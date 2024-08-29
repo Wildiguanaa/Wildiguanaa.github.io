@@ -1,26 +1,36 @@
+//
+/* body */
 
 body {
+  /* dimensions of screen */
   height: 100vh;
   width: 100vw;
   background-color: black;
+  /* no scroll bars */
   margin: 0rem;
   overflow: hidden;
 }
 
+/* sequence of images contained in a track */
 #image-track {
+  /* place images in a line */
   display: flex;
+  /* add space between images */
   gap: 4vmin;
+  /* vertically center the image sequence on page */
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(0%, -50%); 
   user-select: none; /* -- Prevent image highlighting -- */
 }
-
+/* size of images in display */
 #image-track > .image {
   width: 40vmin;
   height: 56vmin;
+  /* aspect ratio */
   object-fit: cover;
+  /* center the image sequence */
   object-position: 100% center;
 }
 

@@ -1,4 +1,4 @@
-//
+
 /* body */
 
 body {
@@ -8,7 +8,6 @@ body {
   background-color: black;
   /* no scroll bars */
   margin: 0rem;
-  overflow: hidden;
 }
 
 /* sequence of images contained in a track */

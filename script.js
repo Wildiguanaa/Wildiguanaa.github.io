@@ -5,7 +5,7 @@ const handleOnDown = e => track.dataset.mouseDownAt = e.clientX;
 
 /* movement when mouse is pressed down */
 const handleOnUp = () => {
-  track.dataset.mouseDownAt = "100";  
+  track.dataset.mouseDownAt = "0";  
   track.dataset.prevPercentage = track.dataset.percentage;
 }
 

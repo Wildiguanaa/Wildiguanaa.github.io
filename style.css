@@ -1,52 +1,61 @@
-body {
-    font-family: 'Open Sans', sans-serif;
-    background-color: #D8C6A8; /* Sandy Beige */
-    color: #4B3B29; /* Deep Brown */
-    margin: 0;
-    padding: 0;
-}
-
-header {
-    text-align: center;
-    padding: 20px;
-    background-color: #E57E3B; /* Terracotta */
-}
-
-h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem;
-    margin-bottom: 5px;
-}
-
-p {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-}
-
-nav {
-    margin: 15px 0;
-}
-
-.meta-link {
-    margin: 0 15px;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.meta-link:hover {
-    text-decoration: underline;
-}
-
-#image-track {
+#intro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000; /* Black background for the intro effect */
     display: flex;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    animation: fade-out 2s forwards; /* Fade-out effect */
 }
 
-.image {
-    width: 300px; /* Adjust as needed */
-    margin: 0 10px;
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4
+.camera-lens {
+    width: 150px; /* Adjust lens size */
+    height: 150px;
+    border: 10px solid #E57E3B; /* Lens border color */
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    animation: zoom-in 2s forwards;
+}
+
+.pupil {
+    width: 100%;
+    height: 100%;
+    background-color: #000; /* Pupil color */
+    border-radius: 50%;
+    animation: pupil-zoom-out 2s forwards; /* Pupil animation */
+}
+
+@keyframes zoom-in {
+    0% {
+        transform: scale(2); /* Start scaled up */
+    }
+    50% {
+        transform: scale(1); /* Zoom to normal size */
+    }
+    100% {
+        transform: scale(1); /* End at normal size */
+    }
+}
+
+@keyframes pupil-zoom-out {
+    0% {
+        transform: scale(1); /* Start normal size */
+    }
+    100% {
+        transform: scale(2); /* End scaled up */
+    }
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1; /* Start fully visible */
+    }
+    100% {
+        opacity: 0; /* Fade to invisible */
+    }
+}

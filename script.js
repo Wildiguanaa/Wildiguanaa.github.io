@@ -1,47 +1,134 @@
+window.addEventListener("DOMContentLoaded", () => {
+  const track = document.getElementById("image-track");
+  const intro = document.getElementById("intro");
+  const introVideo = document.getElementById("intro-video");
 
-const track = document.getElementById("image-track");
+  /* Fade out intro when the video ends */
+  if (intro && introVideo) {
+    introVideo.addEventListener("ended", () => {
+      intro.classList.add("fade-out");
+      setTimeout(() => {
+        intro.remove();
+      }, 800); // matches the CSS transition time
+    });
 
-const handleOnDown = e => track.dataset.mouseDownAt = e.clientX;
-
-/* movement when mouse is pressed down */
-const handleOnUp = () => {
-  track.dataset.mouseDownAt = "0";  
-  track.dataset.prevPercentage = track.dataset.percentage;
-}
-
-const handleOnMove = e => {
-  if(track.dataset.mouseDownAt === "0") return;
-  
-  const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX,
-        maxDelta = window.innerWidth / 2;
-  
-  const percentage = (mouseDelta / maxDelta) * -100,
-        nextPercentageUnconstrained = parseFloat(track.dataset.prevPercentage) + percentage,
-        nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, 0), -100);
-  
-  track.dataset.percentage = nextPercentage;
-  
-  track.animate({
-    transform: `translate(${nextPercentage}%, -50%)`
-  }, { duration: 1200, fill: "forwards" });
-  
-  for(const image of track.getElementsByClassName("image")) {
-    image.animate({
-      objectPosition: `${100 + nextPercentage}% center`
-    }, { duration: 1200, fill: "forwards" });
+    // Fallback: if video can't play / super short, remove after 6s anyway
+    setTimeout(() => {
+      if (document.body.contains(intro)) {
+        intro.classList.add("fade-out");
+        setTimeout(() => intro.remove(), 800);
+      }
+    }, 6000);
   }
-}
 
-/* -- Had to add extra lines for touch events -- */
+  const navToggle = document.querySelector(".nav-toggle");
+  const nav = document.querySelector(".site-nav");
+  const yearSpan = document.getElementById("year");
 
-window.onmousedown = e => handleOnDown(e);
+  /* Remove intro after animation */
+ 
 
-window.ontouchstart = e => handleOnDown(e.touches[0]);
+  /* Footer year */
+  if (yearSpan) {
+    yearSpan.textContent = new Date().getFullYear();
+  }
 
-window.onmouseup = e => handleOnUp(e);
+  /* Mobile nav toggle */
+  if (navToggle && nav) {
+    navToggle.addEventListener("click", () => {
+      nav.classList.toggle("open");
+    });
 
-window.ontouchend = e => handleOnUp(e.touches[0]);
+    nav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        nav.classList.remove("open");
+      });
+    });
+  }
 
-window.onmousemove = e => handleOnMove(e);
+  /* Smooth-ish scroll for in-page links */
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (e) => {
+      const targetId = link.getAttribute("href");
+      if (targetId.length > 1) {
+        e.preventDefault();
+        const target = document.querySelector(targetId);
+        if (target) {
+          const headerOffset = 70;
+          const elementPosition =
+            target.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = elementPosition - headerOffset;
 
-window.ontouchmove = e => handleOnMove(e.touches[0]);
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+        }
+      }
+    });
+  });
+
+  /* DRAGGABLE IMAGE TRACK */
+  if (!track) return;
+
+  const handleOnDown = (clientX) => {
+    track.dataset.mouseDownAt = clientX;
+  };
+
+  const handleOnUp = () => {
+    track.dataset.mouseDownAt = "0";
+    track.dataset.prevPercentage = track.dataset.percentage || "0";
+  };
+
+  const handleOnMove = (clientX) => {
+    if (track.dataset.mouseDownAt === "0") return;
+
+    const mouseDelta =
+      parseFloat(track.dataset.mouseDownAt) - clientX;
+    const maxDelta = window.innerWidth / 2;
+
+    const percentage = (mouseDelta / maxDelta) * -100;
+    const nextUnconstrained =
+      parseFloat(track.dataset.prevPercentage || "0") + percentage;
+    const nextPercentage = Math.max(
+      Math.min(nextUnconstrained, 0),
+      -100
+    );
+
+    track.dataset.percentage = nextPercentage;
+
+    track.animate(
+      {
+        transform: `translate(${nextPercentage}%, 0%)`
+      },
+      { duration: 1200, fill: "forwards" }
+    );
+
+    for (const image of track.getElementsByClassName("image")) {
+      image.animate(
+        {
+          objectPosition: `${100 + nextPercentage}% center`
+        },
+        { duration: 1200, fill: "forwards" }
+      );
+    }
+  };
+
+  /* Mouse events */
+  window.addEventListener("mousedown", (e) =>
+    handleOnDown(e.clientX)
+  );
+  window.addEventListener("mouseup", handleOnUp);
+  window.addEventListener("mousemove", (e) =>
+    handleOnMove(e.clientX)
+  );
+
+  /* Touch events */
+  window.addEventListener("touchstart", (e) =>
+    handleOnDown(e.touches[0].clientX)
+  );
+  window.addEventListener("touchend", handleOnUp);
+  window.addEventListener("touchmove", (e) =>
+    handleOnMove(e.touches[0].clientX)
+  );
+});

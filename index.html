@@ -1,36 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Joanna Fishman - Portfolio</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <h1>Joanna Fishman</h1>
-        <p>Videographer, Artist, Human.</p>
-        <script>src="script.js"</script> 
-    </body>
-</html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Joanna Fishman - Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<!-- sequence of images contained in a track -->
-<div id="image-track" data-mouse-down-at="0" data-prev-percentage="0">
-    <img class="image" src="https://images.unsplash.com/photo-1524781289445-ddf8f5695861?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" draggable="false" />
-    <img class="image" src="https://images.unsplash.com/photo-1610194352361-4c81a6a8967e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1674&q=80" draggable="false" />
-    <img class="image" src="https://images.unsplash.com/photo-1618202133208-2907bebba9e1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" draggable="false" />
-    <img class="image" src="https://images.unsplash.com/photo-1495805442109-bf1cf975750b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" draggable="false" />
-    <img class="image" src="https://images.unsplash.com/photo-1548021682-1720ed403a5b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" draggable="false" />
-    <img class="image" src="https://images.unsplash.com/photo-1496753480864-3e588e0269b3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2134&q=80" draggable="false" />
-    <img class="image" src="https://images.unsplash.com/photo-1613346945084-35cccc812dd5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1759&q=80" draggable="false" />
-    <img class="image" src="https://images.unsplash.com/photo-1516681100942-77d8e7f9dd97?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" draggable="false" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Playfair+Display:wght@500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Font Awesome icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+
+  <!-- Your styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Your script -->
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <!-- Intro camera lens -->
+  <div id="intro">
+    <div class="camera-lens">
+      <div class="pupil"></div>
+    </div>
   </div>
-  
-  <a id="source-link" class="meta-link" href="./about.html">
-    <i class="fa-solid fa-link"></i>
-    <span>About Me</span> 
-  </a> 
-  
-  <a id="contact-link" class="meta-link" href="./contact.html">
-    <i class="fa-brands fa-link"></i>
-    <span>Contact</span>
-  </a>
-  
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="logo">Joanna Fishman</div>
+
+    <nav class="site-nav">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero-inner">
+        <p class="eyebrow">Videographer · Artist · Human</p>
+        <h1>
+          Visual stories with <span class="accent">feels</span>, not just frames.
+        </h1>
+        <p class="hero-tagline">
+          I capture people, places, and weird little moments that feel like a
+          memory you forgot you had.
+        </p>
+        <div class="hero-actions">
+          <a href="#work" class="btn primary">View Selected Work</a>
+          <a href="#contact" class="btn ghost">Let’s Work Together</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SELECTED FRAMES / IMAGE TRACK -->
+    <section class="section" id="work">
+      <div class="section-header">
+        <h2>Selected Frames</h2>
+        <p>Drag to explore — a moving strip of moments.</p>
+      </div>
+
+      <div class="track-wrapper">
+        <div
+          id="image-track"
+          data-mouse-down-at="0"
+          data-prev-percentage="0"
+          data-percentage="0"
+        >
+          <img
+            class="image"
+            src="https://images.unsplash.com/photo-1524781289445-ddf8f5695861?auto=format&fit=crop&w=1770&q=80"
+            draggable="false"
+            alt="Foggy forest landscape"
+          />
+          <img
+            class="image"
+            src="https://images.unsplash.com/photo-1610194352361-4c81a6a8967e?auto=format&fit=crop&w=1674&q=80"
+            draggable="false"
+            alt="City lights at night"
+          />
+          <img
+            class="image"
+            src="https://images.unsplash.com/photo-1618202133208-2907bebba9e1?auto=format&fit=crop&w=1770&q=80"
+            draggable="false"
+            alt="Neon street scene"
+          />
+          <img
+            class="image"
+            src="https://images.unsplash.com/photo-1495805442109-bf1cf975750b?auto=format&fit=crop&w=1770&q=80"
+            draggable="false"
+            alt="Cinema interior"
+          />
+          <img
+            class="image"
+            src="https://images.unsplash.com/photo-1548021682-1720ed403a5b?auto=format&fit=crop&w=1770&q=80"
+            draggable="false"
+            alt="Desert landscape"
+          />
+          <img
+            class="image"
+            src="https://images.unsplash.com/photo-1496753480864-3e588e0269b3?auto=format&fit=crop&w=2134&q=80"
+            draggable="false"
+            alt="Sunset over mountains"
+          />
+          <img
+            class="image"
+            src="https://images.unsplash.com/photo-1613346945084-35cccc812dd5?auto=format&fit=crop&w=1759&q=80"
+            draggable="false"
+            alt="Moody portrait lighting"
+          />
+          <img
+            class="image"
+            src="https://images.unsplash.com/photo-1516681100942-77d8e7f9dd97?auto=format&fit=crop&w=1770&q=80"
+            draggable="false"
+            alt="Street at golden hour"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="section-header">
+        <h2>About</h2>
+      </div>
+
+      <div class="about-layout">
+        <div>
+          <p>
+            I’m Joanna, a videographer and artist obsessed with atmosphere and
+            emotion. My work lives somewhere between documentary and dream —
+            grounded in real people, with a little bit of magic layered on top.
+          </p>
+          <p>
+            I’ve shot and edited projects for [clients / brands / orgs], from
+            intimate portraits to live events and music videos. I care about
+            honesty, texture, and the tiny details that make a frame feel alive.
+          </p>
+        </div>
+
+        <div class="about-details">
+          <h3>What I love working on</h3>
+          <ul>
+            <li>Music videos & performance films</li>
+            <li>Documentary & short-form storytelling</li>
+            <li>Experimental, artsy visual pieces</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT (Consume & Create–inspired) -->
+    <section class="section contact-section" id="contact">
+      <div class="contact-layout">
+        <div class="contact-copy">
+          <h2>Let’s Work Together</h2>
+          <p class="contact-tagline">For a good time, email:</p>
+          <a href="mailto:youremail@example.com" class="contact-email">
+            youremail@example.com
+          </a>
+          <p class="contact-footnote">
+            Tell me about your project, your vibe, and any references you love.
+            The lizard wizards will be with you shortly 🦎✨
+          </p>
+
+          <div class="contact-socials">
+            <a href="#" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" aria-label="Vimeo"><i class="fab fa-vimeo-v"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <form class="contact-form" action="" method="post">
+          <div class="form-row">
+            <label for="name">Name *</label>
+            <input id="name" name="name" type="text" required />
+          </div>
+
+          <div class="form-row">
+            <label for="email">Email *</label>
+            <input id="email" name="email" type="email" required />
+          </div>
+
+          <div class="form-row">
+            <label for="projectType">Project Type</label>
+            <select id="projectType" name="projectType">
+              <option value="">Select a project type</option>
+              <option>Music Video</option>
+              <option>Live Session</option>
+              <option>Short Documentary</option>
+              <option>Experimental / Art Film</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="budget">Budget Range</label>
+            <select id="budget" name="budget">
+              <option value="">Select budget range</option>
+              <option>Under $1,000</option>
+              <option>$1,000 – $3,000</option>
+              <option>$3,000 – $7,000</option>
+              <option>$7,000+</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="message">Tell me more *</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn primary full-width">
+            Send message
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="year"></span> Joanna Fishman.</span>
+    <span>Shot, cut & coded with love.</span>
+  </footer>
+</body>
+</html>

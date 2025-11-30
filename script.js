@@ -1,32 +1,8 @@
 window.addEventListener("DOMContentLoaded", () => {
   const track = document.getElementById("image-track");
-  const intro = document.getElementById("intro");
-  const introVideo = document.getElementById("intro-video");
-
-  /* Fade out intro when the video ends */
-  if (intro && introVideo) {
-    introVideo.addEventListener("ended", () => {
-      intro.classList.add("fade-out");
-      setTimeout(() => {
-        intro.remove();
-      }, 800); // matches the CSS transition time
-    });
-
-    // Fallback: if video can't play / super short, remove after 6s anyway
-    setTimeout(() => {
-      if (document.body.contains(intro)) {
-        intro.classList.add("fade-out");
-        setTimeout(() => intro.remove(), 800);
-      }
-    }, 6000);
-  }
-
   const navToggle = document.querySelector(".nav-toggle");
   const nav = document.querySelector(".site-nav");
   const yearSpan = document.getElementById("year");
-
-  /* Remove intro after animation */
- 
 
   /* Footer year */
   if (yearSpan) {

@@ -31,9 +31,8 @@ p {
 }
 
 .gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
+  column-count: 3;
+  column-gap: 1.5rem;
 }
 
 .item {
@@ -42,17 +41,46 @@ p {
   border-radius: 4px;
   cursor: pointer;
   background: #000;
-  aspect-ratio: 3/4;
+  margin-bottom: 1.5rem;
+  break-inside: avoid;
+  display: inline-block;
+  width: 100%;
 }
 
 .item img,
 .item video {
   width: 100%;
-  height: 100%;
+  height: auto;
+  display: block;
   object-fit: cover;
   filter: grayscale(1) brightness(0.7);
   transition: 0.4s ease;
 }
+
+/* Varied heights for organic look */
+.item:nth-child(1) img,
+.item:nth-child(1) video { height: 400px; }
+
+.item:nth-child(2) img,
+.item:nth-child(2) video { height: 500px; }
+
+.item:nth-child(3) img,
+.item:nth-child(3) video { height: 350px; }
+
+.item:nth-child(4) img,
+.item:nth-child(4) video { height: 450px; }
+
+.item:nth-child(5) img,
+.item:nth-child(5) video { height: 380px; }
+
+.item:nth-child(6) img,
+.item:nth-child(6) video { height: 520px; }
+
+.item:nth-child(7) img,
+.item:nth-child(7) video { height: 420px; }
+
+.item:nth-child(8) img,
+.item:nth-child(8) video { height: 480px; }
 
 .item:hover img,
 .item:hover video {
@@ -152,6 +180,12 @@ p {
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+  .gallery {
+    column-count: 2;
+  }
+}
+
 @media (max-width: 768px) {
   body {
     padding: 2rem 5%;
@@ -162,8 +196,12 @@ p {
   }
   
   .gallery {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
+    column-count: 1;
+    column-gap: 1rem;
+  }
+  
+  .item {
+    margin-bottom: 1rem;
   }
   
   .action-icon {
@@ -171,6 +209,13 @@ p {
     height: 50px;
     font-size: 20px;
   }
+  
+  /* Simpler heights for mobile */
+  .item:nth-child(odd) img,
+  .item:nth-child(odd) video { height: 350px; }
+  
+  .item:nth-child(even) img,
+  .item:nth-child(even) video { height: 400px; }
 }
 </style>
 </head>
@@ -220,6 +265,18 @@ p {
     <img src="https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=800" alt="Documentary Still">
     <div class="action-icon"><i class="fas fa-expand"></i></div>
     <div class="item-title">Documentary Still</div>
+  </div>
+  
+  <div class="item" onclick="openModal(this)">
+    <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=800" alt="Behind the Scenes">
+    <div class="action-icon"><i class="fas fa-expand"></i></div>
+    <div class="item-title">Behind the Scenes</div>
+  </div>
+  
+  <div class="item" onclick="openModal(this)">
+    <img src="https://images.unsplash.com/photo-1616530940355-351fabd9524b?w=800" alt="Cinematography">
+    <div class="action-icon"><i class="fas fa-expand"></i></div>
+    <div class="item-title">Cinematography Study</div>
   </div>
 </div>
 

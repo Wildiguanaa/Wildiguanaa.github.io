@@ -16,7 +16,7 @@
       --text-primary: #f5f5f5;
       --text-muted: #a0a0a0;
       --accent: #d4af37;
-      --accent-glow: rgba(66, 48, 201, 0.3);
+      --accent-glow: rgba(212, 175, 55, 0.3);
       --font-serif: "Libre Baskerville", serif;
       --font-sans: "Inter", sans-serif;
     }
@@ -35,24 +35,132 @@
       overflow-x: hidden;
     }
 
-    /* Hero text fix */
+    /* HEADER */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 5%;
+      background: rgba(10, 10, 10, 0.9);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .logo {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .site-nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .site-nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+
+    .site-nav a:hover {
+      color: var(--accent);
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8rem 5% 4rem;
+      position: relative;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    }
+
+    .hero-content {
+      max-width: 900px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
     .hero h1 {
       font-family: var(--font-serif);
-      font-size: clamp(2.4rem, 6vw, 4.5rem); /* made smaller */
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
       line-height: 1.15;
       margin-bottom: 1.5rem;
       font-weight: 400;
     }
 
-    /* Scroll indicator fix */
+    .hero-tagline {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.9rem 2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .btn:first-child {
+      background: var(--accent);
+      color: #0a0a0a;
+    }
+
+    .btn:first-child:hover {
+      background: #e6c34a;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px var(--accent-glow);
+    }
+
+    .btn:last-child {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn:last-child:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
     .scroll-indicator {
       position: absolute;
       bottom: 40px;
       left: 50%;
       transform: translateX(-50%);
       animation: bounce 2s infinite;
-      z-index: 20;
-      margin-top: 2rem;
+      color: var(--text-muted);
+      font-size: 1.5rem;
     }
 
     @keyframes bounce {
@@ -60,12 +168,17 @@
       50% { transform: translate(-50%, 10px); }
     }
 
-    /* Draggable track restored */
+    /* DRAGGABLE TRACK */
     .track-wrapper {
       position: relative;
       height: 450px;
       overflow: hidden;
       cursor: grab;
+      user-select: none;
+    }
+
+    .track-wrapper:active {
+      cursor: grabbing;
     }
 
     #image-track {
@@ -94,7 +207,7 @@
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
     }
 
-    /* SECTION SHARED STYLES */
+    /* SECTIONS */
     .section {
       padding: 8rem 5%;
       max-width: 1400px;
@@ -117,19 +230,20 @@
       color: var(--text-muted);
     }
 
-    /* Categories grid */
+    /* CATEGORIES */
     .categories-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
     }
 
     .category-card {
       position: relative;
-      height: 260px;
+      height: 280px;
       border-radius: 4px;
       overflow: hidden;
       cursor: pointer;
+      background: var(--bg-card);
     }
 
     .category-bg {
@@ -137,7 +251,7 @@
       height: 100%;
       object-fit: cover;
       filter: brightness(60%);
-      transition: 0.3s ease;
+      transition: 0.4s ease;
     }
 
     .category-card:hover .category-bg {
@@ -154,7 +268,8 @@
 
     .category-card h3 {
       font-family: var(--font-serif);
-      font-size: 1.4rem;
+      font-size: 1.5rem;
+      margin-bottom: 0.3rem;
     }
 
     .category-card p {
@@ -162,7 +277,7 @@
       color: var(--text-muted);
     }
 
-    /* ABOUT section restored */
+    /* ABOUT */
     .about-content {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -182,22 +297,31 @@
       padding: 3rem;
       background: var(--bg-card);
       border-radius: 4px;
-      border: 1px solid rgba(255,255,255,0.05);
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .about-details h3 {
       font-family: var(--font-serif);
       font-size: 1.5rem;
       color: var(--accent);
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-details ul {
+      list-style: none;
     }
 
     .about-details li {
       padding: 0.75rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
     }
 
-    /* CONTACT restore */
+    .about-details li:last-child {
+      border-bottom: none;
+    }
+
+    /* CONTACT */
     .contact-wrapper {
       max-width: 1100px;
       margin: 0 auto;
@@ -206,16 +330,164 @@
       gap: 4rem;
     }
 
+    .contact-info h2 {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+
+    .contact-tagline {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
     .contact-email {
       color: var(--accent);
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       text-decoration: none;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      transition: opacity 0.3s;
+    }
+
+    .contact-email:hover {
+      opacity: 0.8;
+    }
+
+    .contact-note {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
     }
 
     .contact-socials {
       display: flex;
       gap: 1rem;
-      margin-top: 1rem;
+    }
+
+    .contact-socials a {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: all 0.3s;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .contact-socials a:hover {
+      background: var(--accent);
+      color: #0a0a0a;
+      border-color: var(--accent);
+    }
+
+    /* CONTACT FORM */
+    .contact-form {
+      background: var(--bg-card);
+      padding: 3rem;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--bg-dark);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 1rem;
+      background: var(--accent);
+      color: #0a0a0a;
+      border: none;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .form-submit:hover {
+      background: #e6c34a;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px var(--accent-glow);
+    }
+
+    /* FOOTER */
+    .site-footer {
+      padding: 3rem 5%;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .site-nav {
+        gap: 1rem;
+      }
+
+      .site-nav a {
+        font-size: 0.85rem;
+      }
+
+      .hero {
+        padding: 6rem 5% 3rem;
+      }
+
+      .section {
+        padding: 5rem 5%;
+      }
+
+      .about-content,
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .track-wrapper {
+        height: 350px;
+      }
+
+      .image {
+        width: 60vmin;
+        height: 80vmin;
+      }
     }
   </style>
 </head>
@@ -250,14 +522,13 @@
       <a href="#contact" class="btn">Let's Collaborate</a>
     </div>
 
-    <!-- FIXED POSITION -->
     <div class="scroll-indicator">
       <i class="fas fa-chevron-down"></i>
     </div>
   </div>
 </section>
 
-<!-- SELECTED FRAMES (DRAGGABLE) -->
+<!-- SELECTED FRAMES -->
 <section class="section" id="work">
   <div class="section-header">
     <h2 class="section-title">Selected Frames</h2>
@@ -266,17 +537,17 @@
 
   <div class="track-wrapper">
     <div id="image-track" data-mouse-down-at="0" data-prev-percentage="0">
-      <img class="image" src="https://images.unsplash.com/photo-1524781289445-ddf8f5695861?auto=format&fit=crop&w=1770&q=80" draggable="false" />
-      <img class="image" src="https://images.unsplash.com/photo-1610194352361-4c81a6a8967e?auto=format&fit=crop&w=1674&q=80" draggable="false" />
-      <img class="image" src="https://images.unsplash.com/photo-1618202133208-2907bebba9e1?auto=format&fit=crop&w=1770&q=80" draggable="false" />
-      <img class="image" src="https://images.unsplash.com/photo-1495805442109-bf1cf975750b?auto=format&fit=crop&w=1770&q=80" draggable="false" />
-      <img class="image" src="https://images.unsplash.com/photo-1548021682-1720ed403a5b?auto=format&fit=crop&w=1770&q=80" draggable="false" />
-      <img class="image" src="https://images.unsplash.com/photo-1496753480864-3e588e0269b3?auto=format&fit=crop&w=2134&q=80" draggable="false" />
+      <img class="image" src="https://images.unsplash.com/photo-1524781289445-ddf8f5695861?auto=format&fit=crop&w=1770&q=80" draggable="false" alt="Frame 1" />
+      <img class="image" src="https://images.unsplash.com/photo-1610194352361-4c81a6a8967e?auto=format&fit=crop&w=1674&q=80" draggable="false" alt="Frame 2" />
+      <img class="image" src="https://images.unsplash.com/photo-1618202133208-2907bebba9e1?auto=format&fit=crop&w=1770&q=80" draggable="false" alt="Frame 3" />
+      <img class="image" src="https://images.unsplash.com/photo-1495805442109-bf1cf975750b?auto=format&fit=crop&w=1770&q=80" draggable="false" alt="Frame 4" />
+      <img class="image" src="https://images.unsplash.com/photo-1548021682-1720ed403a5b?auto=format&fit=crop&w=1770&q=80" draggable="false" alt="Frame 5" />
+      <img class="image" src="https://images.unsplash.com/photo-1496753480864-3e588e0269b3?auto=format&fit=crop&w=2134&q=80" draggable="false" alt="Frame 6" />
     </div>
   </div>
 </section>
 
-<!-- CATEGORY GRID (only this one remains) -->
+<!-- CATEGORIES -->
 <section class="section" id="categories">
   <div class="section-header">
     <h2 class="section-title">View More Work</h2>
@@ -284,7 +555,37 @@
   </div>
 
   <div class="categories-grid">
-    <!-- cards identical to last version -->
+    <div class="category-card">
+      <img class="category-bg" src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1770&q=80" alt="Music Videos" />
+      <div class="category-content">
+        <h3>Music Videos</h3>
+        <p>Performance & narrative</p>
+      </div>
+    </div>
+
+    <div class="category-card">
+      <img class="category-bg" src="https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=1770&q=80" alt="Documentary" />
+      <div class="category-content">
+        <h3>Documentary</h3>
+        <p>Real stories, real people</p>
+      </div>
+    </div>
+
+    <div class="category-card">
+      <img class="category-bg" src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1770&q=80" alt="Experimental" />
+      <div class="category-content">
+        <h3>Experimental</h3>
+        <p>Visual explorations</p>
+      </div>
+    </div>
+
+    <div class="category-card">
+      <img class="category-bg" src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1770&q=80" alt="Events" />
+      <div class="category-content">
+        <h3>Events</h3>
+        <p>Live moments captured</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -296,8 +597,8 @@
 
   <div class="about-content">
     <div class="about-text">
-      <p>I’m a filmmaker and emerging-tech creative working with cinema, interactive media, and socially grounded storytelling. I graduated Magna Cum Laude from Binghamton University with a BA in Cinema and minors in Digital & Data Studies and Genocide & Mass Atrocity Prevention.</p>
-      <p>My experience spans 3D printing, lidar scanning, VR/AR, animation, editing, broadcast, and development for documentary and scripted media. I've worked at Binghamton’s Emerging Technology Studio, contributed to the TLC docuseries *Jay and Pamela*, collaborated internationally as a Global Intern for IFIT in Barcelona, and created interactive projection art for LUMA Festival.</p>
+      <p>I'm a filmmaker and emerging-tech creative working with cinema, interactive media, and socially grounded storytelling. I graduated Magna Cum Laude from Binghamton University with a BA in Cinema and minors in Digital & Data Studies and Genocide & Mass Atrocity Prevention.</p>
+      <p>My experience spans 3D printing, lidar scanning, VR/AR, animation, editing, broadcast, and development for documentary and scripted media. I've worked at Binghamton's Emerging Technology Studio, contributed to the TLC docuseries *Jay and Pamela*, collaborated internationally as a Global Intern for IFIT in Barcelona, and created interactive projection art for LUMA Festival.</p>
       <p>I love building work that blends the technical and the poetic. Outside the studio, I enjoy biking, camping, making homemade ice cream, and hanging out with my golden-doodle, Brooklynn.</p>
     </div>
 
@@ -328,13 +629,13 @@
       <p class="contact-note">Tell me about your project, your vibe, and any references you love.</p>
 
       <div class="contact-socials">
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-vimeo-v"></i></a>
-        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="Vimeo"><i class="fab fa-vimeo-v"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
       </div>
     </div>
 
-    <form class="contact-form">
+    <div class="contact-form">
       <div class="form-group">
         <label>Name *</label>
         <input type="text" required />
@@ -347,8 +648,8 @@
         <label>Tell me more *</label>
         <textarea rows="5" required></textarea>
       </div>
-      <button type="submit" class="form-submit">Send Message</button>
-    </form>
+      <button type="button" class="form-submit" onclick="handleSubmit()">Send Message</button>
+    </div>
   </div>
 </section>
 
@@ -362,7 +663,12 @@
   // Footer year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Draggable track logic — FIXED
+  // Form submission handler
+  function handleSubmit() {
+    alert('Thanks for reaching out! This is a demo form.');
+  }
+
+  // Draggable track
   const track = document.getElementById("image-track");
 
   window.addEventListener("mousedown", e => {
@@ -378,6 +684,33 @@
     if (track.dataset.mouseDownAt === "0") return;
 
     const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX;
+    const maxDelta = window.innerWidth / 2;
+
+    let percentage = (mouseDelta / maxDelta) * -100;
+    let next = Math.min(Math.max(parseFloat(track.dataset.prevPercentage) + percentage, -100), 0);
+
+    track.dataset.percentage = next;
+
+    track.style.transform = `translate(${next}%, -50%)`;
+    [...track.children].forEach((img) => {
+      img.style.objectPosition = `${100 + next}% center`;
+    });
+  });
+
+  // Touch support for mobile
+  track.addEventListener("touchstart", e => {
+    track.dataset.mouseDownAt = e.touches[0].clientX;
+  });
+
+  track.addEventListener("touchend", () => {
+    track.dataset.mouseDownAt = "0";
+    track.dataset.prevPercentage = track.dataset.percentage;
+  });
+
+  track.addEventListener("touchmove", e => {
+    if (track.dataset.mouseDownAt === "0") return;
+
+    const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.touches[0].clientX;
     const maxDelta = window.innerWidth / 2;
 
     let percentage = (mouseDelta / maxDelta) * -100;

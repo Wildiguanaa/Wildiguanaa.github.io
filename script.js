@@ -242,3 +242,8 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+
+function openCategory(page) {
+  window.open(page, "_blank");
+}

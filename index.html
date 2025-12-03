@@ -11,18 +11,19 @@
 
   <style>
     :root {
-      --bg-dark: #0a0a0a;
-      --bg-card-dark: #1a1a1a;
-      --text-primary-dark: #f5f5f5;
-      --text-muted-dark: #a0a0a0;
-      --accent: #d4af37;
-      --accent-glow: rgba(212, 175, 55, 0.3);
+      --bg-dark: #1a1410;
+      --bg-card-dark: #2a1f18;
+      --text-primary-dark: #f5e8e0;
+      --text-muted-dark: #a89080;
+      --accent: #a84c3a;
+      --accent-glow: rgba(168, 76, 58, 0.3);
+      --accent-light: #c86555;
       
-      --bg-light: #fafaf8;
-      --bg-card-light: #ffffff;
-      --text-primary-light: #1a1a1a;
-      --text-muted-light: #666666;
-      --border-light: rgba(0, 0, 0, 0.08);
+      --bg-light: #2a1f18;
+      --bg-card-light: #3a2f28;
+      --text-primary-light: #f5e8e0;
+      --text-muted-light: #a89080;
+      --border-light: rgba(245, 232, 224, 0.1);
       
       --font-serif: "Libre Baskerville", serif;
       --font-sans: "Inter", sans-serif;
@@ -41,7 +42,7 @@
       --bg-card: var(--bg-card-dark);
       --text-primary: var(--text-primary-dark);
       --text-muted: var(--text-muted-dark);
-      --border: rgba(255, 255, 255, 0.05);
+      --border: rgba(245, 232, 224, 0.08);
     }
 
     * {
@@ -73,15 +74,15 @@
       justify-content: space-between;
       align-items: center;
       padding: 1.5rem 5%;
-      background: rgba(10, 10, 10, 0.9);
+      background: rgba(26, 20, 16, 0.95);
       backdrop-filter: blur(10px);
       z-index: 100;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(245, 232, 224, 0.05);
       transition: background 0.4s ease;
     }
 
     body.light-mode .site-header {
-      background: rgba(250, 250, 248, 0.95);
+      background: rgba(42, 31, 24, 0.95);
       border-bottom-color: var(--border);
     }
 
@@ -104,7 +105,7 @@
     }
 
     .site-nav a:hover {
-      color: var(--accent);
+      color: var(--accent-light);
     }
 
     /* THEME TOGGLE - FIXED BOTTOM RIGHT */
@@ -125,12 +126,12 @@
       justify-content: center;
       transition: all 0.3s ease;
       z-index: 99;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     }
 
     .theme-toggle:hover {
       background: var(--accent);
-      color: #0a0a0a;
+      color: #f5e8e0;
       border-color: var(--accent);
       transform: scale(1.1);
     }
@@ -158,13 +159,13 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(to right, rgba(10, 10, 10, 0.5), rgba(10, 10, 10, 0.1));
+      background: linear-gradient(to right, rgba(26, 20, 16, 0.7), rgba(26, 20, 16, 0.4));
       z-index: -1;
       transition: background 0.4s ease;
     }
 
     body.light-mode .bg-overlay {
-      background: linear-gradient(to right, rgba(250, 250, 248, 0.4), rgba(250, 250, 248, 0.05));
+      background: linear-gradient(to right, rgba(42, 31, 24, 0.6), rgba(42, 31, 24, 0.3));
     }
 
     /* HERO SECTION */
@@ -198,7 +199,7 @@
       font-size: 0.9rem;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--accent-light);
       margin: 0;
     }
 
@@ -242,11 +243,11 @@
 
     .btn.primary {
       background: var(--accent);
-      color: #0a0a0a;
+      color: #f5e8e0;
     }
 
     .btn.primary:hover {
-      background: #e6c34a;
+      background: var(--accent-light);
       transform: translateY(-2px);
       box-shadow: 0 10px 30px var(--accent-glow);
     }
@@ -254,7 +255,7 @@
     .btn.secondary {
       background: transparent;
       color: var(--text-primary);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(245, 232, 224, 0.2);
     }
 
     body.light-mode .btn.secondary {
@@ -262,8 +263,8 @@
     }
 
     .btn.secondary:hover {
-      border-color: var(--accent);
-      color: var(--accent);
+      border-color: var(--accent-light);
+      color: var(--accent-light);
     }
 
     .scroll-indicator {
@@ -341,16 +342,17 @@
       object-fit: cover;
       flex-shrink: 0;
       border-radius: 6px;
-      filter: grayscale(0.2);
+      filter: grayscale(0.3) brightness(0.9);
       transition: all 0.3s ease;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
     }
 
     .image:hover {
-      filter: grayscale(0);
+      filter: grayscale(0.1) brightness(1.05);
       transform: scale(1.02);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 20px 60px rgba(168, 76, 58, 0.2);
     }
+
     .about-content {
       display: grid;
       grid-template-columns: 1.5fr 1fr;
@@ -388,7 +390,7 @@
     .about-card h3 {
       font-family: var(--font-serif);
       font-size: 1.4rem;
-      color: var(--accent);
+      color: var(--accent-light);
     }
 
     .about-card p {
@@ -401,7 +403,7 @@
     .cv-button {
       padding: 0.9rem 2rem;
       background: var(--accent);
-      color: #0a0a0a;
+      color: #f5e8e0;
       border: none;
       border-radius: 4px;
       font-weight: 600;
@@ -416,7 +418,7 @@
     }
 
     .cv-button:hover {
-      background: #e6c34a;
+      background: var(--accent-light);
       transform: translateY(-2px);
       box-shadow: 0 8px 20px var(--accent-glow);
     }
@@ -444,19 +446,19 @@
 
     .category-card:hover {
       transform: translateY(-8px);
-      border-color: var(--accent);
+      border-color: var(--accent-light);
     }
 
     .category-bg {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: brightness(60%);
+      filter: brightness(40%);
       transition: 0.4s ease;
     }
 
     .category-card:hover .category-bg {
-      filter: brightness(90%);
+      filter: brightness(70%);
       transform: scale(1.05);
     }
 
@@ -495,7 +497,7 @@
     }
 
     .contact-email {
-      color: var(--accent);
+      color: var(--accent-light);
       font-size: 1.4rem;
       text-decoration: none;
       display: inline-block;
@@ -524,12 +526,12 @@
       color: var(--text-primary);
       text-decoration: none;
       transition: all 0.3s;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(245, 232, 224, 0.1);
     }
 
     .contact-socials a:hover {
       background: var(--accent);
-      color: #0a0a0a;
+      color: #f5e8e0;
       border-color: var(--accent);
     }
 
@@ -568,14 +570,14 @@
     .form-group input:focus,
     .form-group textarea:focus {
       outline: none;
-      border-color: var(--accent);
+      border-color: var(--accent-light);
     }
 
     .form-submit {
       width: 100%;
       padding: 1rem;
       background: var(--accent);
-      color: #0a0a0a;
+      color: #f5e8e0;
       border: none;
       border-radius: 4px;
       font-weight: 600;
@@ -585,7 +587,7 @@
     }
 
     .form-submit:hover {
-      background: #e6c34a;
+      background: var(--accent-light);
       transform: translateY(-2px);
       box-shadow: 0 10px 30px var(--accent-glow);
     }
@@ -790,7 +792,7 @@
     </div>
 
     <div class="about-card">
-      <img src="images/selfportrait.png" alt="Joanna Fishman" class="profile-photo" />
+      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1770&q=80" alt="Joanna Fishman" class="profile-photo" />
       <h3>Meet Joanna</h3>
       <p>Filmmaker and emerging-tech creative working with cinema, interactive media, and socially grounded storytelling. Let's create something amazing together.</p>
       <button class="cv-button" onclick="downloadCV()">
@@ -842,125 +844,3 @@
 <footer class="site-footer">
   <p>© <span id="year"></span> Joanna Fishman. Shot, cut & coded with love.</p>
 </footer>
-
-<script>
-  // Set footer year
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Theme toggle
-  function toggleTheme() {
-    const body = document.body;
-    const icon = document.getElementById('theme-icon');
-    
-    if (body.classList.contains('dark-mode')) {
-      body.classList.remove('dark-mode');
-      body.classList.add('light-mode');
-      icon.classList.remove('fa-moon');
-      icon.classList.add('fa-sun');
-      localStorage.setItem('theme', 'light');
-    } else {
-      body.classList.remove('light-mode');
-      body.classList.add('dark-mode');
-      icon.classList.remove('fa-sun');
-      icon.classList.add('fa-moon');
-      localStorage.setItem('theme', 'dark');
-    }
-  }
-
-  // Load saved theme
-  window.addEventListener('DOMContentLoaded', () => {
-    const saved = localStorage.getItem('theme') || 'dark';
-    const body = document.body;
-    const icon = document.getElementById('theme-icon');
-    
-    body.classList.remove('dark-mode', 'light-mode');
-    body.classList.add(saved === 'light' ? 'light-mode' : 'dark-mode');
-    
-    if (saved === 'light') {
-      icon.classList.remove('fa-moon');
-      icon.classList.add('fa-sun');
-    }
-  });
-
-  // Form submission
-  function handleSubmit() {
-    alert('Thanks for reaching out! This is a demo form.');
-  }
-
-  // CV download
-  function downloadCV() {
-    alert('CV download functionality - link your actual CV file here');
-  }
-
-  // Smooth scroll for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', (e) => {
-      const href = link.getAttribute('href');
-      if (href !== '#' && document.querySelector(href)) {
-        e.preventDefault();
-        document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  });
-
-  // DRAGGABLE IMAGE TRACK
-  const track = document.getElementById("image-track");
-  
-  if (track) {
-    window.addEventListener("mousedown", e => {
-      track.dataset.mouseDownAt = e.clientX;
-    });
-
-    window.addEventListener("mouseup", () => {
-      track.dataset.mouseDownAt = "0";
-      track.dataset.prevPercentage = track.dataset.percentage;
-    });
-
-    window.addEventListener("mousemove", e => {
-      if (track.dataset.mouseDownAt === "0") return;
-
-      const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX;
-      const maxDelta = window.innerWidth / 2;
-
-      let percentage = (mouseDelta / maxDelta) * -100;
-      let next = Math.min(Math.max(parseFloat(track.dataset.prevPercentage) + percentage, -100), 0);
-
-      track.dataset.percentage = next;
-
-      track.style.transform = `translate(${next}%, -50%)`;
-      [...track.children].forEach((img) => {
-        img.style.objectPosition = `${100 + next}% center`;
-      });
-    });
-
-    // Touch support for mobile
-    track.addEventListener("touchstart", e => {
-      track.dataset.mouseDownAt = e.touches[0].clientX;
-    });
-
-    track.addEventListener("touchend", () => {
-      track.dataset.mouseDownAt = "0";
-      track.dataset.prevPercentage = track.dataset.percentage;
-    });
-
-    track.addEventListener("touchmove", e => {
-      if (track.dataset.mouseDownAt === "0") return;
-
-      const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.touches[0].clientX;
-      const maxDelta = window.innerWidth / 2;
-
-      let percentage = (mouseDelta / maxDelta) * -100;
-      let next = Math.min(Math.max(parseFloat(track.dataset.prevPercentage) + percentage, -100), 0);
-
-      track.dataset.percentage = next;
-
-      track.style.transform = `translate(${next}%, -50%)`;
-      [...track.children].forEach((img) => {
-        img.style.objectPosition = `${100 + next}% center`;
-      });
-    });
-  }
-</script>
-
-</body>
-</html>

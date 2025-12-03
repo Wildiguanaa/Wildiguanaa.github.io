@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Joanna Fishman - Videographer & Visual Artist</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Joanna Fishman - Videographer & Visual Artist</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -12,13 +12,36 @@
   <style>
     :root {
       --bg-dark: #0a0a0a;
-      --bg-card: #1a1a1a;
-      --text-primary: #f5f5f5;
-      --text-muted: #a0a0a0;
+      --bg-card-dark: #1a1a1a;
+      --text-primary-dark: #f5f5f5;
+      --text-muted-dark: #a0a0a0;
       --accent: #d4af37;
       --accent-glow: rgba(212, 175, 55, 0.3);
+      
+      --bg-light: #fafaf8;
+      --bg-card-light: #ffffff;
+      --text-primary-light: #1a1a1a;
+      --text-muted-light: #666666;
+      --border-light: rgba(0, 0, 0, 0.08);
+      
       --font-serif: "Libre Baskerville", serif;
       --font-sans: "Inter", sans-serif;
+    }
+
+    body.light-mode {
+      --bg: var(--bg-light);
+      --bg-card: var(--bg-card-light);
+      --text-primary: var(--text-primary-light);
+      --text-muted: var(--text-muted-light);
+      --border: var(--border-light);
+    }
+
+    body.dark-mode {
+      --bg: var(--bg-dark);
+      --bg-card: var(--bg-card-dark);
+      --text-primary: var(--text-primary-dark);
+      --text-muted: var(--text-muted-dark);
+      --border: rgba(255, 255, 255, 0.05);
     }
 
     * {
@@ -27,12 +50,17 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: var(--font-sans);
-      background: var(--bg-dark);
+      background: var(--bg);
       color: var(--text-primary);
       line-height: 1.6;
       overflow-x: hidden;
+      transition: background 0.4s ease, color 0.4s ease;
     }
 
     /* HEADER */
@@ -49,6 +77,12 @@
       backdrop-filter: blur(10px);
       z-index: 100;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: background 0.4s ease;
+    }
+
+    body.light-mode .site-header {
+      background: rgba(250, 250, 248, 0.95);
+      border-bottom-color: var(--border);
     }
 
     .logo {
@@ -73,21 +107,91 @@
       color: var(--accent);
     }
 
-    /* HERO */
+    /* THEME TOGGLE - FIXED BOTTOM RIGHT */
+    .theme-toggle {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 1.2rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 99;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .theme-toggle:hover {
+      background: var(--accent);
+      color: #0a0a0a;
+      border-color: var(--accent);
+      transform: scale(1.1);
+    }
+
+    /* BACKGROUND VIDEO */
+    .bg-video-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -2;
+    }
+
+    .bg-video-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .bg-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, rgba(10, 10, 10, 0.5), rgba(10, 10, 10, 0.1));
+      z-index: -1;
+      transition: background 0.4s ease;
+    }
+
+    body.light-mode .bg-overlay {
+      background: linear-gradient(to right, rgba(250, 250, 248, 0.4), rgba(250, 250, 248, 0.05));
+    }
+
+    /* HERO SECTION */
     .hero {
       min-height: 100vh;
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 8rem 5% 4rem;
+      justify-content: space-between;
+      padding: 8rem 8% 4rem;
       position: relative;
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+      max-width: 100%;
+    }
+
+    .hero-left {
+      flex: 1;
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
     }
 
     .hero-content {
-      max-width: 900px;
-      text-align: center;
       position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
     }
 
     .hero-eyebrow {
@@ -95,29 +199,29 @@
       letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 1.5rem;
+      margin: 0;
     }
 
     .hero h1 {
       font-family: var(--font-serif);
-      font-size: clamp(2.4rem, 6vw, 4.5rem);
-      line-height: 1.15;
-      margin-bottom: 1.5rem;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.2;
+      margin: 0;
       font-weight: 400;
     }
 
     .hero-tagline {
-      font-size: 1.2rem;
+      font-size: 1rem;
       color: var(--text-muted);
-      margin-bottom: 2.5rem;
       line-height: 1.7;
+      margin: 0;
     }
 
-    .hero-cta {
+    .hero-actions {
       display: flex;
+      flex-direction: column;
       gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
+      margin-top: 1rem;
     }
 
     .btn {
@@ -129,26 +233,35 @@
       cursor: pointer;
       border: none;
       font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: fit-content;
     }
 
-    .btn:first-child {
+    .btn.primary {
       background: var(--accent);
       color: #0a0a0a;
     }
 
-    .btn:first-child:hover {
+    .btn.primary:hover {
       background: #e6c34a;
       transform: translateY(-2px);
       box-shadow: 0 10px 30px var(--accent-glow);
     }
 
-    .btn:last-child {
+    .btn.secondary {
       background: transparent;
       color: var(--text-primary);
       border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
-    .btn:last-child:hover {
+    body.light-mode .btn.secondary {
+      border-color: var(--border);
+    }
+
+    .btn.secondary:hover {
       border-color: var(--accent);
       color: var(--accent);
     }
@@ -156,56 +269,16 @@
     .scroll-indicator {
       position: absolute;
       bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 8%;
       animation: bounce 2s infinite;
       color: var(--text-muted);
       font-size: 1.5rem;
-      margin-top: 3rem;
+      z-index: 10;
     }
 
     @keyframes bounce {
-      0%, 100% { transform: translate(-50%, 0); }
-      50% { transform: translate(-50%, 10px); }
-    }
-
-    /* DRAGGABLE TRACK */
-    .track-wrapper {
-      position: relative;
-      height: 450px;
-      overflow: hidden;
-      cursor: grab;
-      user-select: none;
-    }
-
-    .track-wrapper:active {
-      cursor: grabbing;
-    }
-
-    #image-track {
-      display: flex;
-      gap: 2rem;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(0%, -50%);
-      user-select: none;
-    }
-
-    .image {
-      width: 40vmin;
-      height: 56vmin;
-      object-fit: cover;
-      flex-shrink: 0;
-      border-radius: 4px;
-      filter: grayscale(0.3);
-      transition: all 0.3s ease;
-    }
-
-    .image:hover {
-      filter: grayscale(0);
-      transform: scale(1.03);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(10px); }
     }
 
     /* SECTIONS */
@@ -213,6 +286,9 @@
       padding: 8rem 5%;
       max-width: 1400px;
       margin: 0 auto;
+      position: relative;
+      z-index: 5;
+      background: var(--bg);
     }
 
     .section-header {
@@ -231,7 +307,78 @@
       color: var(--text-muted);
     }
 
-    /* CATEGORIES */
+    /* ABOUT SECTION */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .about-text p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+
+    .about-card {
+      background: var(--bg-card);
+      padding: 2.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .profile-photo {
+      width: 100%;
+      height: 350px;
+      border-radius: 6px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+    }
+
+    .about-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      color: var(--accent);
+    }
+
+    .about-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .cv-button {
+      padding: 0.9rem 2rem;
+      background: var(--accent);
+      color: #0a0a0a;
+      border: none;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+    }
+
+    .cv-button:hover {
+      background: #e6c34a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px var(--accent-glow);
+    }
+
+    /* CATEGORIES GRID */
     .categories-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -248,6 +395,13 @@
       text-decoration: none;
       color: var(--text-primary);
       display: block;
+      border: 1px solid var(--border);
+      transition: all 0.4s ease;
+    }
+
+    .category-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent);
     }
 
     .category-bg {
@@ -281,50 +435,6 @@
       color: var(--text-muted);
     }
 
-    /* ABOUT */
-    .about-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .about-text p {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-      line-height: 1.8;
-    }
-
-    .about-details {
-      padding: 3rem;
-      background: var(--bg-card);
-      border-radius: 4px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .about-details h3 {
-      font-family: var(--font-serif);
-      font-size: 1.5rem;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-    }
-
-    .about-details ul {
-      list-style: none;
-    }
-
-    .about-details li {
-      padding: 0.75rem 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      color: var(--text-muted);
-    }
-
-    .about-details li:last-child {
-      border-bottom: none;
-    }
-
     /* CONTACT */
     .contact-wrapper {
       max-width: 1100px;
@@ -341,14 +451,6 @@
       line-height: 1.2;
     }
 
-    .contact-tagline {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-muted);
-      margin-bottom: 0.5rem;
-    }
-
     .contact-email {
       color: var(--accent);
       font-size: 1.4rem;
@@ -362,16 +464,10 @@
       opacity: 0.8;
     }
 
-    .contact-note {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      line-height: 1.6;
-      margin-bottom: 2rem;
-    }
-
     .contact-socials {
       display: flex;
       gap: 1rem;
+      margin-top: 1.5rem;
     }
 
     .contact-socials a {
@@ -399,7 +495,7 @@
       background: var(--bg-card);
       padding: 3rem;
       border-radius: 4px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
     }
 
     .form-group {
@@ -417,8 +513,8 @@
     .form-group textarea {
       width: 100%;
       padding: 0.9rem;
-      background: var(--bg-dark);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: var(--bg);
+      border: 1px solid var(--border);
       border-radius: 4px;
       color: var(--text-primary);
       font-family: var(--font-sans);
@@ -455,128 +551,70 @@
     .site-footer {
       padding: 3rem 5%;
       text-align: center;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-top: 1px solid var(--border);
       color: var(--text-muted);
       font-size: 0.9rem;
+      position: relative;
+      z-index: 5;
+      background: var(--bg);
     }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
-      .site-nav {
-        gap: 1rem;
-      }
-
-      .site-nav a {
-        font-size: 0.85rem;
-      }
-
       .hero {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
         padding: 6rem 5% 3rem;
+      }
+
+      .hero-left {
+        max-width: 100%;
+        align-items: center;
+      }
+
+      .hero-actions {
+        align-items: center;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 2rem;
       }
 
       .section {
         padding: 5rem 5%;
       }
 
-      .about-content,
-      .contact-wrapper {
-        grid-template-columns: 1fr;
-        gap: 2rem;
+      .theme-toggle {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
       }
 
-      .track-wrapper {
-        height: 350px;
-      }
-
-      .image {
-        width: 60vmin;
-        height: 80vmin;
+      .scroll-indicator {
+        left: 50%;
+        transform: translateX(-50%);
       }
     }
-    /* THEME TOGGLE */
-.theme-toggle {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: var(--accent);
-  color: #0a0a0a;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  z-index: 99;
-  box-shadow: 0 10px 30px var(--accent-glow);
-  transition: all 0.3s ease;
-}
-
-.theme-toggle:hover {
-  transform: scale(1.1);
-  box-shadow: 0 15px 40px var(--accent-glow);
-}
-
-/* Light mode colors */
-html.light-mode {
-  --bg-dark: #f5f5f0;
-  --bg-card: #ffffff;
-  --text-primary-dark: #1a1a1a;
-  --text-muted-dark: #666666;
-}
-
-html.light-mode body {
-  background: #f5f5f0;
-  color: #1a1a1a;
-}
-
-html.light-mode .site-header {
-  background: rgba(245, 245, 240, 0.95);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-html.light-mode .site-nav a {
-  color: #666666;
-}
-
-html.light-mode .btn:last-child {
-  color: #1a1a1a;
-  border-color: rgba(0, 0, 0, 0.2);
-}
-
-html.light-mode .category-card {
-  background: #ffffff;
-  color: #1a1a1a;
-}
-
-html.light-mode .contact-socials a {
-  background: #ffffff;
-  color: #1a1a1a;
-  border-color: rgba(0, 0, 0, 0.1);
-}
-
-html.light-mode .contact-form {
-  background: #ffffff;
-  border-color: rgba(0, 0, 0, 0.08);
-}
-
-html.light-mode .form-group input,
-html.light-mode .form-group textarea {
-  background: rgba(255, 255, 255, 0.9);
-  border-color: rgba(0, 0, 0, 0.1);
-  color: #1a1a1a;
-}
-
-html.light-mode .site-footer {
-  border-top-color: rgba(0, 0, 0, 0.08);
-  color: #666666;
-}
   </style>
 </head>
 
-<body>
+<body class="dark-mode">
+
+<div class="bg-video-container">
+  <video autoplay muted loop playsinline>
+    <source src="https://videos.pexels.com/video-files/17629346/17629346-hd_1920_1080_30fps.mp4" type="video/mp4" />
+  </video>
+</div>
+<div class="bg-overlay"></div>
 
 <header class="site-header">
   <div class="logo">Joanna Fishman</div>
@@ -586,81 +624,48 @@ html.light-mode .site-footer {
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </nav>
-
-  <button class="theme-toggle" id="themeToggle">
-  <i class="fas fa-sun"></i>
-</button>
-
 </header>
+
+<button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">
+  <i class="fas fa-moon" id="theme-icon"></i>
+</button>
 
 <main>
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <div class="bg-carousel" id="bgCarousel">
-    <div class="carousel-slide active">
-      <video autoplay muted loop playsinline>
-        <source src="https://cdn.pixabay.com/video/2024/03/26/203975-918876848_large.mp4" type="video/mp4">
-      </video>
-      <div class="carousel-overlay"></div>
+  <div class="hero-left">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Videographer · Artist · Storyteller</div>
+      <h1>Capturing stories suspended between reality and reverie</h1>
+      <p class="hero-tagline">I use filmcraft and emerging technology to bring people, places, and the weird little moments that make you feel something real to life.</p>
     </div>
-    <div class="carousel-slide">
-      <img src="https://images.unsplash.com/photo-1524781289445-ddf8f5695861?auto=format&fit=crop&w=2000&q=80" alt="Slide 2">
-      <div class="carousel-overlay"></div>
-    </div>
-    <div class="carousel-slide">
-      <img src="https://images.unsplash.com/photo-1618202133208-2907bebba9e1?auto=format&fit=crop&w=2000&q=80" alt="Slide 3">
-      <div class="carousel-overlay"></div>
-    </div>
-    <div class="carousel-slide">
-      <img src="https://images.unsplash.com/photo-1495805442109-bf1cf975750b?auto=format&fit=crop&w=2000&q=80" alt="Slide 4">
-      <div class="carousel-overlay"></div>
+
+    <div class="hero-actions">
+      <a href="#work" class="btn primary">
+        <span>View Work</span>
+        <i class="fas fa-arrow-right"></i>
+      </a>
+      <a href="#contact" class="btn secondary">
+        <span>Let's Collaborate</span>
+      </a>
     </div>
   </div>
 
-  <div class="hero-content">
-    <div class="hero-left">
-      <div class="hero-eyebrow">Videographer · Artist · Storyteller</div>
-    </div>
-
-    <div class="hero-right">
-      <p class="hero-tagline">Capturing stories suspended between reality and reverie<br>I use filmcraft and emerging technology to bring people, places, and the weird little moments that make you feel something real to life.</p>
-      <div class="hero-cta">
-        <a href="#work" class="btn">View Work</a>
-        <a href="#contact" class="btn">Let's Collaborate</a>
-      </div>
-    </div>
+  <div class="scroll-indicator">
+    <i class="fas fa-chevron-down"></i>
   </div>
 </section>
 
-<!-- SELECTED FRAMES -->
+<!-- WORK / CATEGORIES -->
 <section class="section" id="work">
   <div class="section-header">
-    <h2 class="section-title">Selected Frames</h2>
-    <p class="section-subtitle">Drag to explore — moments in motion</p>
-  </div>
-
-  <div class="track-wrapper">
-    <div id="image-track" data-mouse-down-at="0" data-prev-percentage="0" data-percentage="0">
-      <img class="image" src="https://images.unsplash.com/photo-1524781289445-ddf8f5695861?auto=format&fit=crop&w=1770&q=80" draggable="false" alt="Frame 1" />
-      <img class="image" src="https://images.unsplash.com/photo-1610194352361-4c81a6a8967e?auto=format&fit=crop&w=1674&q=80" draggable="false" alt="Frame 2" />
-      <img class="image" src="https://images.unsplash.com/photo-1618202133208-2907bebba9e1?auto=format&fit=crop&w=1770&q=80" draggable="false" alt="Frame 3" />
-      <img class="image" src="https://images.unsplash.com/photo-1495805442109-bf1cf975750b?auto=format&fit=crop&w=1770&q=80" draggable="false" alt="Frame 4" />
-      <img class="image" src="https://images.unsplash.com/photo-1548021682-1720ed403a5b?auto=format&fit=crop&w=1770&q=80" draggable="false" alt="Frame 5" />
-      <img class="image" src="https://images.unsplash.com/photo-1496753480864-3e588e0269b3?auto=format&fit=crop&w=2134&q=80" draggable="false" alt="Frame 6" />
-    </div>
-  </div>
-</section>
-
-<!-- CATEGORIES -->
-<section class="section" id="categories">
-  <div class="section-header">
-    <h2 class="section-title">View More Work</h2>
+    <h2 class="section-title">View My Work</h2>
     <p class="section-subtitle">Explore projects by category</p>
   </div>
 
   <div class="categories-grid">
-    <a href="writing.html" target="_blank" class="category-card">
+    <a href="#" target="_blank" class="category-card">
       <img class="category-bg" src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1770&q=80" alt="Writing" />
       <div class="category-content">
         <h3>Writing</h3>
@@ -668,7 +673,7 @@ html.light-mode .site-footer {
       </div>
     </a>
 
-    <a href="film.html" target="_blank" class="category-card">
+    <a href="#" target="_blank" class="category-card">
       <img class="category-bg" src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1770&q=80" alt="Film & Documentary" />
       <div class="category-content">
         <h3>Film & Documentary</h3>
@@ -676,7 +681,7 @@ html.light-mode .site-footer {
       </div>
     </a>
 
-    <a href="fineart.html" target="_blank" class="category-card">
+    <a href="#" target="_blank" class="category-card">
       <img class="category-bg" src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&w=1770&q=80" alt="Fine Art & Sculpture" />
       <div class="category-content">
         <h3>Fine Art & Sculpture</h3>
@@ -684,7 +689,7 @@ html.light-mode .site-footer {
       </div>
     </a>
 
-    <a href="photography.html" target="_blank" class="category-card">
+    <a href="#" target="_blank" class="category-card">
       <img class="category-bg" src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=1770&q=80" alt="Photography" />
       <div class="category-content">
         <h3>Photography</h3>
@@ -692,7 +697,7 @@ html.light-mode .site-footer {
       </div>
     </a>
 
-    <a href="emergingtech.html" target="_blank" class="category-card">
+    <a href="#" target="_blank" class="category-card">
       <img class="category-bg" src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1770&q=80" alt="Emerging Tech & 3D Media" />
       <div class="category-content">
         <h3>Emerging Tech & 3D Media</h3>
@@ -700,7 +705,7 @@ html.light-mode .site-footer {
       </div>
     </a>
 
-    <a href="interactive.html" target="_blank" class="category-card">
+    <a href="#" target="_blank" class="category-card">
       <img class="category-bg" src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1770&q=80" alt="Interactive & Immersive Work" />
       <div class="category-content">
         <h3>Interactive & Immersive Work</h3>
@@ -719,19 +724,17 @@ html.light-mode .site-footer {
   <div class="about-content">
     <div class="about-text">
       <p>I'm a filmmaker and emerging-tech creative working with cinema, interactive media, and socially grounded storytelling. I graduated Magna Cum Laude from Binghamton University with a BA in Cinema and minors in Digital & Data Studies and Genocide & Mass Atrocity Prevention.</p>
-      <p>My experience spans 3D printing, lidar scanning, VR/AR, animation, editing, broadcast, and development for documentary and scripted media. I've worked at Binghamton's Emerging Technology Studio, contributed to the TLC docuseries *Jay and Pamela*, collaborated internationally as a Global Intern for IFIT in Barcelona, and created interactive projection art for LUMA Festival.</p>
+      <p>My experience spans 3D printing, lidar scanning, VR/AR, animation, editing, broadcast, and development for documentary and scripted media. I've worked at Binghamton's Emerging Technology Studio, contributed to the TLC docuseries <em>Jay and Pamela</em>, collaborated internationally as a Global Intern for IFIT in Barcelona, and created interactive projection art for LUMA Festival.</p>
       <p>I love building work that blends the technical and the poetic. Outside the studio, I enjoy biking, camping, making homemade ice cream, and hanging out with my golden-doodle, Brooklynn.</p>
     </div>
 
-    <div class="about-details">
-      <h3>What I Love Working On</h3>
-      <ul>
-        <li>Music videos & performance films</li>
-        <li>Documentary & short-form storytelling</li>
-        <li>Experimental visual pieces</li>
-        <li>Live sessions & event coverage</li>
-        <li>Creative collaborations</li>
-      </ul>
+    <div class="about-card">
+      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80" alt="Joanna Fishman" class="profile-photo" />
+      <h3>Meet Joanna</h3>
+      <p>Filmmaker and emerging-tech creative working with cinema, interactive media, and socially grounded storytelling. Let's create something amazing together.</p>
+      <button class="cv-button" onclick="downloadCV()">
+        <i class="fas fa-download"></i> Download CV
+      </button>
     </div>
   </div>
 </section>
@@ -745,9 +748,8 @@ html.light-mode .site-footer {
   <div class="contact-wrapper">
     <div class="contact-info">
       <h2>Have a project<br>in mind?</h2>
-      <p class="contact-tagline">Email:</p>
       <a href="mailto:team@jdnydigital.com" class="contact-email">team@jdnydigital.com</a>
-      <p class="contact-note">Tell me about your project, your vibe, and any references you love.</p>
+      <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">Tell me about your project, your vibe, and any references you love.</p>
 
       <div class="contact-socials">
         <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -781,103 +783,65 @@ html.light-mode .site-footer {
 </footer>
 
 <script>
-  // Footer year
+  // Set footer year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Form submission handler
+  // Theme toggle
+  function toggleTheme() {
+    const body = document.body;
+    const icon = document.getElementById('theme-icon');
+    
+    if (body.classList.contains('dark-mode')) {
+      body.classList.remove('dark-mode');
+      body.classList.add('light-mode');
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+      localStorage.setItem('theme', 'light');
+    } else {
+      body.classList.remove('light-mode');
+      body.classList.add('dark-mode');
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+      localStorage.setItem('theme', 'dark');
+    }
+  }
+
+  // Load saved theme
+  window.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem('theme') || 'dark';
+    const body = document.body;
+    const icon = document.getElementById('theme-icon');
+    
+    body.classList.remove('dark-mode', 'light-mode');
+    body.classList.add(saved === 'light' ? 'light-mode' : 'dark-mode');
+    
+    if (saved === 'light') {
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    }
+  });
+
+  // Form submission
   function handleSubmit() {
     alert('Thanks for reaching out! This is a demo form.');
   }
 
-  // Draggable track
-  const track = document.getElementById("image-track");
+  // CV download
+  function downloadCV() {
+    alert('CV download functionality - link your actual CV file here');
+  }
 
-  window.addEventListener("mousedown", e => {
-    track.dataset.mouseDownAt = e.clientX;
-  });
-
-  window.addEventListener("mouseup", () => {
-    track.dataset.mouseDownAt = "0";
-    track.dataset.prevPercentage = track.dataset.percentage;
-  });
-
-  window.addEventListener("mousemove", e => {
-    if (track.dataset.mouseDownAt === "0") return;
-
-    const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX;
-    const maxDelta = window.innerWidth / 2;
-
-    let percentage = (mouseDelta / maxDelta) * -100;
-    let next = Math.min(Math.max(parseFloat(track.dataset.prevPercentage) + percentage, -100), 0);
-
-    track.dataset.percentage = next;
-
-    track.style.transform = `translate(${next}%, -50%)`;
-    [...track.children].forEach((img) => {
-      img.style.objectPosition = `${100 + next}% center`;
-    });
-  });
-
-  // Touch support for mobile
-  track.addEventListener("touchstart", e => {
-    track.dataset.mouseDownAt = e.touches[0].clientX;
-  });
-
-  track.addEventListener("touchend", () => {
-    track.dataset.mouseDownAt = "0";
-    track.dataset.prevPercentage = track.dataset.percentage;
-  });
-
-  track.addEventListener("touchmove", e => {
-    if (track.dataset.mouseDownAt === "0") return;
-
-    const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.touches[0].clientX;
-    const maxDelta = window.innerWidth / 2;
-
-    let percentage = (mouseDelta / maxDelta) * -100;
-    let next = Math.min(Math.max(parseFloat(track.dataset.prevPercentage) + percentage, -100), 0);
-
-    track.dataset.percentage = next;
-
-    track.style.transform = `translate(${next}%, -50%)`;
-    [...track.children].forEach((img) => {
-      img.style.objectPosition = `${100 + next}% center`;
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href !== '#' && document.querySelector(href)) {
+        e.preventDefault();
+        document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+      }
     });
   });
 </script>
-
-// Theme toggle
-const themeToggle = document.getElementById('themeToggle');
-const html = document.documentElement;
-
-// Check for saved preference or default to dark
-const currentTheme = localStorage.getItem('theme') || 'dark-mode';
-html.classList.add(currentTheme);
-updateThemeIcon();
-
-themeToggle.addEventListener('click', () => {
-  if (html.classList.contains('dark-mode')) {
-    html.classList.remove('dark-mode');
-    html.classList.add('light-mode');
-    localStorage.setItem('theme', 'light-mode');
-  } else {
-    html.classList.remove('light-mode');
-    html.classList.add('dark-mode');
-    localStorage.setItem('theme', 'dark-mode');
-  }
-  updateThemeIcon();
-});
-
-function updateThemeIcon() {
-  const icon = themeToggle.querySelector('i');
-  if (html.classList.contains('light-mode')) {
-    icon.classList.remove('fa-sun');
-    icon.classList.add('fa-moon');
-  } else {
-    icon.classList.remove('fa-moon');
-    icon.classList.add('fa-sun');
-  }
-}
 
 </body>
 </html>

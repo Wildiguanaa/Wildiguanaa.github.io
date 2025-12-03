@@ -19,11 +19,11 @@
       --accent-glow: rgba(168, 76, 58, 0.3);
       --accent-light: #c86555;
       
-      --bg-light: #2a1f18;
-      --bg-card-light: #3a2f28;
-      --text-primary-light: #f5e8e0;
-      --text-muted-light: #a89080;
-      --border-light: rgba(245, 232, 224, 0.1);
+      --bg-light: #e8dcc8;
+      --bg-card-light: #f0e6d8;
+      --text-primary-light: #3d2f24;
+      --text-muted-light: #8b7355;
+      --border-light: rgba(61, 47, 36, 0.1);
       
       --font-serif: "Libre Baskerville", serif;
       --font-sans: "Inter", sans-serif;
@@ -82,7 +82,7 @@
     }
 
     body.light-mode .site-header {
-      background: rgba(42, 31, 24, 0.95);
+      background: rgba(232, 220, 200, 0.95);
       border-bottom-color: var(--border);
     }
 
@@ -165,7 +165,7 @@
     }
 
     body.light-mode .bg-overlay {
-      background: linear-gradient(to right, rgba(42, 31, 24, 0.6), rgba(42, 31, 24, 0.3));
+      background: linear-gradient(to right, rgba(232, 220, 200, 0.3), rgba(232, 220, 200, 0.1));
     }
 
     /* HERO SECTION */
@@ -844,3 +844,125 @@
 <footer class="site-footer">
   <p>© <span id="year"></span> Joanna Fishman. Shot, cut & coded with love.</p>
 </footer>
+
+<script>
+  // Set footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Theme toggle
+  function toggleTheme() {
+    const body = document.body;
+    const icon = document.getElementById('theme-icon');
+    
+    if (body.classList.contains('dark-mode')) {
+      body.classList.remove('dark-mode');
+      body.classList.add('light-mode');
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+      localStorage.setItem('theme', 'light');
+    } else {
+      body.classList.remove('light-mode');
+      body.classList.add('dark-mode');
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+      localStorage.setItem('theme', 'dark');
+    }
+  }
+
+  // Load saved theme
+  window.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem('theme') || 'dark';
+    const body = document.body;
+    const icon = document.getElementById('theme-icon');
+    
+    body.classList.remove('dark-mode', 'light-mode');
+    body.classList.add(saved === 'light' ? 'light-mode' : 'dark-mode');
+    
+    if (saved === 'light') {
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    } else {
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+    }
+  });
+
+  // Form submission
+  function handleSubmit() {
+    alert('Thanks for reaching out! This is a demo form.');
+  }
+
+  // CV download
+  function downloadCV() {
+    alert('CV download functionality - link your actual CV file here');
+  }
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href !== '#' && document.querySelector(href)) {
+        e.preventDefault();
+        document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // DRAGGABLE IMAGE TRACK
+  const track = document.getElementById("image-track");
+  
+  if (track) {
+    window.addEventListener("mousedown", e => {
+      track.dataset.mouseDownAt = e.clientX;
+    });
+
+    window.addEventListener("mouseup", () => {
+      track.dataset.mouseDownAt = "0";
+      track.dataset.prevPercentage = track.dataset.percentage;
+    });
+
+    window.addEventListener("mousemove", e => {
+      if (track.dataset.mouseDownAt === "0") return;
+
+      const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX;
+      const maxDelta = window.innerWidth / 2;
+
+      let percentage = (mouseDelta / maxDelta) * -100;
+      let next = Math.min(Math.max(parseFloat(track.dataset.prevPercentage) + percentage, -100), 0);
+
+      track.dataset.percentage = next;
+
+      track.style.transform = `translate(${next}%, -50%)`;
+      [...track.children].forEach((img) => {
+        img.style.objectPosition = `${100 + next}% center`;
+      });
+    });
+
+    // Touch support for mobile
+    track.addEventListener("touchstart", e => {
+      track.dataset.mouseDownAt = e.touches[0].clientX;
+    });
+
+    track.addEventListener("touchend", () => {
+      track.dataset.mouseDownAt = "0";
+      track.dataset.prevPercentage = track.dataset.percentage;
+    });
+
+    track.addEventListener("touchmove", e => {
+      if (track.dataset.mouseDownAt === "0") return;
+
+      const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.touches[0].clientX;
+      const maxDelta = window.innerWidth / 2;
+
+      let percentage = (mouseDelta / maxDelta) * -100;
+      let next = Math.min(Math.max(parseFloat(track.dataset.prevPercentage) + percentage, -100), 0);
+
+      track.dataset.percentage = next;
+
+      track.style.transform = `translate(${next}%, -50%)`;
+      [...track.children].forEach((img) => {
+        img.style.objectPosition = `${100 + next}% center`;
+      });
+    });
+  }
+</script>

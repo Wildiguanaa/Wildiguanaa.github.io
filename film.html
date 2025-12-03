@@ -240,12 +240,6 @@
   .item:nth-child(18) img,
   .item:nth-child(18) video { height: 510px; }
 
-  .item:hover img,
-  .item:hover video {
-    filter: grayscale(0) brightness(1);
-    transform: scale(1.05);
-  }
-
   /* Play/Expand icon overlay - hidden by default */
   .action-icon {
     position: absolute;
@@ -540,6 +534,13 @@
       <img src="images/battlei.png" alt="Battle of the Bands">
       <div class="action-icon"><i class="fas fa-play"></i></div>
       <div class="item-title">Battle of the Bands</div>
+    </div>
+
+    <!-- Sample Photo -->
+    <div class="item" onclick="openModal(this)">
+      <img src="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=800" alt="Sample Photo">
+      <div class="action-icon"><i class="fas fa-expand"></i></div>
+      <div class="item-title">Sample Photo</div>
     </div>
   </div>
 </main>

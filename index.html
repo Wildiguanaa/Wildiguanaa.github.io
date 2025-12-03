@@ -307,7 +307,49 @@
       color: var(--text-muted);
     }
 
-    /* ABOUT SECTION */
+    /* DRAGGABLE TRACK */
+    .track-wrapper {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+      border-radius: 8px;
+      background: var(--bg-card);
+      margin-bottom: 6rem;
+    }
+
+    .track-wrapper:active {
+      cursor: grabbing;
+    }
+
+    #image-track {
+      display: flex;
+      gap: 1.5rem;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      user-select: none;
+      padding: 0 2rem;
+    }
+
+    .image {
+      width: 35vmin;
+      height: 50vmin;
+      object-fit: cover;
+      flex-shrink: 0;
+      border-radius: 6px;
+      filter: grayscale(0.2);
+      transition: all 0.3s ease;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .image:hover {
+      filter: grayscale(0);
+      transform: scale(1.02);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
     .about-content {
       display: grid;
       grid-template-columns: 1.5fr 1fr;
@@ -657,10 +699,29 @@
   </div>
 </section>
 
-<!-- WORK / CATEGORIES -->
+<!-- SELECTED FRAMES -->
 <section class="section" id="work">
   <div class="section-header">
-    <h2 class="section-title">View My Work</h2>
+    <h2 class="section-title">Selected Frames</h2>
+    <p class="section-subtitle">Drag to explore — moments in motion</p>
+  </div>
+
+  <div class="track-wrapper">
+    <div id="image-track" data-mouse-down-at="0" data-prev-percentage="0" data-percentage="0">
+      <img class="image" src="https://images.unsplash.com/photo-1524781289445-ddf8f5695861?auto=format&fit=crop&w=1770&q=80" draggable="false" alt="Frame 1" />
+      <img class="image" src="https://images.unsplash.com/photo-1610194352361-4c81a6a8967e?auto=format&fit=crop&w=1674&q=80" draggable="false" alt="Frame 2" />
+      <img class="image" src="https://images.unsplash.com/photo-1618202133208-2907bebba9e1?auto=format&fit=crop&w=1770&q=80" draggable="false" alt="Frame 3" />
+      <img class="image" src="https://images.unsplash.com/photo-1495805442109-bf1cf975750b?auto=format&fit=crop&w=1770&q=80" draggable="false" alt="Frame 4" />
+      <img class="image" src="https://images.unsplash.com/photo-1548021682-1720ed403a5b?auto=format&fit=crop&w=1770&q=80" draggable="false" alt="Frame 5" />
+      <img class="image" src="https://images.unsplash.com/photo-1496753480864-3e588e0269b3?auto=format&fit=crop&w=2134&q=80" draggable="false" alt="Frame 6" />
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">View More Work</h2>
     <p class="section-subtitle">Explore projects by category</p>
   </div>
 
@@ -841,6 +902,64 @@
       }
     });
   });
+
+  // DRAGGABLE IMAGE TRACK
+  const track = document.getElementById("image-track");
+  
+  if (track) {
+    window.addEventListener("mousedown", e => {
+      track.dataset.mouseDownAt = e.clientX;
+    });
+
+    window.addEventListener("mouseup", () => {
+      track.dataset.mouseDownAt = "0";
+      track.dataset.prevPercentage = track.dataset.percentage;
+    });
+
+    window.addEventListener("mousemove", e => {
+      if (track.dataset.mouseDownAt === "0") return;
+
+      const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX;
+      const maxDelta = window.innerWidth / 2;
+
+      let percentage = (mouseDelta / maxDelta) * -100;
+      let next = Math.min(Math.max(parseFloat(track.dataset.prevPercentage) + percentage, -100), 0);
+
+      track.dataset.percentage = next;
+
+      track.style.transform = `translate(${next}%, -50%)`;
+      [...track.children].forEach((img) => {
+        img.style.objectPosition = `${100 + next}% center`;
+      });
+    });
+
+    // Touch support for mobile
+    track.addEventListener("touchstart", e => {
+      track.dataset.mouseDownAt = e.touches[0].clientX;
+    });
+
+    track.addEventListener("touchend", () => {
+      track.dataset.mouseDownAt = "0";
+      track.dataset.prevPercentage = track.dataset.percentage;
+    });
+
+    track.addEventListener("touchmove", e => {
+      if (track.dataset.mouseDownAt === "0") return;
+
+      const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.touches[0].clientX;
+      const maxDelta = window.innerWidth / 2;
+
+      let percentage = (mouseDelta / maxDelta) * -100;
+      let next = Math.min(Math.max(parseFloat(track.dataset.prevPercentage) + percentage, -100), 0);
+
+      track.dataset.percentage = next;
+
+      track.style.transform = `translate(${next}%, -50%)`;
+      [...track.children].forEach((img) => {
+        img.style.objectPosition = `${100 + next}% center`;
+      });
+    });
+  }
 </script>
 
 </body>

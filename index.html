@@ -493,6 +493,86 @@
         height: 80vmin;
       }
     }
+    /* THEME TOGGLE */
+.theme-toggle {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #0a0a0a;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  z-index: 99;
+  box-shadow: 0 10px 30px var(--accent-glow);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 15px 40px var(--accent-glow);
+}
+
+/* Light mode colors */
+html.light-mode {
+  --bg-dark: #f5f5f0;
+  --bg-card: #ffffff;
+  --text-primary-dark: #1a1a1a;
+  --text-muted-dark: #666666;
+}
+
+html.light-mode body {
+  background: #f5f5f0;
+  color: #1a1a1a;
+}
+
+html.light-mode .site-header {
+  background: rgba(245, 245, 240, 0.95);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+html.light-mode .site-nav a {
+  color: #666666;
+}
+
+html.light-mode .btn:last-child {
+  color: #1a1a1a;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+html.light-mode .category-card {
+  background: #ffffff;
+  color: #1a1a1a;
+}
+
+html.light-mode .contact-socials a {
+  background: #ffffff;
+  color: #1a1a1a;
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+html.light-mode .contact-form {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+html.light-mode .form-group input,
+html.light-mode .form-group textarea {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #1a1a1a;
+}
+
+html.light-mode .site-footer {
+  border-top-color: rgba(0, 0, 0, 0.08);
+  color: #666666;
+}
   </style>
 </head>
 
@@ -506,29 +586,50 @@
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </nav>
+
+  <button class="theme-toggle" id="themeToggle">
+  <i class="fas fa-sun"></i>
+</button>
+
 </header>
 
 <main>
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <div class="hero-content">
-    <div class="hero-eyebrow">Videographer · Artist · Storyteller</div>
-
-    <h1>Capturing stories<br>suspended<br>between reality and reverie</h1>
-
-    <p class="hero-tagline">
-      I use filmcraft and emerging technology to bring people, places, and the weird little moments that make you feel something real to life.
-    </p>
-
-    <div class="hero-cta">
-      <a href="#work" class="btn">View Work</a>
-      <a href="#contact" class="btn">Let's Collaborate</a>
+  <div class="bg-carousel" id="bgCarousel">
+    <div class="carousel-slide active">
+      <video autoplay muted loop playsinline>
+        <source src="https://cdn.pixabay.com/video/2024/03/26/203975-918876848_large.mp4" type="video/mp4">
+      </video>
+      <div class="carousel-overlay"></div>
+    </div>
+    <div class="carousel-slide">
+      <img src="https://images.unsplash.com/photo-1524781289445-ddf8f5695861?auto=format&fit=crop&w=2000&q=80" alt="Slide 2">
+      <div class="carousel-overlay"></div>
+    </div>
+    <div class="carousel-slide">
+      <img src="https://images.unsplash.com/photo-1618202133208-2907bebba9e1?auto=format&fit=crop&w=2000&q=80" alt="Slide 3">
+      <div class="carousel-overlay"></div>
+    </div>
+    <div class="carousel-slide">
+      <img src="https://images.unsplash.com/photo-1495805442109-bf1cf975750b?auto=format&fit=crop&w=2000&q=80" alt="Slide 4">
+      <div class="carousel-overlay"></div>
     </div>
   </div>
 
-  <div class="scroll-indicator">
-    <i class="fas fa-chevron-down"></i>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Videographer · Artist · Storyteller</div>
+    </div>
+
+    <div class="hero-right">
+      <p class="hero-tagline">Capturing stories suspended between reality and reverie<br>I use filmcraft and emerging technology to bring people, places, and the weird little moments that make you feel something real to life.</p>
+      <div class="hero-cta">
+        <a href="#work" class="btn">View Work</a>
+        <a href="#contact" class="btn">Let's Collaborate</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -744,6 +845,39 @@
     });
   });
 </script>
+
+// Theme toggle
+const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+
+// Check for saved preference or default to dark
+const currentTheme = localStorage.getItem('theme') || 'dark-mode';
+html.classList.add(currentTheme);
+updateThemeIcon();
+
+themeToggle.addEventListener('click', () => {
+  if (html.classList.contains('dark-mode')) {
+    html.classList.remove('dark-mode');
+    html.classList.add('light-mode');
+    localStorage.setItem('theme', 'light-mode');
+  } else {
+    html.classList.remove('light-mode');
+    html.classList.add('dark-mode');
+    localStorage.setItem('theme', 'dark-mode');
+  }
+  updateThemeIcon();
+});
+
+function updateThemeIcon() {
+  const icon = themeToggle.querySelector('i');
+  if (html.classList.contains('light-mode')) {
+    icon.classList.remove('fa-sun');
+    icon.classList.add('fa-moon');
+  } else {
+    icon.classList.remove('fa-moon');
+    icon.classList.add('fa-sun');
+  }
+}
 
 </body>
 </html>

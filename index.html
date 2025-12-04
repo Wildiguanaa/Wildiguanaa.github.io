@@ -647,6 +647,10 @@
         font-size: 1rem;
       }
 
+      .controls-container {
+        gap: 0.5rem;
+      }
+
       .scroll-indicator {
         left: 50%;
         transform: translateX(-50%);
@@ -676,10 +680,7 @@
 
 <!-- CONTROL BUTTONS -->
 <div class="controls-container">
-  <button class="control-btn" id="audioToggle" onclick="toggleAudio()" title="Toggle video audio">
-    <i class="fas fa-volume-mute" id="audio-icon"></i>
-  </button>
-  <button class="control-btn" onclick="toggleTheme()" title="Toggle light/dark mode">
+  <button class="control-btn" id="themeToggleBtn" title="Toggle light/dark mode">
     <i class="fas fa-moon" id="theme-icon"></i>
   </button>
 </div>

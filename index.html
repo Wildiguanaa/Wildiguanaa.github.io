@@ -108,17 +108,11 @@
       color: var(--accent-light);
     }
 
-    /* CONTROL BUTTONS - FIXED BOTTOM RIGHT */
-    .controls-container {
+    /* THEME TOGGLE - FIXED BOTTOM RIGHT */
+    .theme-toggle {
       position: fixed;
       bottom: 2rem;
       right: 2rem;
-      display: flex;
-      gap: 0.75rem;
-      z-index: 99;
-    }
-
-    .control-btn {
       background: var(--bg-card);
       border: 1px solid var(--border);
       color: var(--text-primary);
@@ -131,10 +125,11 @@
       align-items: center;
       justify-content: center;
       transition: all 0.3s ease;
+      z-index: 99;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     }
 
-    .control-btn:hover {
+    .theme-toggle:hover {
       background: var(--accent);
       color: #f5e8e0;
       border-color: var(--accent);
@@ -641,14 +636,12 @@
         padding: 5rem 5%;
       }
 
-      .control-btn {
+      .theme-toggle {
+        bottom: 1.5rem;
+        right: 1.5rem;
         width: 45px;
         height: 45px;
         font-size: 1rem;
-      }
-
-      .controls-container {
-        gap: 0.5rem;
       }
 
       .scroll-indicator {
@@ -662,7 +655,7 @@
 <body class="dark-mode">
 
 <div class="bg-video-container">
-  <video id="bgVideo" autoplay muted loop playsinline>
+  <video autoplay muted loop playsinline>
     <source src="videos/filmreel.mp4" type="video/mp4" />
   </video>
 </div>
@@ -678,12 +671,9 @@
   </nav>
 </header>
 
-<!-- CONTROL BUTTONS -->
-<div class="controls-container">
-  <button class="control-btn" onclick="toggleTheme()" title="Toggle light/dark mode">
-    <i class="fas fa-moon" id="theme-icon"></i>
-  </button>
-</div>
+<button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">
+  <i class="fas fa-moon" id="theme-icon"></i>
+</button>
 
 <main>
 
@@ -851,4 +841,128 @@
 
 </main>
 
-<footer class="site-
+<footer class="site-footer">
+  <p>© <span id="year"></span> Joanna Fishman. Shot, cut & coded with love.</p>
+</footer>
+
+<script>
+  // Set footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Theme toggle
+  function toggleTheme() {
+    const body = document.body;
+    const icon = document.getElementById('theme-icon');
+    
+    if (body.classList.contains('dark-mode')) {
+      body.classList.remove('dark-mode');
+      body.classList.add('light-mode');
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+      localStorage.setItem('theme', 'light');
+    } else {
+      body.classList.remove('light-mode');
+      body.classList.add('dark-mode');
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+      localStorage.setItem('theme', 'dark');
+    }
+  }
+
+  // Load saved theme
+  window.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem('theme') || 'dark';
+    const body = document.body;
+    const icon = document.getElementById('theme-icon');
+    
+    body.classList.remove('dark-mode', 'light-mode');
+    body.classList.add(saved === 'light' ? 'light-mode' : 'dark-mode');
+    
+    if (saved === 'light') {
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    } else {
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+    }
+  });
+
+  // Form submission
+  function handleSubmit() {
+    alert('Thanks for reaching out! This is a demo form.');
+  }
+
+  // CV download
+  function downloadCV() {
+    alert('CV download functionality - link your actual CV file here');
+  }
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href !== '#' && document.querySelector(href)) {
+        e.preventDefault();
+        document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // DRAGGABLE IMAGE TRACK
+  const track = document.getElementById("image-track");
+  
+  if (track) {
+    window.addEventListener("mousedown", e => {
+      track.dataset.mouseDownAt = e.clientX;
+    });
+
+    window.addEventListener("mouseup", () => {
+      track.dataset.mouseDownAt = "0";
+      track.dataset.prevPercentage = track.dataset.percentage;
+    });
+
+    window.addEventListener("mousemove", e => {
+      if (track.dataset.mouseDownAt === "0") return;
+
+      const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX;
+      const maxDelta = window.innerWidth / 2;
+
+      let percentage = (mouseDelta / maxDelta) * -100;
+      let next = Math.min(Math.max(parseFloat(track.dataset.prevPercentage) + percentage, -100), 0);
+
+      track.dataset.percentage = next;
+
+      track.style.transform = `translate(${next}%, -50%)`;
+      [...track.children].forEach((img) => {
+        img.style.objectPosition = `${100 + next}% center`;
+      });
+    });
+
+    // Touch support for mobile
+    track.addEventListener("touchstart", e => {
+      track.dataset.mouseDownAt = e.touches[0].clientX;
+    });
+
+    track.addEventListener("touchend", () => {
+      track.dataset.mouseDownAt = "0";
+      track.dataset.prevPercentage = track.dataset.percentage;
+    });
+
+    track.addEventListener("touchmove", e => {
+      if (track.dataset.mouseDownAt === "0") return;
+
+      const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.touches[0].clientX;
+      const maxDelta = window.innerWidth / 2;
+
+      let percentage = (mouseDelta / maxDelta) * -100;
+      let next = Math.min(Math.max(parseFloat(track.dataset.prevPercentage) + percentage, -100), 0);
+
+      track.dataset.percentage = next;
+
+      track.style.transform = `translate(${next}%, -50%)`;
+      [...track.children].forEach((img) => {
+        img.style.objectPosition = `${100 + next}% center`;
+      });
+    });
+  }
+</script>

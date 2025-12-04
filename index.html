@@ -144,10 +144,10 @@
     /* BACKGROUND VIDEO */
     .bg-video-container {
       position: fixed;
-      top: 120px;
+      top: 80px;
       left: 0;
       width: 100%;
-      height: calc(100% - 120px);
+      height: calc(100% - 80px);
       overflow: hidden;
       z-index: -2;
     }
@@ -160,10 +160,10 @@
 
     .bg-overlay {
       position: fixed;
-      top: 120px;
+      top: 80px;
       left: 0;
       width: 100%;
-      height: calc(100% - 120px);
+      height: calc(100% - 80px);
       background: linear-gradient(to right, rgba(26, 20, 16, 0.7), rgba(26, 20, 16, 0.4));
       z-index: -1;
       transition: background 0.4s ease;
@@ -680,7 +680,7 @@
 
 <!-- CONTROL BUTTONS -->
 <div class="controls-container">
-  <button class="control-btn" id="themeToggleBtn" title="Toggle light/dark mode">
+  <button class="control-btn" onclick="toggleTheme()" title="Toggle light/dark mode">
     <i class="fas fa-moon" id="theme-icon"></i>
   </button>
 </div>

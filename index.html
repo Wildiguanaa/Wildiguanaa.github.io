@@ -358,7 +358,7 @@
     }
 
     .image {
-      width: 45vmin;
+      width: 65vmin;
       height: 50vmin;
       object-fit: cover;
       flex-shrink: 0;
@@ -374,6 +374,7 @@
       transform: scale(1.02);
       box-shadow: 0 20px 60px rgba(168, 76, 58, 0.2);
       object-position: center;
+      Math.min(Math.max(..., -100), 0)
     }
 
     .about-content {
@@ -979,7 +980,7 @@
 
       let percentage = (mouseDelta / maxDelta) * -100;
       let next = parseFloat(track.dataset.prevPercentage) + percentage;
-      
+
       track.dataset.percentage = next;
 
       track.style.transform = `translate(${next}%, -50%)`;

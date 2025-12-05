@@ -951,7 +951,7 @@
       const maxDelta = window.innerWidth / 2;
 
       let percentage = (mouseDelta / maxDelta) * -100;
-      let next = Math.min(Math.max(parseFloat(track.dataset.prevPercentage) + percentage, -100), 0);
+      let next = parseFloat(track.dataset.prevPercentage) + percentage;
 
       track.dataset.percentage = next;
 
@@ -978,8 +978,8 @@
       const maxDelta = window.innerWidth / 2;
 
       let percentage = (mouseDelta / maxDelta) * -100;
-      let next = Math.min(Math.max(parseFloat(track.dataset.prevPercentage) + percentage, -100), 0);
-
+      let next = parseFloat(track.dataset.prevPercentage) + percentage;
+      
       track.dataset.percentage = next;
 
       track.style.transform = `translate(${next}%, -50%)`;

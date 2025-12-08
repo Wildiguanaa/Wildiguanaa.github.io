@@ -64,33 +64,6 @@
       transition: background 0.4s ease, color 0.4s ease;
     }
 
-/* SPLASH SCREEN */
-   /* .splash-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      opacity: 1;
-      transition: opacity 1s ease-out 2s;
-    }
-
-    .splash-screen.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .splash-signature {
-      max-width: 300px;
-      width: 80%;
-      height: auto;
-    } */
-
     /* HEADER */
     .site-header {
       position: fixed;
@@ -114,26 +87,9 @@
     }
 
     .logo {
-      max-width: 400px;
-      height: 120px;
-      position: relative;
-    }
-
-    .logo img {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    body.dark-mode .logo-dark {
-      opacity: 1;
-    }
-
-    body.light-mode .logo-light {
-      opacity: 1;
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 700;
     }
 
     .site-nav {
@@ -152,7 +108,7 @@
       color: var(--accent-light);
     }
 
-    /* THEME TOGGLE */
+    /* THEME TOGGLE - FIXED BOTTOM RIGHT */
     .theme-toggle {
       position: fixed;
       bottom: 2rem;
@@ -196,6 +152,8 @@
       height: 100%;
       object-fit: cover;
     }
+
+  
 
     .bg-overlay {
       position: fixed;
@@ -372,81 +330,51 @@
       color: var(--text-muted);
     }
 
-    /* GALLERY */
-    .gallery-container {
+    /* DRAGGABLE TRACK */
+    .track-wrapper {
       position: relative;
-      height: 500px;
+      height: 400px;
       overflow: hidden;
+      cursor: grab;
+      user-select: none;
       border-radius: 8px;
       background: var(--bg-card);
       margin-bottom: 6rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
-    .gallery-track {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .track-wrapper:active {
+      cursor: grabbing;
     }
 
-    .gallery-item {
+    #image-track {
+      display: flex;
+      gap: 1.5rem;
       position: absolute;
-      width: 70%;
-      height: 80%;
-      opacity: 0;
-      transition: opacity 0.6s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      user-select: none;
+      padding: 0 2rem;
     }
 
-    .gallery-item.active {
-      opacity: 1;
-      z-index: 10;
-    }
-
-    .gallery-item img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      border-radius: 8px;
+    .image {
+      width: 65vmin;
+      height: 50vmin;
+      object-fit: cover;
+      flex-shrink: 0;
+      border-radius: 6px;
       filter: grayscale(0.3) brightness(0.9);
-      transition: filter 0.3s ease;
+      transition: all 0.3s ease;
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+      object-position: center;
     }
 
-    .gallery-item:hover img {
+    .image:hover {
       filter: grayscale(0.1) brightness(1.05);
+      transform: scale(1.02);
       box-shadow: 0 20px 60px rgba(168, 76, 58, 0.2);
-    }
-
-    .gallery-controls {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-
-    .gallery-btn {
-      padding: 0.7rem 1.5rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      color: var(--text-primary);
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: all 0.3s;
-    }
-
-    .gallery-btn:hover {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #f5e8e0;
+      object-position: center;
+      Math.min(Math.max(..., -100), 0)
     }
 
     .about-content {
@@ -519,7 +447,7 @@
       box-shadow: 0 8px 20px var(--accent-glow);
     }
 
-    /* CATEGORIES */
+    /* CATEGORIES GRID */
     .categories-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -700,6 +628,7 @@
       background: var(--bg);
     }
 
+    /* RESPONSIVE */
     @media (max-width: 768px) {
       .hero {
         flex-direction: column;
@@ -743,20 +672,11 @@
         left: 50%;
         transform: translateX(-50%);
       }
-
-      .gallery-container {
-        height: 350px;
-      }
     }
   </style>
 </head>
 
 <body class="dark-mode">
-
-<!-- SPLASH SCREEN
-<div class="splash-screen" id="splashScreen">
-  <img src="images/signature-light.png" alt="Joanna Fishman" class="splash-signature" />
-</div> -->
 
 <div class="bg-video-container">
   <video autoplay muted loop playsinline>
@@ -766,10 +686,7 @@
 <div class="bg-overlay"></div>
 
 <header class="site-header">
-  <div class="logo">
-    <img src="images/signature-dark.png" alt="Joanna Fishman" class="logo-dark" />
-    <img src="images/signature-light.png" alt="Joanna Fishman" class="logo-light" />
-  </div>
+  <div class="logo">Joanna Fishman</div>
   <nav class="site-nav">
     <a href="#home">Home</a>
     <a href="#work">Work</a>
@@ -808,61 +725,32 @@
   </div>
 </section>
 
-<!-- HIGHLIGHTS -->
+<!-- Highlights -->
 <section class="section" id="work">
   <div class="section-header">
     <h2 class="section-title">Highlights</h2>
-    <p class="section-subtitle">Moments in motion. <b>Auto-rotating gallery.</b></p>
+    <p class="section-subtitle">Moments in motion.<b> Drag to explore.</b></p>
   </div>
 
-  <div class="gallery-container">
-    <div class="gallery-track" id="galleryTrack">
-      <div class="gallery-item active">
-        <img src="images/chefs.png" alt="Frame 1" />
-      </div>
-      <div class="gallery-item">
-        <img src="images/seniorthesis.png" alt="Frame 2" />
-      </div>
-      <div class="gallery-item">
-        <img src="images/audience.png" alt="Frame 3" />
-      </div>
-      <div class="gallery-item">
-        <img src="images/P1032147.jpg" alt="Frame 4" />
-      </div>
-      <div class="gallery-item">
-        <img src="images/cumberland1.jpg" alt="Frame 5" />
-      </div>
-      <div class="gallery-item">
-        <img src="images/nrhs1.jpg" alt="Frame 6" />
-      </div>
-      <div class="gallery-item">
-        <img src="images/waterlily.jpg" alt="Frame 7" />
-      </div>
-      <div class="gallery-item">
-        <img src="images/willsboro1.png" alt="Frame 8" />
-      </div>
-      <div class="gallery-item">
-        <img src="images/flowergirls1.jpg" alt="Frame 9" />
-      </div>
-      <div class="gallery-item">
-        <img src="images/bwflowergirls2.jpg" alt="Frame 10" />
-      </div>
-      <div class="gallery-item">
-        <img src="images/pigeon.png" alt="Frame 11" />
-      </div>
-      <div class="gallery-item">
-        <img src="images/momfield1.png" alt="Frame 12" />
-      </div>
-      <div class="gallery-item">
-        <img src="images/luma1.png" alt="Frame 13" />
-      </div>
+  <div class="track-wrapper">
+    <div id="image-track" data-mouse-down-at="0" data-prev-percentage="0" data-percentage="0">
+      <img class="image" src="images/chefs.png" draggable="false" alt="Frame 1" />
+      <img class="image" src="images/seniorthesis.png" draggable="false" alt="Frame 10" />
+      <img class="image" src="images/audience.png" draggable="false" alt="Frame 10" />
+      <img class="image" src="images/P1032147.jpg" draggable="false" alt="Frame 3" />
+      <img class="image" src="images/cumberland1.jpg" draggable="false" alt="Frame 4" />
+      <img class="image" src="images/nrhs1.jpg" draggable="false" alt="Frame 5" />
+      <img class="image" src="images/waterlily.jpg" draggable="false" alt="Frame 6" />
+      <img class="image" src="images/willsboro1.png" draggable="false" alt="Frame 7" />
+      <img class="image" src="images/flowergirls1.jpg" draggable="false" alt="Frame 8" />
+      <img class="image" src="images/bwflowergirls2.jpg" draggable="false" alt="Frame 9" />
+      <img class="image" src="images/pigeon.png" draggable="false" alt="Frame 10" />
+      <img class="image" src="images/momfield1.png" draggable="false" alt="Frame 2" />
+      <!-- <img class="image" src="images/seniorthesis2.png" draggable="false" alt="Frame 10" /> -->
+      <img class="image" src="images/luma1.png" draggable="false" alt="Frame 2" />
+      
+      
     </div>
-  </div>
-
-  <div class="gallery-controls">
-    <button class="gallery-btn" onclick="prevGallery()">← Previous</button>
-    <button class="gallery-btn" onclick="toggleGalleryAnimation()">Pause/Play</button>
-    <button class="gallery-btn" onclick="nextGallery()">Next →</button>
   </div>
 </section>
 
@@ -934,4 +822,181 @@
     <div class="about-text">
       <p>I'm a filmmaker and emerging-tech creative working with cinema, interactive media, and socially grounded storytelling. I graduated Magna Cum Laude from Binghamton University with a BA in Cinema and minors in Digital & Data Studies and Genocide & Mass Atrocity Prevention.</p>
       <p>My experience spans 3D printing, lidar scanning, VR/AR, animation, editing, broadcast, and development for documentary and scripted media. I've worked at Binghamton's Emerging Technology Studio, contributed to the TLC docuseries <em>Jay and Pamela</em>, collaborated internationally as a Global Intern for IFIT in Barcelona, and created interactive projection art for LUMA Festival.</p>
-      <p>I love building work
+      <p>I love building work that blends the technical and the poetic. Outside the studio, I enjoy biking, camping, making homemade ice cream, and hanging out with my golden-doodle, Brooklynn.</p>
+    </div>
+
+    <div class="about-card">
+      <img src="images/selfportrait.png" alt="Joanna Fishman" class="profile-photo" />
+      <h3>Meet Joanna</h3>
+      <p></p>
+      <button class="cv-button" onclick="downloadCV()">
+        <i class="fas fa-download"></i> Download CV
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="section-header">
+    <h2 class="section-title">Let's Work Together</h2>
+  </div>
+
+  <div class="contact-wrapper">
+    <div class="contact-info">
+      <h2>Have a project<br>in mind?</h2>
+      <a href="mailto:team@jdnydigital.com" class="contact-email">team@jdnydigital.com</a>
+      <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">Let's connect.</p>
+
+      <div class="contact-socials">
+        <a href="https://www.instagram.com/wildiguana/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/joanna-fishman/" aria-label="Linkedin"><i class="fab fa-linkedin-v"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <div class="form-group">
+        <label>Name *</label>
+        <input type="text" required />
+      </div>
+      <div class="form-group">
+        <label>Email *</label>
+        <input type="email" required />
+      </div>
+      <div class="form-group">
+        <label>Tell me more *</label>
+        <textarea rows="5" required></textarea>
+      </div>
+      <button type="button" class="form-submit" onclick="handleSubmit()">Send Message</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <p>© <span id="year"></span> Joanna Fishman. Shot, cut & coded with love.</p>
+</footer>
+
+<script>
+  // Set footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Theme toggle
+  function toggleTheme() {
+    const body = document.body;
+    const icon = document.getElementById('theme-icon');
+    
+    if (body.classList.contains('dark-mode')) {
+      body.classList.remove('dark-mode');
+      body.classList.add('light-mode');
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+      localStorage.setItem('theme', 'light');
+    } else {
+      body.classList.remove('light-mode');
+      body.classList.add('dark-mode');
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+      localStorage.setItem('theme', 'dark');
+    }
+  }
+
+  // Load saved theme
+  window.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem('theme') || 'dark';
+    const body = document.body;
+    const icon = document.getElementById('theme-icon');
+    
+    body.classList.remove('dark-mode', 'light-mode');
+    body.classList.add(saved === 'light' ? 'light-mode' : 'dark-mode');
+    
+    if (saved === 'light') {
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    } else {
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+    }
+  });
+
+  // Form submission
+  function handleSubmit() {
+    alert('Thanks for reaching out! This is a demo form.');
+  }
+
+  // CV download
+  function downloadCV() {
+    alert('CV download functionality - link your actual CV file here');
+  }
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href !== '#' && document.querySelector(href)) {
+        e.preventDefault();
+        document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // DRAGGABLE IMAGE TRACK
+  const track = document.getElementById("image-track");
+  
+  if (track) {
+    window.addEventListener("mousedown", e => {
+      track.dataset.mouseDownAt = e.clientX;
+    });
+
+    window.addEventListener("mouseup", () => {
+      track.dataset.mouseDownAt = "0";
+      track.dataset.prevPercentage = track.dataset.percentage;
+    });
+
+    window.addEventListener("mousemove", e => {
+      if (track.dataset.mouseDownAt === "0") return;
+
+      const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX;
+      const maxDelta = window.innerWidth / 2;
+
+      let percentage = (mouseDelta / maxDelta) * -100;
+      let next = parseFloat(track.dataset.prevPercentage) + percentage;
+
+      track.dataset.percentage = next;
+
+      track.style.transform = `translate(${next}%, -50%)`;
+      [...track.children].forEach((img) => {
+        img.style.objectPosition = `${100 + next}% center`;
+      });
+    });
+
+    // Touch support for mobile
+    track.addEventListener("touchstart", e => {
+      track.dataset.mouseDownAt = e.touches[0].clientX;
+    });
+
+    track.addEventListener("touchend", () => {
+      track.dataset.mouseDownAt = "0";
+      track.dataset.prevPercentage = track.dataset.percentage;
+    });
+
+    track.addEventListener("touchmove", e => {
+      if (track.dataset.mouseDownAt === "0") return;
+
+      const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.touches[0].clientX;
+      const maxDelta = window.innerWidth / 2;
+
+      let percentage = (mouseDelta / maxDelta) * -100;
+      let next = parseFloat(track.dataset.prevPercentage) + percentage;
+
+      track.dataset.percentage = next;
+
+      track.style.transform = `translate(${next}%, -50%)`;
+      [...track.children].forEach((img) => {
+        img.style.objectPosition = `${100 + next}% center`;
+      });
+    });
+  }
+</script>

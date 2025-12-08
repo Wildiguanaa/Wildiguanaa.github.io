@@ -97,7 +97,7 @@
 
     .logo-dark,
     .logo-light {
-      max-height: 40px;
+      max-height: 60px;
       width: auto;
     }
 
@@ -161,6 +161,34 @@
       transform: scale(1.1);
     }
 
+    /* SPLASH SCREEN */
+    .splash-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 1s ease-out;
+      pointer-events: all;
+    }
+
+    .splash-screen.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .splash-signature {
+      max-width: 300px;
+      width: 80%;
+      height: auto;
+    }
+
     /* BACKGROUND VIDEO */
     .bg-video-container {
       position: fixed;
@@ -214,20 +242,22 @@
       gap: 2.5rem;
     }
 
+
     .hero-content {
       position: relative;
       z-index: 10;
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 
-                   0px 0px 20px rgba(0, 0, 0, 0.6);
+      text-shadow: 3px 3px 12px rgba(0, 0, 0, 1), 
+                  0px 0px 25px rgba(0, 0, 0, 0.9),
+                  1px 1px 4px rgba(0, 0, 0, 1);
     }
 
-  
     body.light-mode .hero-content {
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5), 
-                  0px 0px 20px rgba(0, 0, 0, 0.3);
+      text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.9), 
+                  0px 0px 25px rgba(0, 0, 0, 0.7),
+                  1px 1px 4px rgba(0, 0, 0, 0.8);
     }
 
     .hero-eyebrow {
@@ -718,6 +748,10 @@
 
 <body class="dark-mode">
 
+<div class="splash-screen" id="splashScreen">
+  <img src="images/signature-light.png" alt="Joanna Fishman" class="splash-signature" />
+</div>
+
 <div class="bg-video-container">
   <video autoplay muted loop playsinline>
     <source src="videos/filmreel.mp4" type="video/mp4" />
@@ -791,8 +825,38 @@
       <img class="image" src="images/pigeon.png" draggable="false" alt="Frame 10" />
       <img class="image" src="images/momfield1.png" draggable="false" alt="Frame 2" />
       <!-- <img class="image" src="images/seniorthesis2.png" draggable="false" alt="Frame 10" /> -->
+
+      <!-- FIRST SET -->
+      <img class="image" src="images/chefs.png" draggable="false" alt="Frame 1" />
+      <img class="image" src="images/seniorthesis.png" draggable="false" alt="Frame 2" />
+      <img class="image" src="images/audience.png" draggable="false" alt="Frame 3" />
+      <img class="image" src="images/P1032147.jpg" draggable="false" alt="Frame 4" />
+      <img class="image" src="images/cumberland1.jpg" draggable="false" alt="Frame 5" />
+      <img class="image" src="images/nrhs1.jpg" draggable="false" alt="Frame 6" />
+      <img class="image" src="images/waterlily.jpg" draggable="false" alt="Frame 7" />
+      <img class="image" src="images/willsboro1.png" draggable="false" alt="Frame 8" />
+      <img class="image" src="images/flowergirls1.jpg" draggable="false" alt="Frame 9" />
+      <img class="image" src="images/bwflowergirls2.jpg" draggable="false" alt="Frame 10" />
+      <img class="image" src="images/pigeon.png" draggable="false" alt="Frame 11" />
+      <img class="image" src="images/momfield1.png" draggable="false" alt="Frame 12" />
       <img class="image" src="images/luma1.png" draggable="false" alt="Frame 13" />
-      <!-- Duplicate images for infinite loop -->
+      
+      <!-- SECOND SET (for looping) -->
+      <img class="image" src="images/chefs.png" draggable="false" alt="Frame 1" />
+      <img class="image" src="images/seniorthesis.png" draggable="false" alt="Frame 2" />
+      <img class="image" src="images/audience.png" draggable="false" alt="Frame 3" />
+      <img class="image" src="images/P1032147.jpg" draggable="false" alt="Frame 4" />
+      <img class="image" src="images/cumberland1.jpg" draggable="false" alt="Frame 5" />
+      <img class="image" src="images/nrhs1.jpg" draggable="false" alt="Frame 6" />
+      <img class="image" src="images/waterlily.jpg" draggable="false" alt="Frame 7" />
+      <img class="image" src="images/willsboro1.png" draggable="false" alt="Frame 8" />
+      <img class="image" src="images/flowergirls1.jpg" draggable="false" alt="Frame 9" />
+      <img class="image" src="images/bwflowergirls2.jpg" draggable="false" alt="Frame 10" />
+      <img class="image" src="images/pigeon.png" draggable="false" alt="Frame 11" />
+      <img class="image" src="images/momfield1.png" draggable="false" alt="Frame 12" />
+      <img class="image" src="images/luma1.png" draggable="false" alt="Frame 13" />
+      
+      <!-- THIRD SET (for seamless looping) -->
       <img class="image" src="images/chefs.png" draggable="false" alt="Frame 1" />
       <img class="image" src="images/seniorthesis.png" draggable="false" alt="Frame 2" />
       <img class="image" src="images/audience.png" draggable="false" alt="Frame 3" />
@@ -940,8 +1004,20 @@
 </footer>
 
 <script>
+
+
   // Set footer year
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Splash screen - fade out after 2 seconds
+  window.addEventListener('load', () => {
+    const splash = document.getElementById('splashScreen');
+    if (splash) {
+      setTimeout(() => {
+        splash.classList.add('hidden');
+      }, 2000);
+    }
+  });
 
   // Theme toggle
   function toggleTheme() {
@@ -1002,10 +1078,15 @@
     });
   });
 
-  // DRAGGABLE IMAGE TRACK
+
+
+    // DRAGGABLE IMAGE TRACK - TRUE INFINITE SCROLL
   const track = document.getElementById("image-track");
-  
+
   if (track) {
+    const imageCount = 13; // Number of unique images
+    const imageGapDistance = 1.5 * 16; // 1.5rem in pixels (approximate)
+    
     window.addEventListener("mousedown", e => {
       track.dataset.mouseDownAt = e.clientX;
     });
@@ -1025,12 +1106,58 @@
       let next = parseFloat(track.dataset.prevPercentage) + percentage;
 
       track.dataset.percentage = next;
-
-      track.style.transform = `translate(${next}%, -50%)`;
-      [...track.children].forEach((img) => {
-        img.style.objectPosition = `${100 + next}% center`;
-      });
+      applyTrackPosition(next);
     });
+
+    // Touch support for mobile
+    track.addEventListener("touchstart", e => {
+      track.dataset.mouseDownAt = e.touches[0].clientX;
+    }, { passive: true });
+
+    track.addEventListener("touchend", () => {
+      track.dataset.mouseDownAt = "0";
+      track.dataset.prevPercentage = track.dataset.percentage;
+    });
+
+    track.addEventListener("touchmove", e => {
+      if (track.dataset.mouseDownAt === "0") return;
+
+      const touchDelta = parseFloat(track.dataset.mouseDownAt) - e.touches[0].clientX;
+      const maxDelta = window.innerWidth / 2;
+
+      let percentage = (touchDelta / maxDelta) * -100;
+      let next = parseFloat(track.dataset.prevPercentage) + percentage;
+
+      track.dataset.percentage = next;
+      applyTrackPosition(next);
+    }, { passive: true });
+
+    function applyTrackPosition(nextValue) {
+      // Calculate the position for seamless looping
+      const totalImages = track.children.length;
+      const scrollRange = (imageCount / totalImages) * 100;
+      
+      // Reset position when we reach the end of the first set
+      if (nextValue <= -scrollRange) {
+        // Jump back to start without visual interruption
+        track.dataset.percentage = nextValue + scrollRange;
+        track.style.transform = `translate(${track.dataset.percentage}%, -50%)`;
+      } else if (nextValue > 0) {
+        // Jump forward if dragging backwards past the start
+        track.data.percentage = nextValue - scrollRange;
+        track.style.transform = `translate(${track.dataset.percentage}%, -50%)`;
+      } else {
+        track.style.transform = `translate(${nextValue}%, -50%)`;
+      }
+      
+      [...track.children].forEach((img) => {
+        img.style.objectPosition = `${100 + nextValue}% center`;
+      });
+    }
+  }
+
+
+
 
     // Touch support for mobile
     track.addEventListener("touchstart", e => {

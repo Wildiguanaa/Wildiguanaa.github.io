@@ -75,35 +75,20 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 2000 !important;
-      opacity: 1 !important;
-      transition: opacity 1s ease-out !important;
-      visibility: visible !important;
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 1s ease-out 2s;
     }
 
     .splash-screen.hidden {
-      opacity: 0 !important;
-      pointer-events: none !important;
-      z-index: -1 !important;
-      visibility: hidden !important;
+      opacity: 0;
+      pointer-events: none;
     }
 
     .splash-signature {
       max-width: 300px;
       width: 80%;
       height: auto;
-      animation: splashFadeIn 0.8s ease-in-out;
-    }
-
-    @keyframes splashFadeIn {
-      0% {
-        opacity: 0;
-        transform: scale(0.9);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
     }
 
     /* HEADER */
@@ -167,7 +152,7 @@
       color: var(--accent-light);
     }
 
-    /* THEME TOGGLE - FIXED BOTTOM RIGHT */
+    /* THEME TOGGLE */
     .theme-toggle {
       position: fixed;
       bottom: 2rem;
@@ -387,7 +372,7 @@
       color: var(--text-muted);
     }
 
-    /* GALLERY CAROUSEL */
+    /* GALLERY */
     .gallery-container {
       position: relative;
       height: 500px;
@@ -414,7 +399,7 @@
       width: 70%;
       height: 80%;
       opacity: 0;
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transition: opacity 0.6s ease;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -422,7 +407,6 @@
 
     .gallery-item.active {
       opacity: 1;
-      transform: scale(1);
       z-index: 10;
     }
 
@@ -535,7 +519,7 @@
       box-shadow: 0 8px 20px var(--accent-glow);
     }
 
-    /* CATEGORIES GRID */
+    /* CATEGORIES */
     .categories-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -716,7 +700,6 @@
       background: var(--bg);
     }
 
-    /* RESPONSIVE */
     @media (max-width: 768px) {
       .hero {
         flex-direction: column;
@@ -825,7 +808,7 @@
   </div>
 </section>
 
-<!-- HIGHLIGHTS - AUTO TRANSITIONING GALLERY -->
+<!-- HIGHLIGHTS -->
 <section class="section" id="work">
   <div class="section-header">
     <h2 class="section-title">Highlights</h2>
@@ -951,4 +934,4 @@
     <div class="about-text">
       <p>I'm a filmmaker and emerging-tech creative working with cinema, interactive media, and socially grounded storytelling. I graduated Magna Cum Laude from Binghamton University with a BA in Cinema and minors in Digital & Data Studies and Genocide & Mass Atrocity Prevention.</p>
       <p>My experience spans 3D printing, lidar scanning, VR/AR, animation, editing, broadcast, and development for documentary and scripted media. I've worked at Binghamton's Emerging Technology Studio, contributed to the TLC docuseries <em>Jay and Pamela</em>, collaborated internationally as a Global Intern for IFIT in Barcelona, and created interactive projection art for LUMA Festival.</p>
-      <p>I love building work that blends the technical and the poetic. Outside the studio, I enjoy biking, camping, making homemade ice cream, and hanging out with my golden-doodle, Brooklynn.</p>
+      <p>I love building work

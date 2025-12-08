@@ -330,11 +330,17 @@
       background: transparent;
       color: var(--text-primary);
       border: 1px solid rgba(245, 232, 224, 0.2);
+      text-shadow: 3px 3px 12px rgba(0, 0, 0, 1), 
+                  0px 0px 25px rgba(0, 0, 0, 0.9),
+                  1px 1px 4px rgba(0, 0, 0, 1);
     }
 
     body.light-mode .btn.secondary {
       border-color: var(--border);
       color: #fbf8e8;
+      text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.9), 
+                  0px 0px 25px rgba(0, 0, 0, 0.7),
+                  1px 1px 4px rgba(0, 0, 0, 0.8);
     }
 
     .btn.secondary:hover {
@@ -990,22 +996,26 @@
     }
   }, 2000);
 
+
   // Theme toggle
   function toggleTheme() {
     const body = document.body;
     const icon = document.getElementById('theme-icon');
+    const splashSig = document.querySelector('.splash-signature');
     
     if (body.classList.contains('dark-mode')) {
       body.classList.remove('dark-mode');
       body.classList.add('light-mode');
       icon.classList.remove('fa-moon');
       icon.classList.add('fa-sun');
+      if (splashSig) splashSig.src = 'images/signature-dark.png';
       localStorage.setItem('theme', 'light');
     } else {
       body.classList.remove('light-mode');
       body.classList.add('dark-mode');
       icon.classList.remove('fa-sun');
       icon.classList.add('fa-moon');
+      if (splashSig) splashSig.src = 'images/signature-light.png';
       localStorage.setItem('theme', 'dark');
     }
   }
@@ -1018,6 +1028,12 @@
     
     body.classList.remove('dark-mode', 'light-mode');
     body.classList.add(saved === 'light' ? 'light-mode' : 'dark-mode');
+    
+    // Update splash screen signature based on theme
+    const splashSig = document.querySelector('.splash-signature');
+    if (splashSig) {
+      splashSig.src = saved === 'light' ? 'images/signature-dark.png' : 'images/signature-light.png';
+    }
     
     if (saved === 'light') {
       icon.classList.remove('fa-moon');
@@ -1049,10 +1065,14 @@
     });
   });
 
-  // DRAGGABLE IMAGE TRACK
+
+// DRAGGABLE IMAGE TRACK - INFINITE SCROLL
   const track = document.getElementById("image-track");
 
   if (track) {
+    const imageCount = 13; // Number of unique images
+    const constraintPercent = imageCount * 33.33; // 3 sets of images = 100%
+    
     window.addEventListener("mousedown", e => {
       track.dataset.mouseDownAt = e.clientX;
     });
@@ -1099,12 +1119,21 @@
     }, { passive: true });
 
     function applyTrackPosition(nextValue) {
-      track.style.transform = `translate(${nextValue}%, -50%)`;
+      // Allow infinite scrolling - reset position when reaching boundaries
+      let adjustedValue = nextValue % constraintPercent;
+      if (adjustedValue > 0) {
+        adjustedValue = adjustedValue - constraintPercent;
+      }
+      
+      track.style.transform = `translate(${adjustedValue}%, -50%)`;
       [...track.children].forEach((img) => {
-        img.style.objectPosition = `${100 + nextValue}% center`;
+        img.style.objectPosition = `${100 + adjustedValue}% center`;
       });
     }
   }
+
+
+
 </script>
 
 </body>

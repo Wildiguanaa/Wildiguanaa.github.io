@@ -436,9 +436,10 @@
       width: fit-content;
     }
 
+
     .image {
-      width: 65vmin;
-      height: 50vmin;
+      width: auto;
+      height: auto;
       object-fit: cover;
       flex-shrink: 0;
       border-radius: 6px;
@@ -447,6 +448,7 @@
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
       object-position: center;
       pointer-events: none;
+      aspect-ratio: attr(data-aspect-ratio);
     }
 
     .image:hover {
@@ -728,10 +730,18 @@
 
 
     @media (max-width: 768px) {
-      .track-wrapper {
-        height: 300px;
+      .image {
+        width: 100%;
+        height: auto;
+        max-width: 280px;
       }
       
+      .track-wrapper {
+        height: 350px;
+      }
+    }
+
+
       .image {
         width: 80vw;
         height: 60vw;
@@ -854,23 +864,55 @@
   </div>
 
   <div class="track-wrapper">
+
     <div id="image-track" data-mouse-down-at="0" data-prev-percentage="0" data-percentage="0">
       <!-- FIRST SET -->
-      <img class="image" src="images/chefs.png" draggable="false" alt="Frame 1" />
-      <img class="image" src="images/seniorthesis.png" draggable="false" alt="Frame 2" />
-      <img class="image" src="images/audience.png" draggable="false" alt="Frame 3" />
-      <img class="image" src="images/P1032147.jpg" draggable="false" alt="Frame 4" />
-      <img class="image" src="images/cumberland1.jpg" draggable="false" alt="Frame 5" />
-      <img class="image" src="images/nrhs1.jpg" draggable="false" alt="Frame 6" />
-      <img class="image" src="images/waterlily.jpg" draggable="false" alt="Frame 7" />
-      <img class="image" src="images/willsboro1.png" draggable="false" alt="Frame 8" />
-      <img class="image" src="images/flowergirls1.jpg" draggable="false" alt="Frame 9" />
-      <img class="image" src="images/bwflowergirls2.jpg" draggable="false" alt="Frame 10" />
-      <img class="image" src="images/pigeon.png" draggable="false" alt="Frame 11" />
-      <img class="image" src="images/momfield1.png" draggable="false" alt="Frame 12" />
-      <img class="image" src="images/luma1.png" draggable="false" alt="Frame 13" />
+      <img class="image" src="images/chefs.png" data-aspect-ratio="4/3" style="width: clamp(250px, 20vw, 340px);" draggable="false" alt="Frame 1" />
+      <img class="image" src="images/seniorthesis.png" data-aspect-ratio="3/4" style="width: clamp(240px, 18vw, 320px);" draggable="false" alt="Frame 2" />
+      <img class="image" src="images/audience.png" data-aspect-ratio="5/4" style="width: clamp(260px, 19vw, 350px);" draggable="false" alt="Frame 3" />
+      <img class="image" src="images/P1032147.jpg" data-aspect-ratio="3/4" style="width: clamp(245px, 18vw, 330px);" draggable="false" alt="Frame 4" />
+      <img class="image" src="images/cumberland1.jpg" data-aspect-ratio="4/3" style="width: clamp(255px, 20vw, 345px);" draggable="false" alt="Frame 5" />
+      <img class="image" src="images/nrhs1.jpg" data-aspect-ratio="16/9" style="width: clamp(270px, 21vw, 360px);" draggable="false" alt="Frame 6" />
+      <img class="image" src="images/waterlily.jpg" data-aspect-ratio="3/4" style="width: clamp(230px, 17vw, 310px);" draggable="false" alt="Frame 7" />
+      <img class="image" src="images/willsboro1.png" data-aspect-ratio="4/3" style="width: clamp(260px, 20vw, 350px);" draggable="false" alt="Frame 8" />
+      <img class="image" src="images/flowergirls1.jpg" data-aspect-ratio="1/1" style="width: clamp(280px, 20vw, 360px);" draggable="false" alt="Frame 9" />
+      <img class="image" src="images/bwflowergirls2.jpg" data-aspect-ratio="5/6" style="width: clamp(250px, 19vw, 340px);" draggable="false" alt="Frame 10" />
+      <img class="image" src="images/pigeon.png" data-aspect-ratio="3/4" style="width: clamp(240px, 18vw, 320px);" draggable="false" alt="Frame 11" />
+      <img class="image" src="images/momfield1.png" data-aspect-ratio="4/3" style="width: clamp(255px, 20vw, 345px);" draggable="false" alt="Frame 12" />
+      <img class="image" src="images/luma1.png" data-aspect-ratio="3/4" style="width: clamp(245px, 18vw, 330px);" draggable="false" alt="Frame 13" />
       
+      <!-- SECOND SET (for looping) -->
+      <img class="image" src="images/chefs.png" data-aspect-ratio="4/3" style="width: clamp(250px, 20vw, 340px);" draggable="false" alt="Frame 1" />
+      <img class="image" src="images/seniorthesis.png" data-aspect-ratio="3/4" style="width: clamp(240px, 18vw, 320px);" draggable="false" alt="Frame 2" />
+      <img class="image" src="images/audience.png" data-aspect-ratio="5/4" style="width: clamp(260px, 19vw, 350px);" draggable="false" alt="Frame 3" />
+      <img class="image" src="images/P1032147.jpg" data-aspect-ratio="3/4" style="width: clamp(245px, 18vw, 330px);" draggable="false" alt="Frame 4" />
+      <img class="image" src="images/cumberland1.jpg" data-aspect-ratio="4/3" style="width: clamp(255px, 20vw, 345px);" draggable="false" alt="Frame 5" />
+      <img class="image" src="images/nrhs1.jpg" data-aspect-ratio="16/9" style="width: clamp(270px, 21vw, 360px);" draggable="false" alt="Frame 6" />
+      <img class="image" src="images/waterlily.jpg" data-aspect-ratio="3/4" style="width: clamp(230px, 17vw, 310px);" draggable="false" alt="Frame 7" />
+      <img class="image" src="images/willsboro1.png" data-aspect-ratio="4/3" style="width: clamp(260px, 20vw, 350px);" draggable="false" alt="Frame 8" />
+      <img class="image" src="images/flowergirls1.jpg" data-aspect-ratio="1/1" style="width: clamp(280px, 20vw, 360px);" draggable="false" alt="Frame 9" />
+      <img class="image" src="images/bwflowergirls2.jpg" data-aspect-ratio="5/6" style="width: clamp(250px, 19vw, 340px);" draggable="false" alt="Frame 10" />
+      <img class="image" src="images/pigeon.png" data-aspect-ratio="3/4" style="width: clamp(240px, 18vw, 320px);" draggable="false" alt="Frame 11" />
+      <img class="image" src="images/momfield1.png" data-aspect-ratio="4/3" style="width: clamp(255px, 20vw, 345px);" draggable="false" alt="Frame 12" />
+      <img class="image" src="images/luma1.png" data-aspect-ratio="3/4" style="width: clamp(245px, 18vw, 330px);" draggable="false" alt="Frame 13" />
+      
+          <!-- THIRD SET (for seamless looping) -->
+      <img class="image" src="images/chefs.png" data-aspect-ratio="4/3" style="width: clamp(250px, 20vw, 340px);" draggable="false" alt="Frame 1" />
+      <img class="image" src="images/seniorthesis.png" data-aspect-ratio="3/4" style="width: clamp(240px, 18vw, 320px);" draggable="false" alt="Frame 2" />
+      <img class="image" src="images/audience.png" data-aspect-ratio="5/4" style="width: clamp(260px, 19vw, 350px);" draggable="false" alt="Frame 3" />
+      <img class="image" src="images/P1032147.jpg" data-aspect-ratio="3/4" style="width: clamp(245px, 18vw, 330px);" draggable="false" alt="Frame 4" />
+      <img class="image" src="images/cumberland1.jpg" data-aspect-ratio="4/3" style="width: clamp(255px, 20vw, 345px);" draggable="false" alt="Frame 5" />
+      <img class="image" src="images/nrhs1.jpg" data-aspect-ratio="16/9" style="width: clamp(270px, 21vw, 360px);" draggable="false" alt="Frame 6" />
+      <img class="image" src="images/waterlily.jpg" data-aspect-ratio="3/4" style="width: clamp(230px, 17vw, 310px);" draggable="false" alt="Frame 7" />
+      <img class="image" src="images/willsboro1.png" data-aspect-ratio="4/3" style="width: clamp(260px, 20vw, 350px);" draggable="false" alt="Frame 8" />
+      <img class="image" src="images/flowergirls1.jpg" data-aspect-ratio="1/1" style="width: clamp(280px, 20vw, 360px);" draggable="false" alt="Frame 9" />
+      <img class="image" src="images/bwflowergirls2.jpg" data-aspect-ratio="5/6" style="width: clamp(250px, 19vw, 340px);" draggable="false" alt="Frame 10" />
+      <img class="image" src="images/pigeon.png" data-aspect-ratio="3/4" style="width: clamp(240px, 18vw, 320px);" draggable="false" alt="Frame 11" />
+      <img class="image" src="images/momfield1.png" data-aspect-ratio="4/3" style="width: clamp(255px, 20vw, 345px);" draggable="false" alt="Frame 12" />
+      <img class="image" src="images/luma1.png" data-aspect-ratio="3/4" style="width: clamp(245px, 18vw, 330px);" draggable="false" alt="Frame 13" />
     </div>
+
+
   </div>
 </section>
 

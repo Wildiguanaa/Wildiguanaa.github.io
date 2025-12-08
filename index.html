@@ -391,17 +391,33 @@
     }
 
     /* DRAGGABLE TRACK */
-    .track-wrapper {
-      position: relative;
-      height: 400px;
-      overflow: hidden;
-      cursor: grab;
-      user-select: none;
-      border-radius: 8px;
-      background: var(--bg-card);
-      margin-bottom: 6rem;
-      touch-action: none;
-    }
+  .track-wrapper {
+    position: relative;
+    height: 400px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    cursor: grab;
+    user-select: none;
+    border-radius: 8px;
+    background: var(--bg-card);
+    margin-bottom: 6rem;
+    touch-action: none;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .track-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .track-wrapper {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+
+
+
 
     .track-wrapper:active {
       cursor: grabbing;
@@ -410,12 +426,14 @@
     #image-track {
       display: flex;
       gap: 1.5rem;
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
+      position: relative;
+      left: auto;
+      top: auto;
+      transform: none;
       user-select: none;
       padding: 0 2rem;
+      align-items: center;
+      width: fit-content;
     }
 
     .image {
@@ -707,6 +725,18 @@
         padding: 10rem 5% 3rem;
         min-height: auto;
       }
+
+
+    @media (max-width: 768px) {
+      .track-wrapper {
+        height: 300px;
+      }
+      
+      .image {
+        width: 80vw;
+        height: 60vw;
+      }
+    }
 
       .hero-left {
         max-width: 100%;
@@ -1080,93 +1110,56 @@
   });
 
   
-  // DRAGGABLE IMAGE TRACK - LIMITED SCROLL
+// DRAGGABLE IMAGE TRACK - LINEAR SCROLL
   const track = document.getElementById("image-track");
 
   if (track) {
-    const images = track.querySelectorAll('.image');
-    const uniqueImageCount = 13; // Your unique images
-    const imageWidth = 65; // vmin
-    const gapRem = 1.5; // rem
-    
-    // Convert rem to vmin (approximate: 1rem ≈ 1.6vmin)
-    const gapVmin = gapRem * 1.6;
-    const itemWidth = imageWidth + gapVmin; // Total width per image with gap
-    
-    // Calculate bounds based on actual image count
-    const totalImagesWidth = itemWidth * images.length;
-    const viewportWidth = 100; // viewport width in vmin equivalent
-    
-    // Start position: center the first unique image
-    const startPosition = -((uniqueImageCount * itemWidth) / 2);
-    track.dataset.percentage = startPosition;
-    track.style.transform = `translate(${startPosition}%, -50%)`;
-    
-    window.addEventListener("mousedown", e => {
-      track.dataset.mouseDownAt = e.clientX;
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    track.addEventListener('mousedown', (e) => {
+      isDown = true;
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.parentElement.scrollLeft;
+      track.style.cursor = 'grabbing';
     });
 
-    window.addEventListener("mouseup", () => {
-      track.dataset.mouseDownAt = "0";
-      track.dataset.prevPercentage = track.dataset.percentage;
+    track.addEventListener('mouseleave', () => {
+      isDown = false;
+      track.style.cursor = 'grab';
     });
 
-    window.addEventListener("mousemove", e => {
-      if (track.dataset.mouseDownAt === "0") return;
+    track.addEventListener('mouseup', () => {
+      isDown = false;
+      track.style.cursor = 'grab';
+    });
 
-      const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX;
-      const maxDelta = window.innerWidth / 2;
-
-      let percentage = (mouseDelta / maxDelta) * -100;
-      let next = parseFloat(track.dataset.prevPercentage) + percentage;
-
-      // Constrain dragging to available images
-      const minPosition = -(totalImagesWidth - 40);
-      const maxPosition = 20;
-      
-      if (next < minPosition) next = minPosition;
-      if (next > maxPosition) next = maxPosition;
-
-      track.dataset.percentage = next;
-      applyTrackPosition(next);
+    track.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - track.offsetLeft;
+      const walk = (x - startX) * 1;
+      track.parentElement.scrollLeft = scrollLeft - walk;
     });
 
     // Touch support for mobile
-    track.addEventListener("touchstart", e => {
-      track.dataset.mouseDownAt = e.touches[0].clientX;
+    track.addEventListener('touchstart', (e) => {
+      isDown = true;
+      startX = e.touches[0].pageX - track.offsetLeft;
+      scrollLeft = track.parentElement.scrollLeft;
     }, { passive: true });
 
-    track.addEventListener("touchend", () => {
-      track.dataset.mouseDownAt = "0";
-      track.dataset.prevPercentage = track.dataset.percentage;
+    track.addEventListener('touchend', () => {
+      isDown = false;
     });
 
-    track.addEventListener("touchmove", e => {
-      if (track.dataset.mouseDownAt === "0") return;
-
-      const touchDelta = parseFloat(track.dataset.mouseDownAt) - e.touches[0].clientX;
-      const maxDelta = window.innerWidth / 2;
-
-      let percentage = (touchDelta / maxDelta) * -100;
-      let next = parseFloat(track.dataset.prevPercentage) + percentage;
-
-      // Constrain dragging to available images
-      const minPosition = -(totalImagesWidth - 40);
-      const maxPosition = 20;
-      
-      if (next < minPosition) next = minPosition;
-      if (next > maxPosition) next = maxPosition;
-
-      track.dataset.percentage = next;
-      applyTrackPosition(next);
+    track.addEventListener('touchmove', (e) => {
+      if (!isDown) return;
+      const x = e.touches[0].pageX - track.offsetLeft;
+      const walk = (x - startX) * 1;
+      track.parentElement.scrollLeft = scrollLeft - walk;
     }, { passive: true });
-
-    function applyTrackPosition(nextValue) {
-      track.style.transform = `translate(${nextValue}%, -50%)`;
-      [...track.children].forEach((img) => {
-        img.style.objectPosition = `${100 + nextValue}% center`;
-      });
-    }
   }
 
 

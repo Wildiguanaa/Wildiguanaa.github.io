@@ -752,6 +752,8 @@
   <img src="images/signature-light.png" alt="Joanna Fishman" class="splash-signature" />
 </div>
 
+<header class="site-header">
+
 <div class="bg-video-container">
   <video autoplay muted loop playsinline>
     <source src="videos/filmreel.mp4" type="video/mp4" />
@@ -1005,19 +1007,19 @@
 
 <script>
 
-
   // Set footer year
   document.getElementById('year').textContent = new Date().getFullYear();
 
   // Splash screen - fade out after 2 seconds
   window.addEventListener('load', () => {
     const splash = document.getElementById('splashScreen');
-    if (splash) {
-      setTimeout(() => {
-        splash.classList.add('hidden');
-      }, 2000);
-    }
+    setTimeout(() => {
+      splash.classList.add('hidden');
+    }, 2000);
   });
+
+  // Theme toggle
+  function toggleTheme() {
 
   // Theme toggle
   function toggleTheme() {
@@ -1078,14 +1080,14 @@
     });
   });
 
-
-
-    // DRAGGABLE IMAGE TRACK - TRUE INFINITE SCROLL
+    // DRAGGABLE IMAGE TRACK - IMPROVED
   const track = document.getElementById("image-track");
 
   if (track) {
-    const imageCount = 13; // Number of unique images
-    const imageGapDistance = 1.5 * 16; // 1.5rem in pixels (approximate)
+    const images = track.querySelectorAll('.image');
+    const imageCount = images.length / 2; // Half are duplicates for looping
+    const imageWidth = 65; // vmin
+    const gapWidth = 1.5; // rem in px (approximate)
     
     window.addEventListener("mousedown", e => {
       track.dataset.mouseDownAt = e.clientX;
@@ -1108,6 +1110,38 @@
       track.dataset.percentage = next;
       applyTrackPosition(next);
     });
+
+    // Touch support for mobile
+    track.addEventListener("touchstart", e => {
+      track.dataset.mouseDownAt = e.touches[0].clientX;
+    }, { passive: true });
+
+    track.addEventListener("touchend", () => {
+      track.dataset.mouseDownAt = "0";
+      track.dataset.prevPercentage = track.dataset.percentage;
+    });
+
+    track.addEventListener("touchmove", e => {
+      if (track.dataset.mouseDownAt === "0") return;
+
+      const touchDelta = parseFloat(track.dataset.mouseDownAt) - e.touches[0].clientX;
+      const maxDelta = window.innerWidth / 2;
+
+      let percentage = (touchDelta / maxDelta) * -100;
+      let next = parseFloat(track.dataset.prevPercentage) + percentage;
+
+      track.dataset.percentage = next;
+      applyTrackPosition(next);
+    }, { passive: true });
+
+    function applyTrackPosition(nextValue) {
+      track.style.transform = `translate(${nextValue}%, -50%)`;
+      [...track.children].forEach((img) => {
+        img.style.objectPosition = `${100 + nextValue}% center`;
+      });
+    }
+  }
+
 
     // Touch support for mobile
     track.addEventListener("touchstart", e => {

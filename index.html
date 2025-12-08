@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+<meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>JF - Videographer & Visual Artist</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -64,6 +64,34 @@
       transition: background 0.4s ease, color 0.4s ease;
     }
 
+    /* SPLASH SCREEN */
+    .splash-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 1s ease-out;
+      pointer-events: all;
+    }
+
+    .splash-screen.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .splash-signature {
+      max-width: 300px;
+      width: 80%;
+      height: auto;
+    }
+
     /* HEADER */
     .site-header {
       position: fixed;
@@ -85,7 +113,6 @@
       background: rgba(220, 223, 232, 0.95);
       border-bottom-color: var(--border);
     }
-
 
     .logo {
       font-family: var(--font-serif);
@@ -161,34 +188,6 @@
       transform: scale(1.1);
     }
 
-    /* SPLASH SCREEN */
-    .splash-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      opacity: 1;
-      transition: opacity 1s ease-out;
-      pointer-events: all;
-    }
-
-    .splash-screen.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .splash-signature {
-      max-width: 300px;
-      width: 80%;
-      height: auto;
-    }
-
     /* BACKGROUND VIDEO */
     .bg-video-container {
       position: fixed;
@@ -205,8 +204,6 @@
       height: 100%;
       object-fit: cover;
     }
-
-  
 
     .bg-overlay {
       position: fixed;
@@ -241,7 +238,6 @@
       flex-direction: column;
       gap: 2.5rem;
     }
-
 
     .hero-content {
       position: relative;
@@ -330,7 +326,6 @@
       box-shadow: 0 10px 30px var(--accent-glow);
     }
 
-  
     .btn.secondary {
       background: transparent;
       color: var(--text-primary);
@@ -435,7 +430,6 @@
       transform: scale(1.02);
       box-shadow: 0 20px 60px rgba(168, 76, 58, 0.2);
       object-position: center;
-      Math.min(Math.max(..., -100), 0)
     }
 
     .about-content {
@@ -752,8 +746,6 @@
   <img src="images/signature-light.png" alt="Joanna Fishman" class="splash-signature" />
 </div>
 
-<header class="site-header">
-
 <div class="bg-video-container">
   <video autoplay muted loop playsinline>
     <source src="videos/filmreel.mp4" type="video/mp4" />
@@ -767,7 +759,6 @@
     <img src="images/signature-dark.png" alt="Joanna Fishman" class="logo-light" />
   </div>
   <nav class="site-nav">
-
     <a href="#home">Home</a>
     <a href="#work">Work</a>
     <a href="#about">About</a>
@@ -814,20 +805,6 @@
 
   <div class="track-wrapper">
     <div id="image-track" data-mouse-down-at="0" data-prev-percentage="0" data-percentage="0">
-      <img class="image" src="images/chefs.png" draggable="false" alt="Frame 1" />
-      <img class="image" src="images/seniorthesis.png" draggable="false" alt="Frame 10" />
-      <img class="image" src="images/audience.png" draggable="false" alt="Frame 10" />
-      <img class="image" src="images/P1032147.jpg" draggable="false" alt="Frame 3" />
-      <img class="image" src="images/cumberland1.jpg" draggable="false" alt="Frame 4" />
-      <img class="image" src="images/nrhs1.jpg" draggable="false" alt="Frame 5" />
-      <img class="image" src="images/waterlily.jpg" draggable="false" alt="Frame 6" />
-      <img class="image" src="images/willsboro1.png" draggable="false" alt="Frame 7" />
-      <img class="image" src="images/flowergirls1.jpg" draggable="false" alt="Frame 8" />
-      <img class="image" src="images/bwflowergirls2.jpg" draggable="false" alt="Frame 9" />
-      <img class="image" src="images/pigeon.png" draggable="false" alt="Frame 10" />
-      <img class="image" src="images/momfield1.png" draggable="false" alt="Frame 2" />
-      <!-- <img class="image" src="images/seniorthesis2.png" draggable="false" alt="Frame 10" /> -->
-
       <!-- FIRST SET -->
       <img class="image" src="images/chefs.png" draggable="false" alt="Frame 1" />
       <img class="image" src="images/seniorthesis.png" draggable="false" alt="Frame 2" />
@@ -872,10 +849,6 @@
       <img class="image" src="images/pigeon.png" draggable="false" alt="Frame 11" />
       <img class="image" src="images/momfield1.png" draggable="false" alt="Frame 12" />
       <img class="image" src="images/luma1.png" draggable="false" alt="Frame 13" />
-    </div>
-  </div>
-</section>
-      
     </div>
   </div>
 </section>
@@ -976,7 +949,7 @@
 
       <div class="contact-socials">
         <a href="https://www.instagram.com/wildiguana/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.linkedin.com/in/joanna-fishman/" aria-label="Linkedin"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://www.linkedin.com/in/joanna-fishman/" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
         <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
       </div>
     </div>
@@ -1006,20 +979,16 @@
 </footer>
 
 <script>
-
   // Set footer year
   document.getElementById('year').textContent = new Date().getFullYear();
 
   // Splash screen - fade out after 2 seconds
-  window.addEventListener('load', () => {
+  setTimeout(() => {
     const splash = document.getElementById('splashScreen');
-    setTimeout(() => {
+    if (splash) {
       splash.classList.add('hidden');
-    }, 2000);
-  });
-
-  // Theme toggle
-  function toggleTheme() {
+    }
+  }, 2000);
 
   // Theme toggle
   function toggleTheme() {
@@ -1080,17 +1049,10 @@
     });
   });
 
-  
-
-    // DRAGGABLE IMAGE TRACK - IMPROVED
+  // DRAGGABLE IMAGE TRACK
   const track = document.getElementById("image-track");
 
   if (track) {
-    const images = track.querySelectorAll('.image');
-    const imageCount = images.length / 2; // Half are duplicates for looping
-    const imageWidth = 65; // vmin
-    const gapWidth = 1.5; // rem in px (approximate)
-    
     window.addEventListener("mousedown", e => {
       track.dataset.mouseDownAt = e.clientX;
     });
@@ -1143,83 +1105,7 @@
       });
     }
   }
-
-
-    // Touch support for mobile
-    track.addEventListener("touchstart", e => {
-      track.dataset.mouseDownAt = e.touches[0].clientX;
-    }, { passive: true });
-
-    track.addEventListener("touchend", () => {
-      track.dataset.mouseDownAt = "0";
-      track.dataset.prevPercentage = track.dataset.percentage;
-    });
-
-    track.addEventListener("touchmove", e => {
-      if (track.dataset.mouseDownAt === "0") return;
-
-      const touchDelta = parseFloat(track.dataset.mouseDownAt) - e.touches[0].clientX;
-      const maxDelta = window.innerWidth / 2;
-
-      let percentage = (touchDelta / maxDelta) * -100;
-      let next = parseFloat(track.dataset.prevPercentage) + percentage;
-
-      track.dataset.percentage = next;
-      applyTrackPosition(next);
-    }, { passive: true });
-
-    function applyTrackPosition(nextValue) {
-      // Calculate the position for seamless looping
-      const totalImages = track.children.length;
-      const scrollRange = (imageCount / totalImages) * 100;
-      
-      // Reset position when we reach the end of the first set
-      if (nextValue <= -scrollRange) {
-        // Jump back to start without visual interruption
-        track.dataset.percentage = nextValue + scrollRange;
-        track.style.transform = `translate(${track.dataset.percentage}%, -50%)`;
-      } else if (nextValue > 0) {
-        // Jump forward if dragging backwards past the start
-        track.data.percentage = nextValue - scrollRange;
-        track.style.transform = `translate(${track.dataset.percentage}%, -50%)`;
-      } else {
-        track.style.transform = `translate(${nextValue}%, -50%)`;
-      }
-      
-      [...track.children].forEach((img) => {
-        img.style.objectPosition = `${100 + nextValue}% center`;
-      });
-    }
-  }
-
-
-
-
-    // Touch support for mobile
-    track.addEventListener("touchstart", e => {
-      track.dataset.mouseDownAt = e.touches[0].clientX;
-    });
-
-    track.addEventListener("touchend", () => {
-      track.dataset.mouseDownAt = "0";
-      track.dataset.prevPercentage = track.dataset.percentage;
-    });
-
-    track.addEventListener("touchmove", e => {
-      if (track.dataset.mouseDownAt === "0") return;
-
-      const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.touches[0].clientX;
-      const maxDelta = window.innerWidth / 2;
-
-      let percentage = (mouseDelta / maxDelta) * -100;
-      let next = parseFloat(track.dataset.prevPercentage) + percentage;
-
-      track.dataset.percentage = next;
-
-      track.style.transform = `translate(${next}%, -50%)`;
-      [...track.children].forEach((img) => {
-        img.style.objectPosition = `${100 + next}% center`;
-      });
-    });
-  }
 </script>
+
+</body>
+</html>

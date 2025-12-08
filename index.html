@@ -704,7 +704,8 @@
         flex-direction: column;
         justify-content: center;
         text-align: center;
-        padding: 6rem 5% 3rem;
+        padding: 10rem 5% 3rem;
+        min-height: auto;
       }
 
       .hero-left {
@@ -743,6 +744,16 @@
         transform: translateX(-50%);
       }
     }
+
+/* BACKGROUND VIDEO - MOBILE FIX */
+.bg-video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  -webkit-playsinline: true;
+  playsinline: true;
+}
+
   </style>
 </head>
 
@@ -756,6 +767,9 @@
   <video autoplay muted loop playsinline>
     <source src="videos/filmreel.mp4" type="video/mp4" />
   </video>
+
+
+  
 </div>
 <div class="bg-overlay"></div>
 
@@ -1065,13 +1079,20 @@
     });
   });
 
-
-// DRAGGABLE IMAGE TRACK - INFINITE SCROLL
+// DRAGGABLE IMAGE TRACK - LIMITED SCROLL
   const track = document.getElementById("image-track");
 
   if (track) {
-    const imageCount = 13; // Number of unique images
-    const constraintPercent = imageCount * 33.33; // 3 sets of images = 100%
+    const images = track.querySelectorAll('.image');
+    const imageCount = images.length / 3; // Divide by 3 since you have 3 sets
+    const imageWidth = 65; // vmin (matches your CSS)
+    const gap = 1.5; // rem converted to vmin approximately
+    const singleSetWidth = (imageWidth + gap) * imageCount;
+    
+    // Start at middle position (first set, roughly centered)
+    const startPosition = -(singleSetWidth / 2);
+    track.dataset.percentage = startPosition;
+    track.style.transform = `translate(${startPosition}%, -50%)`;
     
     window.addEventListener("mousedown", e => {
       track.dataset.mouseDownAt = e.clientX;
@@ -1090,6 +1111,13 @@
 
       let percentage = (mouseDelta / maxDelta) * -100;
       let next = parseFloat(track.dataset.prevPercentage) + percentage;
+
+      // Constrain dragging - don't go past the images
+      const minPosition = -(singleSetWidth * 2); // End of last set
+      const maxPosition = 0; // Start of first set
+      
+      if (next < minPosition) next = minPosition;
+      if (next > maxPosition) next = maxPosition;
 
       track.dataset.percentage = next;
       applyTrackPosition(next);
@@ -1114,23 +1142,28 @@
       let percentage = (touchDelta / maxDelta) * -100;
       let next = parseFloat(track.dataset.prevPercentage) + percentage;
 
+      // Constrain dragging - don't go past the images
+      const minPosition = -(singleSetWidth * 2); // End of last set
+      const maxPosition = 0; // Start of first set
+      
+      if (next < minPosition) next = minPosition;
+      if (next > maxPosition) next = maxPosition;
+
       track.dataset.percentage = next;
       applyTrackPosition(next);
     }, { passive: true });
 
     function applyTrackPosition(nextValue) {
-      // Allow infinite scrolling - reset position when reaching boundaries
-      let adjustedValue = nextValue % constraintPercent;
-      if (adjustedValue > 0) {
-        adjustedValue = adjustedValue - constraintPercent;
-      }
-      
-      track.style.transform = `translate(${adjustedValue}%, -50%)`;
+      track.style.transform = `translate(${nextValue}%, -50%)`;
       [...track.children].forEach((img) => {
-        img.style.objectPosition = `${100 + adjustedValue}% center`;
+        img.style.objectPosition = `${100 + nextValue}% center`;
       });
     }
   }
+
+
+
+
 
 
 

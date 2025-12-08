@@ -75,14 +75,17 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 1000;
-      opacity: 1;
-      transition: opacity 0.8s ease-out 0.5s;
+      z-index: 2000 !important;
+      opacity: 1 !important;
+      transition: opacity 1s ease-out !important;
+      visibility: visible !important;
     }
 
     .splash-screen.hidden {
-      opacity: 0;
-      pointer-events: none;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      z-index: -1 !important;
+      visibility: hidden !important;
     }
 
     .splash-signature {
@@ -769,7 +772,7 @@
 
 <!-- SPLASH SCREEN -->
 <div class="splash-screen" id="splashScreen">
-  <img src="images/signature-light.png" alt="Joanna Fishman" class="splash-signature" />
+  <img src="images/signature-dark.png" alt="Joanna Fishman" class="splash-signature" />
 </div>
 
 <div class="bg-video-container">
@@ -943,7 +946,6 @@
   <div class="section-header">
     <h2 class="section-title">About</h2>
   </div>
-
 
   <div class="about-content">
     <div class="about-text">

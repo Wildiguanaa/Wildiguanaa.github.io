@@ -1079,18 +1079,26 @@
     });
   });
 
-// DRAGGABLE IMAGE TRACK - LIMITED SCROLL
+  
+  // DRAGGABLE IMAGE TRACK - LIMITED SCROLL
   const track = document.getElementById("image-track");
 
   if (track) {
     const images = track.querySelectorAll('.image');
-    const imageCount = images.length / 3; // Divide by 3 since you have 3 sets
-    const imageWidth = 65; // vmin (matches your CSS)
-    const gap = 1.5; // rem converted to vmin approximately
-    const singleSetWidth = (imageWidth + gap) * imageCount;
+    const uniqueImageCount = 13; // Your unique images
+    const imageWidth = 65; // vmin
+    const gapRem = 1.5; // rem
     
-    // Start at middle position (first set, roughly centered)
-    const startPosition = -(singleSetWidth / 2);
+    // Convert rem to vmin (approximate: 1rem ≈ 1.6vmin)
+    const gapVmin = gapRem * 1.6;
+    const itemWidth = imageWidth + gapVmin; // Total width per image with gap
+    
+    // Calculate bounds based on actual image count
+    const totalImagesWidth = itemWidth * images.length;
+    const viewportWidth = 100; // viewport width in vmin equivalent
+    
+    // Start position: center the first unique image
+    const startPosition = -((uniqueImageCount * itemWidth) / 2);
     track.dataset.percentage = startPosition;
     track.style.transform = `translate(${startPosition}%, -50%)`;
     
@@ -1112,9 +1120,9 @@
       let percentage = (mouseDelta / maxDelta) * -100;
       let next = parseFloat(track.dataset.prevPercentage) + percentage;
 
-      // Constrain dragging - don't go past the images
-      const minPosition = -(singleSetWidth * 2); // End of last set
-      const maxPosition = 0; // Start of first set
+      // Constrain dragging to available images
+      const minPosition = -(totalImagesWidth - 40);
+      const maxPosition = 20;
       
       if (next < minPosition) next = minPosition;
       if (next > maxPosition) next = maxPosition;
@@ -1142,9 +1150,9 @@
       let percentage = (touchDelta / maxDelta) * -100;
       let next = parseFloat(track.dataset.prevPercentage) + percentage;
 
-      // Constrain dragging - don't go past the images
-      const minPosition = -(singleSetWidth * 2); // End of last set
-      const maxPosition = 0; // Start of first set
+      // Constrain dragging to available images
+      const minPosition = -(totalImagesWidth - 40);
+      const maxPosition = 20;
       
       if (next < minPosition) next = minPosition;
       if (next > maxPosition) next = maxPosition;
@@ -1160,9 +1168,6 @@
       });
     }
   }
-
-
-
 
 
 

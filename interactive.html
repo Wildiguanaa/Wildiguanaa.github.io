@@ -2,33 +2,160 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Gallery – TITLE HERE</title>
+<title>Gallery – Interactive</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 <style>
+  :root {
+    --bg-dark: #040717;
+    --bg-card-dark: #151d3d;
+    --text-primary-dark: #e8e6f0;
+    --text-muted-dark: #9ba3b8;
+    --accent: #501E28;
+    --accent-glow: rgba(80, 30, 40, 0.3);
+    --accent-light: #6b2a39;
+    
+    --bg-light: #dcdfe8;
+    --bg-card-light: #e8ecf4;
+    --text-primary-light: #1a1f35;
+    --text-muted-light: #4a5468;
+    --border-light: rgba(26, 31, 53, 0.1);
+    
+    --font-serif: "Libre Baskerville", serif;
+    --font-sans: "Inter", sans-serif;
+  }
+
+  body.light-mode {
+    --bg: var(--bg-light);
+    --bg-card: var(--bg-card-light);
+    --text-primary: var(--text-primary-light);
+    --text-muted: var(--text-muted-light);
+    --border: var(--border-light);
+  }
+
+  body.dark-mode {
+    --bg: var(--bg-dark);
+    --bg-card: var(--bg-card-dark);
+    --text-primary: var(--text-primary-dark);
+    --text-muted: var(--text-muted-dark);
+    --border: rgba(232, 230, 240, 0.08);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    background: #0a0a0a;
-    color: #f5f5f5;
-    font-family: "Inter", sans-serif;
-    padding: 3rem 5%;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    transition: background 0.4s ease, color 0.4s ease;
+  }
+
+  /* HEADER */
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    background: rgba(4, 7, 23, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    border-bottom: 1px solid rgba(232, 230, 240, 0.05);
+    transition: background 0.4s ease;
+  }
+
+  body.light-mode .site-header {
+    background: rgba(220, 223, 232, 0.95);
+    border-bottom-color: var(--border);
+  }
+
+  .logo {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+
+  .site-nav {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .site-nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+  }
+
+  .site-nav a:hover {
+    color: var(--accent-light);
+  }
+
+  /* THEME TOGGLE */
+  .theme-toggle {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 1.2rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 99;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  .theme-toggle:hover {
+    background: var(--accent);
+    color: #fbf8e8;
+    border-color: var(--accent);
+    transform: scale(1.1);
+  }
+
+  /* MAIN CONTENT */
+  main {
+    padding-top: 80px;
+    padding: 8rem 5% 3rem;
   }
 
   h1 {
-    font-family: "Libre Baskerville", serif;
+    font-family: var(--font-serif);
     font-size: 2.6rem;
     margin-bottom: 1rem;
+    font-weight: 400;
   }
 
   p {
-    color: #bbb;
+    color: var(--text-muted);
     margin-bottom: 3rem;
     max-width: 650px;
+    line-height: 1.6;
   }
 
   .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem;
+    column-count: 3;
+    column-gap: 1.5rem;
   }
 
   .item {
@@ -36,22 +163,112 @@
     overflow: hidden;
     border-radius: 4px;
     cursor: pointer;
-    background: #000;
+    background: var(--bg-card);
+    margin-bottom: 1.5rem;
+    break-inside: avoid;
+    display: inline-block;
+    width: 100%;
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+  }
+
+  .item:hover {
+    border-color: var(--accent);
   }
 
   .item img,
   .item video {
     width: 100%;
-    height: 100%;
+    height: auto;
+    display: block;
     object-fit: cover;
-    filter: grayscale(1);
-    transition: 0.4s ease;
+    filter: grayscale(100%);
+    transition: filter 0.4s ease;
   }
 
   .item:hover img,
   .item:hover video {
-    filter: grayscale(0);
-    transform: scale(1.05);
+    filter: grayscale(0%);
+  }
+
+  /* Varied heights for organic look */
+  .item:nth-child(1) img,
+  .item:nth-child(1) video { height: 400px; }
+
+  .item:nth-child(2) img,
+  .item:nth-child(2) video { height: 500px; }
+
+  .item:nth-child(3) img,
+  .item:nth-child(3) video { height: 350px; }
+
+  .item:nth-child(4) img,
+  .item:nth-child(4) video { height: 450px; }
+
+  .item:nth-child(5) img,
+  .item:nth-child(5) video { height: 380px; }
+
+  .item:nth-child(6) img,
+  .item:nth-child(6) video { height: 520px; }
+
+  .item:nth-child(7) img,
+  .item:nth-child(7) video { height: 420px; }
+
+  .item:nth-child(8) img,
+  .item:nth-child(8) video { height: 480px; }
+
+  .item:nth-child(9) img,
+  .item:nth-child(9) video { height: 400px; }
+
+  .item:nth-child(10) img,
+  .item:nth-child(10) video { height: 520px; }
+
+  .item:nth-child(11) img,
+  .item:nth-child(11) video { height: 380px; }
+
+  .item:nth-child(12) img,
+  .item:nth-child(12) video { height: 450px; }
+
+  .item:nth-child(13) img,
+  .item:nth-child(13) video { height: 500px; }
+
+  .item:nth-child(14) img,
+  .item:nth-child(14) video { height: 420px; }
+
+  .item:nth-child(15) img,
+  .item:nth-child(15) video { height: 480px; }
+
+  .item:nth-child(16) img,
+  .item:nth-child(16) video { height: 390px; }
+
+  .item:nth-child(17) img,
+  .item:nth-child(17) video { height: 440px; }
+
+  .item:nth-child(18) img,
+  .item:nth-child(18) video { height: 510px; }
+
+  /* Play/Expand icon overlay - hidden by default */
+  .action-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: rgba(80, 30, 40, 0.95);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #fbf8e8;
+    pointer-events: none;
+    opacity: 0;
+    transition: 0.3s ease;
+  }
+
+  .item:hover .action-icon {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
   }
 
   .item-title {
@@ -59,10 +276,10 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(0,0,0,0.5);
-    color: #fff;
-    padding: 0.6rem 0.8rem;
-    font-size: 0.9rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    color: #fbf8e8;
+    padding: 2rem 1rem 1rem;
+    font-size: 0.95rem;
     opacity: 0;
     transition: opacity 0.3s ease;
   }
@@ -75,7 +292,7 @@
   .modal {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0,0,0,0.95);
     display: none;
     align-items: center;
     justify-content: center;
@@ -94,69 +311,225 @@
     position: fixed;
     top: 20px;
     right: 30px;
-    font-size: 2rem;
-    color: #fff;
+    font-size: 2.5rem;
+    color: #fbf8e8;
     cursor: pointer;
     font-family: sans-serif;
+    transition: color 0.3s;
+    z-index: 2001;
+  }
+
+  .modal-close:hover {
+    color: var(--accent);
+  }
+
+  /* Back button */
+  .back-btn {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: opacity 0.3s;
+  }
+
+  .back-btn:hover {
+    opacity: 0.7;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .gallery {
+      column-count: 2;
+    }
+  }
+
+  @media (max-width: 768px) {
+    main {
+      padding: 6rem 5% 3rem;
+    }
+    
+    h1 {
+      font-size: 2rem;
+    }
+    
+    .gallery {
+      column-count: 1;
+      column-gap: 1rem;
+    }
+    
+    .item {
+      margin-bottom: 1rem;
+    }
+    
+    .action-icon {
+      width: 50px;
+      height: 50px;
+      font-size: 20px;
+    }
+    
+    /* Simpler heights for mobile */
+    .item:nth-child(odd) img,
+    .item:nth-child(odd) video { height: 350px; }
+    
+    .item:nth-child(even) img,
+    .item:nth-child(even) video { height: 400px; }
+
+    .site-nav {
+      gap: 1.5rem;
+    }
+
+    .site-nav a {
+      font-size: 0.85rem;
+    }
+
+    .theme-toggle {
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 45px;
+      height: 45px;
+      font-size: 1rem;
+    }
   }
 </style>
 </head>
+<body class="dark-mode">
 
-<body>
+<header class="site-header">
+  <div class="logo">Joanna Fishman</div>
+  <nav class="site-nav">
+    <a href="index.html">Home</a>
+    <a href="index.html#work">Work</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+</header>
 
-<h1>TITLE HERE</h1>
-<p>DESCRIPTION GOES HERE — what this category represents, your approach, etc.</p>
+<button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">
+  <i class="fas fa-moon" id="theme-icon"></i>
+</button>
 
-<div class="gallery">
+<main>
+  <a href="index.html" class="back-btn">← Back to Portfolio</a>
 
-  <!-- Example image item -->
-  <div class="item" onclick="openModal(this)">
-    <img src="YOUR_IMAGE.jpg" alt="Sample">
-    <div class="item-title">Project Title</div>
+  <h1>Interactive & Immersive Work</h1>
+  <p></p>
+
+  <div class="gallery">
+    <!-- Example image item
+    <div class="item" onclick="openModal(this)">
+      <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800" alt="Film Project">
+      <div class="action-icon"><i class="fas fa-expand"></i></div>
+      <div class="item-title">Sample Film Project</div>
+    </div> -->
+
+    <!-- Example video item 
+    <div class="item" onclick="openModal(this)">
+      <video src="https://www.w3schools.com/html/mov_bbb.mp4" muted></video>
+      <div class="action-icon"><i class="fas fa-play"></i></div>
+      <div class="item-title">Sample Video</div>
+    </div> -->
+
+    <!-- Audience1  
+    <div class="item" onclick="openModal(this)">
+      <img src="images/audience.png">
+      <div class="action-icon"><i class="fas fa-expand"></i></div>
+      <div class="item-title">Audience</div>
+    </div> -->
+
   </div>
-
-  <!-- Example video item -->
-  <div class="item" onclick="openModal(this)">
-    <video src="YOUR_VIDEO.mp4" muted></video>
-    <div class="item-title">Video Title</div>
-  </div>
-
-</div>
+</main>
 
 <!-- Modal -->
-<div class="modal" id="modal">
+<div class="modal" id="modal" onclick="checkModalClick(event)">
   <span class="modal-close" onclick="closeModal()">&times;</span>
   <div id="modal-content"></div>
 </div>
 
 <script>
-function openModal(el) {
-  const modal = document.getElementById("modal");
-  const content = document.getElementById("modal-content");
-
-  let media = el.querySelector("img")?.cloneNode() ||
-              el.querySelector("video")?.cloneNode();
-
-  if (media.tagName === "VIDEO") {
-    media.controls = true;
-    media.autoplay = true;
+  // Theme toggle
+  function toggleTheme() {
+    const body = document.body;
+    const icon = document.getElementById('theme-icon');
+    
+    if (body.classList.contains('dark-mode')) {
+      body.classList.remove('dark-mode');
+      body.classList.add('light-mode');
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+      localStorage.setItem('theme', 'light');
+    } else {
+      body.classList.remove('light-mode');
+      body.classList.add('dark-mode');
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+      localStorage.setItem('theme', 'dark');
+    }
   }
 
-  content.innerHTML = "";
-  content.appendChild(media);
-  modal.style.display = "flex";
-}
+  // Load saved theme
+  window.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem('theme') || 'dark';
+    const body = document.body;
+    const icon = document.getElementById('theme-icon');
+    
+    body.classList.remove('dark-mode', 'light-mode');
+    body.classList.add(saved === 'light' ? 'light-mode' : 'dark-mode');
+    
+    if (saved === 'light') {
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    }
+  });
 
-function closeModal() {
-  const modal = document.getElementById("modal");
-  modal.style.display = "none";
-  document.getElementById("modal-content").innerHTML = "";
-}
+  // Gallery functions
+  function openModal(el) {
+    const modal = document.getElementById("modal");
+    const content = document.getElementById("modal-content");
+    let media = el.querySelector("img")?.cloneNode() ||
+                 el.querySelector("video")?.cloneNode();
+    
+    if (media.tagName === "VIDEO") {
+      media.controls = true;
+      media.autoplay = true;
+      media.muted = false;
+    }
+    
+    content.innerHTML = "";
+    content.appendChild(media);
+    modal.style.display = "flex";
+  }
 
-window.onclick = function(e) {
-  const modal = document.getElementById("modal");
-  if (e.target === modal) closeModal();
-}
+  function openInstagram(url) {
+    window.open(url, '_blank');
+  }
+
+  function closeModal() {
+    const modal = document.getElementById("modal");
+    const video = modal.querySelector("video");
+    
+    if (video) {
+      video.pause();
+      video.currentTime = 0;
+    }
+    
+    modal.style.display = "none";
+    document.getElementById("modal-content").innerHTML = "";
+  }
+
+  function checkModalClick(e) {
+    const modal = document.getElementById("modal");
+    
+    if (e.target === modal) {
+      closeModal();
+    }
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeModal();
+    }
+  });
 </script>
 
 </body>

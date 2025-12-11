@@ -178,7 +178,7 @@
     width: 100%;
     height: auto;
     display: block;
-    object-fit: contain;
+    object-fit: cover;
     filter: grayscale(100%);
     transition: filter 0.4s ease;
   }
@@ -188,10 +188,16 @@
     filter: grayscale(0%);
   }
 
+  .item:nth-child(1) img,
+  .item:nth-child(1) video,
   .item:nth-child(1) > div:first-child { height: 400px; }
 
+  .item:nth-child(2) img,
+  .item:nth-child(2) video,
   .item:nth-child(2) > div:first-child { height: 500px; }
 
+  .item:nth-child(3) img,
+  .item:nth-child(3) video,
   .item:nth-child(3) > div:first-child { height: 350px; }
 
   .action-icon {
@@ -312,8 +318,12 @@
       font-size: 20px;
     }
     
+    .item:nth-child(odd) img,
+    .item:nth-child(odd) video,
     .item:nth-child(odd) > div:first-child { height: 350px; }
     
+    .item:nth-child(even) img,
+    .item:nth-child(even) video,
     .item:nth-child(even) > div:first-child { height: 400px; }
 
     .site-nav {

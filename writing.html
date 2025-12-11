@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <style>
   :root {
     --bg-dark: #040717;
@@ -61,7 +62,6 @@
     transition: background 0.4s ease, color 0.4s ease;
   }
 
-  /* HEADER */
   .site-header {
     position: fixed;
     top: 0;
@@ -105,7 +105,6 @@
     color: var(--accent-light);
   }
 
-  /* THEME TOGGLE */
   .theme-toggle {
     position: fixed;
     bottom: 2rem;
@@ -133,9 +132,7 @@
     transform: scale(1.1);
   }
 
-  /* MAIN CONTENT */
   main {
-    padding-top: 80px;
     padding: 8rem 5% 3rem;
   }
 
@@ -191,62 +188,18 @@
     filter: grayscale(0%);
   }
 
-  /* Varied heights for organic look */
   .item:nth-child(1) img,
-  .item:nth-child(1) video { height: 400px; }
+  .item:nth-child(1) video,
+  .item:nth-child(1) > div:first-child { height: 400px; }
 
   .item:nth-child(2) img,
-  .item:nth-child(2) video { height: 500px; }
+  .item:nth-child(2) video,
+  .item:nth-child(2) > div:first-child { height: 500px; }
 
   .item:nth-child(3) img,
-  .item:nth-child(3) video { height: 350px; }
+  .item:nth-child(3) video,
+  .item:nth-child(3) > div:first-child { height: 350px; }
 
-  .item:nth-child(4) img,
-  .item:nth-child(4) video { height: 450px; }
-
-  .item:nth-child(5) img,
-  .item:nth-child(5) video { height: 380px; }
-
-  .item:nth-child(6) img,
-  .item:nth-child(6) video { height: 520px; }
-
-  .item:nth-child(7) img,
-  .item:nth-child(7) video { height: 420px; }
-
-  .item:nth-child(8) img,
-  .item:nth-child(8) video { height: 480px; }
-
-  .item:nth-child(9) img,
-  .item:nth-child(9) video { height: 400px; }
-
-  .item:nth-child(10) img,
-  .item:nth-child(10) video { height: 520px; }
-
-  .item:nth-child(11) img,
-  .item:nth-child(11) video { height: 380px; }
-
-  .item:nth-child(12) img,
-  .item:nth-child(12) video { height: 450px; }
-
-  .item:nth-child(13) img,
-  .item:nth-child(13) video { height: 500px; }
-
-  .item:nth-child(14) img,
-  .item:nth-child(14) video { height: 420px; }
-
-  .item:nth-child(15) img,
-  .item:nth-child(15) video { height: 480px; }
-
-  .item:nth-child(16) img,
-  .item:nth-child(16) video { height: 390px; }
-
-  .item:nth-child(17) img,
-  .item:nth-child(17) video { height: 440px; }
-
-  .item:nth-child(18) img,
-  .item:nth-child(18) video { height: 510px; }
-
-  /* Play/Expand icon overlay - hidden by default */
   .action-icon {
     position: absolute;
     top: 50%;
@@ -288,7 +241,6 @@
     opacity: 1;
   }
 
-  /* Modal viewer */
   .modal {
     position: fixed;
     inset: 0;
@@ -323,7 +275,6 @@
     color: var(--accent);
   }
 
-  /* Back button */
   .back-btn {
     display: inline-block;
     margin-bottom: 2rem;
@@ -337,7 +288,6 @@
     opacity: 0.7;
   }
 
-  /* Responsive */
   @media (max-width: 1024px) {
     .gallery {
       column-count: 2;
@@ -368,12 +318,13 @@
       font-size: 20px;
     }
     
-    /* Simpler heights for mobile */
     .item:nth-child(odd) img,
-    .item:nth-child(odd) video { height: 350px; }
+    .item:nth-child(odd) video,
+    .item:nth-child(odd) > div:first-child { height: 350px; }
     
     .item:nth-child(even) img,
-    .item:nth-child(even) video { height: 400px; }
+    .item:nth-child(even) video,
+    .item:nth-child(even) > div:first-child { height: 400px; }
 
     .site-nav {
       gap: 1.5rem;
@@ -392,9 +343,6 @@
     }
   }
 </style>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-
 </head>
 <body class="dark-mode">
 
@@ -416,74 +364,32 @@
   <a href="index.html" class="back-btn">← Back to Portfolio</a>
 
   <h1>Writing</h1>
-  <p></p>
+  <p>A collection of creative writing pieces and literary works.</p>
 
   <div class="gallery">
 
-    <div class="item" onclick="openPDF('JustaGrrrl.pdf', 4)">
-      <div style="width: 100%; height: 400px; background: linear-gradient(135deg, rgba(80, 30, 40, 0.3), rgba(80, 30, 40, 0.1)); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 4rem;">
-        <i class="fas fa-file-pdf"></i>
-      </div>
-      <div class="action-icon"><i class="fas fa-expand"></i></div>
-      <div class="item-title">1Peppered Green (from Just a Grrrl)</div>
-    </div>
-
     <div class="item" onclick="openPDF('pdfs/JustaGrrrl.pdf', 4)">
-      <div style="width: 100%; height: 400px; background: linear-gradient(135deg, rgba(80, 30, 40, 0.3), rgba(80, 30, 40, 0.1)); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 4rem;">
+      <div style="width: 100%; background: linear-gradient(135deg, rgba(80, 30, 40, 0.3), rgba(80, 30, 40, 0.1)); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 4rem;">
         <i class="fas fa-file-pdf"></i>
       </div>
-      <div class="action-icon"><i class="fas fa-expand"></i></div>
-      <div class="item-title">2Peppered Green (from Just a Grrrl)</div>
-    </div>
-
-   <div class="item" onclick="openPDF('/Users/joannasolomon/Desktop/Wildiguanaa.github.io/pdfs/JustaGrrrl.pdf', 4)">
-      <div style="width: 100%; height: 400px; background: linear-gradient(135deg, rgba(80, 30, 40, 0.3), rgba(80, 30, 40, 0.1)); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 4rem;">
-        <i class="fas fa-file-pdf"></i>
-      </div>
-      <div class="action-icon"><i class="fas fa-expand"></i></div>
-      <div class="item-title">3Peppered Green (from Just a Grrrl)</div>
-    </div>
-
-
-    <!--
-    <div class="item" onclick="openPDF('/Users/joannasolomon/Desktop/Wildiguanaa.github.io/pdfs/JustaGrrrl.pdf', 4)"> 
-      <canvas id="pdf-thumb-0"></canvas>
       <div class="action-icon"><i class="fas fa-expand"></i></div>
       <div class="item-title">Peppered Green (from Just a Grrrl)</div>
-    </div> 
-    -->
-    <!-- Example image item
-    <div class="item" onclick="openModal(this)">
-      <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800" alt="Film Project">
-      <div class="action-icon"><i class="fas fa-expand"></i></div>
-      <div class="item-title">Sample Film Project</div>
-    </div> -->
-
-    <!-- Example video item 
-    <div class="item" onclick="openModal(this)">
-      <video src="https://www.w3schools.com/html/mov_bbb.mp4" muted></video>
-      <div class="action-icon"><i class="fas fa-play"></i></div>
-      <div class="item-title">Sample Video</div>
-    </div> -->
-
-    <!-- Audience1  
-    <div class="item" onclick="openModal(this)">
-      <img src="images/audience.png">
-      <div class="action-icon"><i class="fas fa-expand"></i></div>
-      <div class="item-title">Audience</div>
-    </div> -->
+    </div>
 
   </div>
 </main>
 
-<!-- Modal -->
 <div class="modal" id="modal" onclick="checkModalClick(event)">
   <span class="modal-close" onclick="closeModal()">&times;</span>
   <div id="modal-content"></div>
 </div>
 
 <script>
-  // Theme toggle
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+  let pdfDoc = null;
+  let currentPage = 1;
+
   function toggleTheme() {
     const body = document.body;
     const icon = document.getElementById('theme-icon');
@@ -503,7 +409,6 @@
     }
   }
 
-  // Load saved theme
   window.addEventListener('DOMContentLoaded', () => {
     const saved = localStorage.getItem('theme') || 'dark';
     const body = document.body;
@@ -518,7 +423,6 @@
     }
   });
 
-  // Gallery functions
   function openModal(el) {
     const modal = document.getElementById("modal");
     const content = document.getElementById("modal-content");
@@ -534,10 +438,6 @@
     content.innerHTML = "";
     content.appendChild(media);
     modal.style.display = "flex";
-  }
-
-  function openInstagram(url) {
-    window.open(url, '_blank');
   }
 
   function closeModal() {
@@ -567,103 +467,95 @@
     }
   });
 
-  // PDF.js setup
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-  <script>
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
-    let pdfDoc = null;
-    let currentPage = 1;
-
-    // Open PDF modal
-    async function openPDF(pdfPath, pageNumber = 1) {
-      try {
-        const pdfData = await fetch(pdfPath);
-        pdfDoc = await pdfjsLib.getDocument(pdfData.arrayBuffer()).promise;
-        
-        currentPage = pageNumber;
-        
-        // Create modal
-        let modal = document.getElementById('pdfModal');
-        if (!modal) {
-          modal = document.createElement('div');
-          modal.id = 'pdfModal';
-          modal.style.cssText = 'position: fixed; inset: 0; background: rgba(0,0,0,0.95); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 2000; padding: 2rem;';
-          modal.innerHTML = `
-            <button onclick="closePDF()" style="position: fixed; top: 30px; right: 30px; font-size: 2.5rem; color: #fbf8e8; cursor: pointer; background: none; border: none; transition: color 0.3s; z-index: 2001;">×</button>
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem; max-width: 90vw; max-height: 80vh;">
-              <canvas id="pdf-canvas" style="max-width: 100%; max-height: 75vh; border: 1px solid rgba(232, 230, 240, 0.2); border-radius: 4px;"></canvas>
-              <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
-                <button id="prev-btn" onclick="prevPage()" style="background: #501E28; color: #fbf8e8; border: none; padding: 0.7rem 1.2rem; border-radius: 4px; cursor: pointer; font-size: 0.9rem;">← Previous</button>
-                <div style="color: #fbf8e8; font-size: 0.95rem;" id="page-info">Page 1 of 1</div>
-                <button id="next-btn" onclick="nextPage()" style="background: #501E28; color: #fbf8e8; border: none; padding: 0.7rem 1.2rem; border-radius: 4px; cursor: pointer; font-size: 0.9rem;">Next →</button>
-              </div>
-            </div>
-          `;
-          document.body.appendChild(modal);
-        }
-        
-        modal.style.display = 'flex';
-        renderPage(currentPage);
-        updateControls();
-      } catch (error) {
-        console.error('Error loading PDF:', error);
-        alert('Error loading PDF. Make sure the file path is correct.');
+  async function openPDF(pdfPath, pageNumber = 1) {
+    try {
+      const response = await fetch(pdfPath);
+      if (!response.ok) {
+        throw new Error(`Failed to load PDF: ${response.status} ${response.statusText}`);
       }
-    }
-
-    // Render PDF page
-    async function renderPage(pageNum) {
-      if (!pdfDoc) return;
       
-      try {
-        const page = await pdfDoc.getPage(pageNum);
-        const canvas = document.getElementById('pdf-canvas');
-        const ctx = canvas.getContext('2d');
-        
-        const viewport = page.getViewport({ scale: 1.5 });
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-        
-        await page.render({
-          canvasContext: ctx,
-          viewport: viewport
-        }).promise;
-        
-        document.getElementById('page-info').textContent = `Page ${pageNum} of ${pdfDoc.numPages}`;
-      } catch (error) {
-        console.error('Error rendering page:', error);
+      const arrayBuffer = await response.arrayBuffer();
+      pdfDoc = await pdfjsLib.getDocument({data: arrayBuffer}).promise;
+      
+      currentPage = pageNumber;
+      
+      let modal = document.getElementById('pdfModal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'pdfModal';
+        modal.style.cssText = 'position: fixed; inset: 0; background: rgba(0,0,0,0.95); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 2000; padding: 2rem;';
+        modal.innerHTML = `
+          <button onclick="closePDF()" style="position: fixed; top: 30px; right: 30px; font-size: 2.5rem; color: #fbf8e8; cursor: pointer; background: none; border: none; transition: color 0.3s; z-index: 2001;">×</button>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem; max-width: 90vw; max-height: 80vh;">
+            <canvas id="pdf-canvas" style="max-width: 100%; max-height: 75vh; border: 1px solid rgba(232, 230, 240, 0.2); border-radius: 4px;"></canvas>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
+              <button id="prev-btn" onclick="prevPage()" style="background: #501E28; color: #fbf8e8; border: none; padding: 0.7rem 1.2rem; border-radius: 4px; cursor: pointer; font-size: 0.9rem;">← Previous</button>
+              <div style="color: #fbf8e8; font-size: 0.95rem;" id="page-info">Page 1 of 1</div>
+              <button id="next-btn" onclick="nextPage()" style="background: #501E28; color: #fbf8e8; border: none; padding: 0.7rem 1.2rem; border-radius: 4px; cursor: pointer; font-size: 0.9rem;">Next →</button>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(modal);
       }
+      
+      modal.style.display = 'flex';
+      await renderPage(currentPage);
+      updateControls();
+    } catch (error) {
+      console.error('Error loading PDF:', error);
+      alert(`Error loading PDF: ${error.message}\n\nPlease make sure the file exists at: ${pdfPath}`);
     }
+  }
 
-    function nextPage() {
-      if (currentPage < pdfDoc.numPages) {
-        currentPage++;
-        renderPage(currentPage);
-        updateControls();
-      }
+  async function renderPage(pageNum) {
+    if (!pdfDoc) return;
+    
+    try {
+      const page = await pdfDoc.getPage(pageNum);
+      const canvas = document.getElementById('pdf-canvas');
+      const ctx = canvas.getContext('2d');
+      
+      const viewport = page.getViewport({ scale: 1.5 });
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      
+      await page.render({
+        canvasContext: ctx,
+        viewport: viewport
+      }).promise;
+      
+      document.getElementById('page-info').textContent = `Page ${pageNum} of ${pdfDoc.numPages}`;
+    } catch (error) {
+      console.error('Error rendering page:', error);
     }
+  }
 
-    function prevPage() {
-      if (currentPage > 1) {
-        currentPage--;
-        renderPage(currentPage);
-        updateControls();
-      }
+  function nextPage() {
+    if (currentPage < pdfDoc.numPages) {
+      currentPage++;
+      renderPage(currentPage);
+      updateControls();
     }
+  }
 
-    function updateControls() {
-      document.getElementById('prev-btn').disabled = currentPage === 1;
-      document.getElementById('next-btn').disabled = currentPage === pdfDoc.numPages;
+  function prevPage() {
+    if (currentPage > 1) {
+      currentPage--;
+      renderPage(currentPage);
+      updateControls();
     }
+  }
 
-    function closePDF() {
-      const modal = document.getElementById('pdfModal');
-      if (modal) modal.style.display = 'none';
-      pdfDoc = null;
-    }
-  </script>
+  function updateControls() {
+    document.getElementById('prev-btn').disabled = currentPage === 1;
+    document.getElementById('next-btn').disabled = currentPage === pdfDoc.numPages;
+  }
 
+  function closePDF() {
+    const modal = document.getElementById('pdfModal');
+    if (modal) modal.style.display = 'none';
+    pdfDoc = null;
+  }
 </script>
 
 </body>

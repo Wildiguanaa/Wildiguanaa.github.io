@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Filmmaker and emerging tech creative." />
   <title>JF - Videographer & Visual Artist</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -461,7 +462,7 @@
 
     .about-content {
       display: grid;
-      grid-template-columns: 1.5fr 1fr;
+      grid-template-columns: 1fr 1.5fr;
       gap: 4rem;
       max-width: 1200px;
       margin: 0 auto;
@@ -469,6 +470,7 @@
     }
 
     .about-text p {
+      order: 2;
       font-size: 1.1rem;
       color: var(--text-muted);
       margin-bottom: 1.5rem;
@@ -476,13 +478,14 @@
     }
 
     .about-card {
-      background: var(--bg-card);
-      padding: 2.5rem;
-      border-radius: 8px;
-      border: 1px solid var(--border);
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
+      border: none;
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
+      order: 1;
     }
 
     .profile-photo {
@@ -497,6 +500,7 @@
       font-family: var(--font-serif);
       font-size: 1.4rem;
       color: var(--accent-light);
+      display: none;
     }
 
     .about-card p {
@@ -504,6 +508,7 @@
       font-size: 0.95rem;
       line-height: 1.6;
       margin: 0;
+      display: none;
     }
 
     .cv-button {
@@ -829,7 +834,7 @@
 
 <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">
   <i class="fas fa-moon" id="theme-icon"></i>
-</button>
+</button> 
 
 <main>
 

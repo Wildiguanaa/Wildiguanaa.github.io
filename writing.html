@@ -364,14 +364,12 @@
   <a href="index.html" class="back-btn">← Back to Portfolio</a>
 
   <h1>Writing</h1>
-  <p>A collection of creative writing pieces and literary works.</p>
+  <p>A collection of creative writing pieces and literary works. Click on any item to view.</p>
 
   <div class="gallery">
 
-    <div class="item" onclick="openPDF('pdfs/JustaGrrrl.pdf', 6-7)">
-      <div style="width: 100%; background: linear-gradient(135deg, rgba(80, 30, 40, 0.3), rgba(80, 30, 40, 0.1)); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 4rem;">
-        <i class="fas fa-file-pdf"></i>
-      </div>
+    <div class="item" onclick="openPDF('pdfs/JustaGrrrl.pdf', 6, 7)">
+      <canvas id="pdf-thumb-0"></canvas>
       <div class="action-icon"><i class="fas fa-expand"></i></div>
       <div class="item-title">Peppered Green (from Just a Grrrl)</div>
     </div>
@@ -421,7 +419,45 @@
       icon.classList.remove('fa-moon');
       icon.classList.add('fa-sun');
     }
+    
+    // Generate PDF thumbnails
+    generatePDFThumbnail('pdfs/JustaGrrrl.pdf', 'pdf-thumb-0', 1);
   });
+
+  async function generatePDFThumbnail(pdfPath, canvasId, pageNum) {
+    try {
+      const response = await fetch(pdfPath);
+      if (!response.ok) return;
+      
+      const arrayBuffer = await response.arrayBuffer();
+      const pdf = await pdfjsLib.getDocument({data: arrayBuffer}).promise;
+      const page = await pdf.getPage(pageNum);
+      
+      const canvas = document.getElementById(canvasId);
+      const ctx = canvas.getContext('2d');
+      
+      const viewport = page.getViewport({ scale: 1 });
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      
+      await page.render({
+        canvasContext: ctx,
+        viewport: viewport
+      }).promise;
+    } catch (error) {
+      console.error('Error generating thumbnail:', error);
+      // Fall back to PDF icon if thumbnail fails
+      const canvas = document.getElementById(canvasId);
+      if (canvas) {
+        canvas.style.display = 'none';
+        const parent = canvas.parentElement;
+        const fallback = document.createElement('div');
+        fallback.style.cssText = 'width: 100%; height: 100%; background: linear-gradient(135deg, rgba(80, 30, 40, 0.3), rgba(80, 30, 40, 0.1)); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 4rem;';
+        fallback.innerHTML = '<i class="fas fa-file-pdf"></i>';
+        parent.insertBefore(fallback, canvas);
+      }
+    }
+  }
 
   function openModal(el) {
     const modal = document.getElementById("modal");
@@ -467,7 +503,10 @@
     }
   });
 
-  async function openPDF(pdfPath, pageNumber = 1) {
+  let showTwoPages = false;
+  let startPage = 1;
+
+  async function openPDF(pdfPath, pageNumber = 1, endPage = null) {
     try {
       const response = await fetch(pdfPath);
       if (!response.ok) {
@@ -477,6 +516,8 @@
       const arrayBuffer = await response.arrayBuffer();
       pdfDoc = await pdfjsLib.getDocument({data: arrayBuffer}).promise;
       
+      showTwoPages = endPage !== null;
+      startPage = pageNumber;
       currentPage = pageNumber;
       
       let modal = document.getElementById('pdfModal');
@@ -486,8 +527,8 @@
         modal.style.cssText = 'position: fixed; inset: 0; background: rgba(0,0,0,0.95); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 2000; padding: 2rem;';
         modal.innerHTML = `
           <button onclick="closePDF()" style="position: fixed; top: 30px; right: 30px; font-size: 2.5rem; color: #fbf8e8; cursor: pointer; background: none; border: none; transition: color 0.3s; z-index: 2001;">×</button>
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem; max-width: 90vw; max-height: 80vh;">
-            <canvas id="pdf-canvas" style="max-width: 100%; max-height: 75vh; border: 1px solid rgba(232, 230, 240, 0.2); border-radius: 4px;"></canvas>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem; max-width: 95vw; max-height: 85vh;">
+            <div id="canvas-container" style="display: flex; gap: 1rem; align-items: flex-start;"></div>
             <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
               <button id="prev-btn" onclick="prevPage()" style="background: #501E28; color: #fbf8e8; border: none; padding: 0.7rem 1.2rem; border-radius: 4px; cursor: pointer; font-size: 0.9rem;">← Previous</button>
               <div style="color: #fbf8e8; font-size: 0.95rem;" id="page-info">Page 1 of 1</div>
@@ -511,44 +552,82 @@
     if (!pdfDoc) return;
     
     try {
-      const page = await pdfDoc.getPage(pageNum);
-      const canvas = document.getElementById('pdf-canvas');
-      const ctx = canvas.getContext('2d');
+      const container = document.getElementById('canvas-container');
+      container.innerHTML = '';
       
-      const viewport = page.getViewport({ scale: 1.5 });
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
-      
-      await page.render({
-        canvasContext: ctx,
-        viewport: viewport
-      }).promise;
-      
-      document.getElementById('page-info').textContent = `Page ${pageNum} of ${pdfDoc.numPages}`;
+      if (showTwoPages) {
+        // Render two pages side by side
+        for (let i = 0; i < 2; i++) {
+          const page = await pdfDoc.getPage(pageNum + i);
+          const canvas = document.createElement('canvas');
+          canvas.style.cssText = 'max-width: 45vw; max-height: 75vh; border: 1px solid rgba(232, 230, 240, 0.2); border-radius: 4px;';
+          const ctx = canvas.getContext('2d');
+          
+          const viewport = page.getViewport({ scale: 1.3 });
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+          
+          await page.render({
+            canvasContext: ctx,
+            viewport: viewport
+          }).promise;
+          
+          container.appendChild(canvas);
+        }
+        
+        document.getElementById('page-info').textContent = `Pages ${pageNum}-${pageNum + 1} of ${pdfDoc.numPages}`;
+      } else {
+        // Render single page
+        const page = await pdfDoc.getPage(pageNum);
+        const canvas = document.createElement('canvas');
+        canvas.style.cssText = 'max-width: 90vw; max-height: 75vh; border: 1px solid rgba(232, 230, 240, 0.2); border-radius: 4px;';
+        const ctx = canvas.getContext('2d');
+        
+        const viewport = page.getViewport({ scale: 1.5 });
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        
+        await page.render({
+          canvasContext: ctx,
+          viewport: viewport
+        }).promise;
+        
+        container.appendChild(canvas);
+        document.getElementById('page-info').textContent = `Page ${pageNum} of ${pdfDoc.numPages}`;
+      }
     } catch (error) {
       console.error('Error rendering page:', error);
     }
   }
 
   function nextPage() {
-    if (currentPage < pdfDoc.numPages) {
-      currentPage++;
+    const maxPage = showTwoPages ? pdfDoc.numPages - 1 : pdfDoc.numPages;
+    const increment = showTwoPages ? 2 : 1;
+    
+    if (currentPage + increment <= maxPage) {
+      currentPage += increment;
       renderPage(currentPage);
       updateControls();
     }
   }
 
   function prevPage() {
-    if (currentPage > 1) {
-      currentPage--;
+    const increment = showTwoPages ? 2 : 1;
+    
+    if (currentPage > startPage) {
+      currentPage -= increment;
+      if (currentPage < startPage) currentPage = startPage;
       renderPage(currentPage);
       updateControls();
     }
   }
 
   function updateControls() {
-    document.getElementById('prev-btn').disabled = currentPage === 1;
-    document.getElementById('next-btn').disabled = currentPage === pdfDoc.numPages;
+    const maxPage = showTwoPages ? pdfDoc.numPages - 1 : pdfDoc.numPages;
+    const increment = showTwoPages ? 2 : 1;
+    
+    document.getElementById('prev-btn').disabled = currentPage === startPage;
+    document.getElementById('next-btn').disabled = currentPage + (showTwoPages ? 1 : 0) >= maxPage;
   }
 
   function closePDF() {

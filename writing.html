@@ -178,7 +178,7 @@
     width: 100%;
     height: auto;
     display: block;
-    object-fit: cover;
+    object-fit: contain;
     filter: grayscale(100%);
     transition: filter 0.4s ease;
   }
@@ -188,16 +188,10 @@
     filter: grayscale(0%);
   }
 
-  .item:nth-child(1) img,
-  .item:nth-child(1) video,
   .item:nth-child(1) > div:first-child { height: 400px; }
 
-  .item:nth-child(2) img,
-  .item:nth-child(2) video,
   .item:nth-child(2) > div:first-child { height: 500px; }
 
-  .item:nth-child(3) img,
-  .item:nth-child(3) video,
   .item:nth-child(3) > div:first-child { height: 350px; }
 
   .action-icon {
@@ -318,12 +312,8 @@
       font-size: 20px;
     }
     
-    .item:nth-child(odd) img,
-    .item:nth-child(odd) video,
     .item:nth-child(odd) > div:first-child { height: 350px; }
     
-    .item:nth-child(even) img,
-    .item:nth-child(even) video,
     .item:nth-child(even) > div:first-child { height: 400px; }
 
     .site-nav {
@@ -364,12 +354,12 @@
   <a href="index.html" class="back-btn">← Back to Portfolio</a>
 
   <h1>Writing</h1>
-  <p>A collection of creative writing pieces and literary works. <b>Click on any item to view.</b></p>
+  <p>A collection of creative writing pieces and literary works. Click on any item to view.</p>
 
   <div class="gallery">
 
     <div class="item" onclick="openPDF('pdfs/JustaGrrrl.pdf', 6, 7)">
-      <img src="images/justagrrrlthumbnail.png" alt="Just a Grrrl cover">
+      <img src="images/justagrrl-cover.jpg" alt="Just a Grrrl cover">
       <div class="action-icon"><i class="fas fa-expand"></i></div>
       <div class="item-title">Peppered Green (from Just a Grrrl)</div>
     </div>

@@ -190,6 +190,39 @@
       transform: scale(1.1);
     }
 
+    /* HERO BACKGROUND - FIXED TO HERO ONLY */
+    .hero-bg-wrapper {
+      position: fixed;
+      top: 80px;
+      left: 0;
+      width: 100%;
+      height: 100vh;        /* KEY CHANGE: Fixed height, not infinite */
+      z-index: -2;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .hero-bg-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-bg-overlay {
+      position: fixed;
+      top: 80px;
+      left: 0;
+      width: 100%;
+      height: 100vh;        /* KEY CHANGE: Fixed height */
+      background: linear-gradient(to right, rgba(4, 7, 23, 0.7), rgba(4, 7, 23, 0.4));
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    body.light-mode .hero-bg-overlay {
+      background: linear-gradient(to right, rgba(232, 220, 200, 0.3), rgba(232, 220, 200, 0.1));
+    }
+
     /* BACKGROUND VIDEO */
     .bg-video-container {
       position: fixed;
@@ -361,9 +394,38 @@
       margin-top: 8rem;
     }
 
+    /* SECTIONS - THE KEY FIX FOR ABOUT & CONTACT */
+    .section {
+      position: relative;
+      z-index: 10;          /* KEY: High z-index to layer above background */
+      width: 100%;          /* KEY: Full width */
+      padding: 8rem 5%;
+      background: var(--bg);
+      clear: both;          /* Prevents overlapping */
+    }
+
+    .section-inner {
+      max-width: 1400px;    /* Content stays constrained */
+      margin: 0 auto;       /* Centers content */
+      width: 100%;
+    }
+
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(10px); }
+    }
+
+    /* HERO SECTION */
+    .hero {
+      position: relative;
+      z-index: 5;           /* KEY: Sits above background but below sections */
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8rem 8% 4rem;
+      width: 100%;
+      background: transparent;  /* Allow video to show through */
     }
 
     /* SECTIONS */
@@ -991,10 +1053,10 @@
 
 <!-- ABOUT -->
 <section class="section" id="about">
-  <div class="section-header">
-    <h2 class="section-title">About</h2>
+  <div class="section-inner">
+    <div class="section-header">
+      <h2 class="section-title">About</h2>
   </div>
-
   <div class="about-content">
     <div class="about-text">
       <p>I'm a filmmaker and emerging-tech creative working with cinema, interactive media, and socially grounded storytelling. I graduated Magna Cum Laude from Binghamton University with a BA in Cinema and minors in Digital & Data Studies and Genocide & Mass Atrocity Prevention.</p>
@@ -1017,8 +1079,9 @@
 
 <!-- CONTACT -->
 <section class="section" id="contact">
-  <div class="section-header">
-    <h2 class="section-title">Let's Work Together</h2>
+  <div class="section-inner"></div>
+    <div class="section-header">
+      <h2 class="section-title">Let's Work Together</h2>
   </div>
 
   <div class="contact-wrapper">

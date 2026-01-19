@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Creative Services by Joanna Fishman" />
+  <title>Services & Events | Joanna Fishman</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  <style>
+    :root {
+      --bg-dark: #040717;
+      --bg-card-dark: #151d3d;
+      --text-primary-dark: #e8e6f0;
+      --text-muted-dark: #9ba3b8;
+      --accent: #501E28;
+      --accent-glow: rgba(80, 30, 40, 0.3);
+      --accent-light: #6b2a39;
+      
+      --bg-light: #dcdfe8;
+      --bg-card-light: #e8ecf4;
+      --text-primary-light: #1a1f35;
+      --text-muted-light: #4a5468;
+      --border-light: rgba(26, 31, 53, 0.1);
+      
+      --font-serif: "Libre Baskerville", serif;
+      --font-sans: "Inter", sans-serif;
+    }
+    
+    body.light-mode {
+      --bg: var(--bg-light);
+      --bg-card: var(--bg-card-light);
+      --text-primary: var(--text-primary-light);
+      --text-muted: var(--text-muted-light);
+      --border: var(--border-light);
+    }
+
+    body.dark-mode {
+      --bg: var(--bg-dark);
+      --bg-card: var(--bg-card-dark);
+      --text-primary: var(--text-primary-dark);
+      --text-muted: var(--text-muted-dark);
+      --border: rgba(245, 232, 224, 0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 8%;
+      background: rgba(4, 7, 23, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      border-bottom: 1px solid rgba(232, 230, 240, 0.05);
+      transition: background 0.4s ease;
+    }
+
+    body.light-mode .site-header {
+      background: rgba(220, 223, 232, 0.95);
+      border-bottom-color: var(--border);
+    }
+
+    .logo {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .nav-back {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-back:hover {
+      color: var(--accent-light);
+    }
+
+    .theme-toggle {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 1.2rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 99;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .theme-toggle:hover {
+      background: var(--accent);
+      color: #f5e8e0;
+      border-color: var(--accent);
+      transform: scale(1.1);
+    }
+
+    main {
+      margin-top: 80px;
+      min-height: 100vh;
+    }
+
+    .page-header {
+      padding: 4rem 8%;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(80, 30, 40, 0.1), rgba(107, 42, 57, 0.05));
+    }
+
+    .page-header h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .page-header p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .content-section {
+      padding: 4rem 8%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: var(--text-primary);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent-light);
+      box-shadow: 0 12px 30px rgba(80, 30, 40, 0.2);
+    }
+
+    .service-icon {
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .service-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+      color: var(--text-primary);
+    }
+
+    .service-card p {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      line-height: 1.7;
+    }
+
+    .service-features {
+      list-style: none;
+      margin: 1.5rem 0;
+      padding: 0;
+    }
+
+    .service-features li {
+      padding: 0.4rem 0;
+      padding-left: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      position: relative;
+    }
+
+    .service-features li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .pricing {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+      color: var(--accent-light);
+      font-weight: 500;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 1.8rem;
+      background: var(--accent);
+      color: #f5e8e0;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 500;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      margin-top: 1rem;
+      width: 100%;
+      text-align: center;
+    }
+
+    .btn:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px var(--accent-glow);
+    }
+
+    .highlight-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .highlight-box h3 {
+      color: var(--accent-light);
+      margin-bottom: 1rem;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--bg-card);
+      padding: 2.5rem;
+      border-radius: 8px;
+      max-width: 500px;
+      width: 90%;
+      border: 1px solid var(--border);
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .modal-close:hover {
+      color: var(--text-primary);
+    }
+
+    .modal h2 {
+      font-family: var(--font-serif);
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 1rem;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--accent-light);
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 1rem;
+      background: var(--accent);
+      color: #f5e8e0;
+      border: none;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .form-submit:hover {
+      background: var(--accent-light);
+    }
+
+    .site-footer {
+      padding: 3rem 8%;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 4rem;
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      padding: 0.8rem 1.8rem;
+      background: transparent;
+      color: var(--accent-light);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 500;
+      transition: all 0.3s;
+      cursor: pointer;
+      font-size: 0.95rem;
+      margin-top: 1rem;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(80, 30, 40, 0.1);
+      border-color: var(--accent-light);
+    }
+
+    @media (max-width: 768px) {
+      .page-header {
+        padding: 2rem 5%;
+      }
+
+      .content-section {
+        padding: 2rem 5%;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-content {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="dark-mode">
+
+<header class="site-header">
+  <div class="logo">
+    <a href="index.html" style="color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+      <i class="fas fa-arrow-left" style="font-size: 0.9rem;"></i>
+      Services
+    </a>
+  </div>
+  <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">
+    <i class="fas fa-moon" id="theme-icon"></i>
+  </button>
+</header>
+
+<main>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <h1>Creative Services</h1>
+  <p>I offer affordable, creative services tailored to making your moments memorable. From capturing special events to creating interactive experiences, let's bring your vision to life.</p>
+</div>
+
+<!-- MAIN SERVICES -->
+<section class="content-section">
+  <h2 class="section-title">What I Offer</h2>
+  
+  <div class="services-grid">
+    <!-- SERVICE 1 -->
+    <div class="service-card">
+      <div class="service-icon">
+        <i class="fas fa-video"></i>
+      </div>
+      <h3>Event Videography</h3>
+      <p>Capture your special moments with cinematic storytelling and editing.</p>
+      <ul class="service-features">
+        <li>Professional videography & interviews</li>
+        <li>Edited highlight reels (3-5 min)</li>
+        <li>High-quality video files</li>
+        <li>Custom music & effects</li>
+      </ul>
+      <div class="pricing">
+        <span>Starting at</span> <strong>$800</strong>
+      </div>
+      <button class="btn" onclick="openModal('videography')">Inquire</button>
+    </div>
+
+    <!-- SERVICE 2 -->
+    <div class="service-card">
+      <div class="service-icon">
+        <i class="fas fa-camera"></i>
+      </div>
+      <h3>Photography</h3>
+      <p>Candid and artistic photos of your event or special occasion.</p>
+      <ul class="service-features">
+        <li>3-4 hour event coverage</li>
+        <li>200+ edited photos</li>
+        <li>Digital gallery (online link)</li>
+        <li>Print-ready files</li>
+      </ul>
+      <div class="pricing">
+        <span>Starting at</span> <strong>$500</strong>
+      </div>
+      <button class="btn" onclick="openModal('photography')">Inquire</button>
+    </div>
+
+    <!-- SERVICE 3 -->
+    <div class="service-card">
+      <div class="service-icon">
+        <i class="fas fa-images"></i>
+      </div>
+      <h3>Photo Editing & Albums</h3>
+      <p>Bring your photos to life with color grading, retouching, and creative editing.</p>
+      <ul class="service-features">
+        <li>Color correction & grading</li>
+        <li>Creative filters & effects</li>
+        <li>Print-ready albums</li>
+        <li>Digital galleries</li>
+      </ul>
+      <div class="pricing">
+        <span>Starting at</span> <strong>$300</strong>
+      </div>
+      <button class="btn" onclick="openModal('editing')">Inquire</button>
+    </div>
+  </div>
+</section>
+
+<!-- BIRTHDAY PARTIES -->
+<section class="content-section">
+  <h2 class="section-title">🎉 Birthday Party Packages</h2>
+  <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1rem;">Special pricing for birthday celebrations! Need more? <a href="birthday-parties.html" style="color: var(--accent-light); text-decoration: none;"><strong>See our full Birthday Party page →</strong></a></p>
+
+  <div class="highlight-box">
+    <h3><i class="fas fa-cake-candles"></i> Quick Coverage Package</h3>
+    <p style="color: var(--text-muted); margin-bottom: 1rem;">Perfect for smaller gatherings and intimate celebrations.</p>
+    <ul class="service-features">
+      <li>2-hour video coverage</li>
+      <li>Photos throughout the party</li>
+      <li>Edited 5-minute highlight video</li>
+      <li>50+ photos in a digital gallery</li>
+    </ul>
+    <div class="pricing"><span>Only</span> <strong>$600</strong></div>
+    <button class="btn" onclick="openModal('birthday')">Book Now</button>
+  </div>
+
+  <div class="highlight-box">
+    <h3><i class="fas fa-star"></i> Premium Party Package</h3>
+    <p style="color: var(--text-muted); margin-bottom: 1rem;">Full event coverage with creative touches and more editing.</p>
+    <ul class="service-features">
+      <li>4-hour video & photo coverage</li>
+      <li>10-minute cinematic highlight video</li>
+      <li>100+ professionally edited photos</li>
+      <li>Funny moments & gag reels included</li>
+      <li>Online gallery + USB with all files</li>
+    </ul>
+    <div class="pricing"><span>Only</span> <strong>$1,200</strong></div>
+    <button class="btn" onclick="openModal('birthday')">Book Now</button>
+  </div>
+
+  <div style="text-align: center; margin-top: 2rem;">
+    <p style="color: var(--text-muted); margin-bottom: 1rem;">Want interactive fun at the party?</p>
+    <a href="birthday-parties.html" class="btn-secondary">Explore Birthday Party Ideas</a>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="content-section">
+  <h2 class="section-title">How It Works</h2>
+  <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 2rem; margin: 2rem 0;">
+    <div style="display: grid; gap: 2rem;">
+      <div style="display: flex; gap: 1.5rem;">
+        <div style="flex-shrink: 0; width: 50px; height: 50px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #f5e8e0; font-weight: bold; font-size: 1.2rem;">1</div>
+        <div>
+          <h3 style="margin-bottom: 0.5rem; color: var(--text-primary);">Reach Out</h3>
+          <p style="color: var(--text-muted);">Send me a message with your event date, location, and what you need. I'll get back to you within 24 hours with a quote and timeline.</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 1.5rem;">
+        <div style="flex-shrink: 0; width: 50px; height: 50px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #f5e8e0; font-weight: bold; font-size: 1.2rem;">2</div>
+        <div>
+          <h3 style="margin-bottom: 0.5rem; color: var(--text-primary);">Confirm & Prepare</h3>
+          <p style="color: var(--text-muted);">Once booked, I'll send you a quick briefing so I know what to capture. We'll confirm timing and any special requests.</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 1.5rem;">
+        <div style="flex-shrink: 0; width: 50px; height: 50px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #f5e8e0; font-weight: bold; font-size: 1.2rem;">3</div>
+        <div>
+          <h3 style="margin-bottom: 0.5rem; color: var(--text-primary);">Event Day</h3>
+          <p style="color: var(--text-muted);">I'll capture everything—the big moments and the candid ones. Enjoy your event while I handle the filming and photography.</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 1.5rem;">
+        <div style="flex-shrink: 0; width: 50px; height: 50px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #f5e8e0; font-weight: bold; font-size: 1.2rem;">4</div>
+        <div>
+          <h3 style="margin-bottom: 0.5rem; color: var(--text-primary);">Get Your Content</h3>
+          <p style="color: var(--text-muted);">You'll receive edited videos, high-quality photos, and a digital gallery (usually within 2-3 weeks). Perfect for sharing and remembering!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="content-section" style="text-align: center; padding: 3rem 8%;">
+  <h2 class="section-title">Let's Create Something Great</h2>
+  <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1.1rem;">Tell me about your event and what you're looking for.</p>
+  <button class="btn" onclick="openModal('contact')" style="width: auto; padding: 1rem 2.5rem; font-size: 1rem;">Get In Touch</button>
+</section>
+
+</main>
+
+<!-- CONTACT MODAL -->
+<div class="modal" id="contactModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h2>Let's Work Together</h2>
+    <form onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label>Your Name *</label>
+        <input type="text" required />
+      </div>
+      <div class="form-group">
+        <label>Email *</label>
+        <input type="email" required />
+      </div>
+      <div class="form-group">
+        <label>What's the event? *</label>
+        <input type="text" placeholder="Birthday, celebration, etc." required />
+      </div>
+      <div class="form-group">
+        <label>Event Date *</label>
+        <input type="date" required />
+      </div>
+      <div class="form-group">
+        <label>Tell me what you need *</label>
+        <textarea rows="4" placeholder="Video, photos, or both? Any special requests?" required></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send Request</button>
+    </form>
+  </div>
+</div>
+
+<!-- VIDEOGRAPHY MODAL -->
+<div class="modal" id="videographyModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h2>Event Videography</h2>
+    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Let me capture your moments in motion.</p>
+    <form onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label>Your Name *</label>
+        <input type="text" required />
+      </div>
+      <div class="form-group">
+        <label>Email *</label>
+        <input type="email" required />
+      </div>
+      <div class="form-group">
+        <label>Event Date *</label>
+        <input type="date" required />
+      </div>
+      <div class="form-group">
+        <label>How long will the event be?</label>
+        <input type="text" placeholder="e.g., 2 hours, 4 hours" />
+      </div>
+      <div class="form-group">
+        <label>Any special requests?</label>
+        <textarea rows="3" placeholder="What moments are most important?"></textarea>
+      </div>
+      <button type="submit" class="form-submit">Request Quote</button>
+    </form>
+  </div>
+</div>
+
+<!-- PHOTOGRAPHY MODAL -->
+<div class="modal" id="photographyModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h2>Photography</h2>
+    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Candid, artistic photos of your special day.</p>
+    <form onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label>Your Name *</label>
+        <input type="text" required />
+      </div>
+      <div class="form-group">
+        <label>Email *</label>
+        <input type="email" required />
+      </div>
+      <div class="form-group">
+        <label>Event Date *</label>
+        <input type="date" required />
+      </div>
+      <div class="form-group">
+        <label>Location</label>
+        <input type="text" placeholder="Where's the event?" />
+      </div>
+      <button type="submit" class="form-submit">Request Quote</button>
+    </form>
+  </div>
+</div>
+
+<!-- EDITING MODAL -->
+<div class="modal" id="editingModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h2>Photo Editing & Albums</h2>
+    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Transform your photos with professional editing.</p>
+    <form onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label>Your Name *</label>
+        <input type="text" required />
+      </div>
+      <div class="form-group">
+        <label>Email *</label>
+        <input type="email" required />
+      </div>
+      <div class="form-group">
+        <label>How many photos do you have?</label>
+        <input type="text" placeholder="e.g., 50, 100, 200+" />
+      </div>
+      <div class="form-group">
+        <label>What do you need?</label>
+        <textarea rows="3" placeholder="Full editing, album, specific style?" required></textarea>
+      </div>
+      <button type="submit" class="form-submit">Request Quote</button>
+    </form>
+  </div>
+</div>
+
+<!-- BIRTHDAY MODAL -->
+<div class="modal" id="birthdayModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h2>Book a Birthday Party Package</h2>
+    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Let me capture the birthday fun!</p>
+    <form onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label>Your Name *</label>
+        <input type="text" required />
+      </div>
+      <div class="form-group">
+        <label>Email *</label>
+        <input type="email" required />
+      </div>
+      <div class="form-group">
+        <label>Birthday Person's Age</label>
+        <input type="number" />
+      </div>
+      <div class="form-group">
+        <label>Party Date *</label>
+        <input type="date" required />
+      </div>
+      <div class="form-group">
+        <label>Which package?</label>
+        <select required>
+          <option value="">Select a package</option>
+          <option value="quick">Quick Coverage ($600)</option>
+          <option value="premium">Premium Package ($1,200)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Party details</label>
+        <textarea rows="3" placeholder="Location, theme, special requests?"></textarea>
+      </div>
+      <button type="submit" class="form-submit">Book Party</button>
+    </form>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p>© 2024 Joanna Fishman. Creating memories, one moment at a time.</p>
+</footer>
+
+<script>
+  function toggleTheme() {
+    const body = document.body;
+    const icon = document.getElementById('theme-icon');
+    
+    if (body.classList.contains('dark-mode')) {
+      body.classList.remove('dark-mode');
+      body.classList.add('light-mode');
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+      localStorage.setItem('theme', 'light');
+    } else {
+      body.classList.remove('light-mode');
+      body.classList.add('dark-mode');
+      icon.classList.remove('fa-sun');
+      icon.classList.ad

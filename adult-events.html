@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Creative Events & Workshops for Adults" />
+  <title>Adult Events | Joanna Fishman</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  <style>
+    :root {
+      --bg-dark: #040717;
+      --bg-card-dark: #151d3d;
+      --text-primary-dark: #e8e6f0;
+      --text-muted-dark: #9ba3b8;
+      --accent: #501E28;
+      --accent-glow: rgba(80, 30, 40, 0.3);
+      --accent-light: #6b2a39;
+      
+      --bg-light: #dcdfe8;
+      --bg-card-light: #e8ecf4;
+      --text-primary-light: #1a1f35;
+      --text-muted-light: #4a5468;
+      --border-light: rgba(26, 31, 53, 0.1);
+      
+      --font-serif: "Libre Baskerville", serif;
+      --font-sans: "Inter", sans-serif;
+    }
+    
+    body.light-mode {
+      --bg: var(--bg-light);
+      --bg-card: var(--bg-card-light);
+      --text-primary: var(--text-primary-light);
+      --text-muted: var(--text-muted-light);
+      --border: var(--border-light);
+    }
+
+    body.dark-mode {
+      --bg: var(--bg-dark);
+      --bg-card: var(--bg-card-dark);
+      --text-primary: var(--text-primary-dark);
+      --text-muted: var(--text-muted-dark);
+      --border: rgba(245, 232, 224, 0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 8%;
+      background: rgba(4, 7, 23, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      border-bottom: 1px solid rgba(232, 230, 240, 0.05);
+    }
+
+    body.light-mode .site-header {
+      background: rgba(220, 223, 232, 0.95);
+      border-bottom-color: var(--border);
+    }
+
+    .logo {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 1.2rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 99;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .theme-toggle:hover {
+      background: var(--accent);
+      color: #f5e8e0;
+      border-color: var(--accent);
+      transform: scale(1.1);
+    }
+
+    main {
+      margin-top: 80px;
+      min-height: 100vh;
+    }
+
+    .hero {
+      padding: 5rem 8% 3rem;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(80, 30, 40, 0.15), rgba(107, 42, 57, 0.08));
+    }
+
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .hero .emoji {
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: var(--accent);
+      color: #f5e8e0;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px var(--accent-glow);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent-light);
+      border: 2px solid var(--accent-light);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(80, 30, 40, 0.1);
+    }
+
+    .content-section {
+      padding: 4rem 8%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      color: var(--text-primary);
+      text-align: center;
+    }
+
+    .experiences-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .experience-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .experience-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 50px rgba(80, 30, 40, 0.25);
+      border-color: var(--accent-light);
+    }
+
+    .experience-image {
+      width: 100%;
+      height: 220px;
+      background: linear-gradient(135deg, rgba(80, 30, 40, 0.2), rgba(107, 42, 57, 0.15));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .experience-image::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent 30%, rgba(80, 30, 40, 0.05) 50%, transparent 70%);
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .experience-content {
+      padding: 2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .experience-content h3 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: var(--text-primary);
+    }
+
+    .experience-content p {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .experience-features {
+      list-style: none;
+      margin: 1rem 0;
+      padding: 0;
+      font-size: 0.95rem;
+    }
+
+    .experience-features li {
+      padding: 0.4rem 0;
+      padding-left: 1.5rem;
+      color: var(--text-muted);
+      position: relative;
+    }
+
+    .experience-features li:before {
+      content: "✨";
+      position: absolute;
+      left: 0;
+    }
+
+    .experience-duration {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-book {
+      width: 100%;
+      padding: 0.8rem;
+      background: var(--accent);
+      color: #f5e8e0;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .btn-book:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--bg-card);
+      padding: 2.5rem;
+      border-radius: 12px;
+      max-width: 550px;
+      width: 90%;
+      border: 1px solid var(--border);
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .modal h2 {
+      font-family: var(--font-serif);
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 1rem;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--accent-light);
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 1rem;
+      background: var(--accent);
+      color: #f5e8e0;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .form-submit:hover {
+      background: var(--accent-light);
+    }
+
+    .site-footer {
+      padding: 3rem 8%;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 2.5rem 5%;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .content-section {
+        padding: 2rem 5%;
+      }
+
+      .experiences-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn, .btn-secondary {
+        width: 100%;
+      }
+
+      .modal-content {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="dark-mode">
+
+<header class="site-header">
+  <div class="logo">
+    <a href="services.html" style="color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+      <i class="fas fa-arrow-left" style="font-size: 0.9rem;"></i>
+      Adult Events
+    </a>
+  </div>
+  <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">
+    <i class="fas fa-moon" id="theme-icon"></i>
+  </button>
+</header>
+
+<main>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="emoji">🎬🎨🥂</span>
+  <h1>Creative Experiences for Adults</h1>
+  <p>Team building, bachelorette parties, corporate events, and celebrations—with hands-on creative workshops that bring people together and create unforgettable memories.</p>
+  <div class="cta-buttons">
+    <button class="btn" onclick="openModal('contact')">Plan an Event</button>
+    <button class="btn btn-secondary" onclick="document.querySelector('#experiences').scrollIntoView()">See Experiences</button>
+  </div>
+</div>
+
+<!-- EXPERIENCES -->
+<section class="content-section" id="experiences">
+  <h2 class="section-title">Our Adult Experiences</h2>
+  
+  <div class="experiences-grid">
+    <!-- FILMMAKER TEAM BUILDING -->
+    <div class="experience-card">
+      <div class="experience-image">🎬</div>
+      <div class="experience-content">
+        <h3>Filmmaking Team Challenge</h3>
+        <p>Teams compete to create the best short film. Perfect ice-breaker that gets everyone collaborating and laughing.</p>
+        <ul class="experience-features">
+          <li>Teams write, direct, and film</li>
+          <li>Fun, competitive creative challenge</li>
+          <li>Edited highlight reel for the group</li>
+          <li>Works for 10-50+ people</li>
+        </ul>
+        <div class="experience-duration">⏱️ 3-4 hours | Customizable</div>
+        <button class="btn-book" onclick="openModal('teamFilm')">Get a Quote</button>
+      </div>
+    </div>
+
+    <!-- PHOTOSHOOT EXPERIENCE -->
+    <div class="experience-card">
+      <div class="experience-image">📸</div>
+      <div class="experience-content">
+        <h3>Professional Group Photoshoot</h3>
+        <p>Styled, professional photos for your group—perfect for bachelorette parties, corporate events, or just fun memories.</p>
+        <ul class="experience-features">
+          <li>Professional styling & makeup guidance</li>
+          <li>Multiple backdrops & setups</li>
+          <li>Fun, relaxed shoot atmosphere</li>
+          <li>Digital gallery + printed album option</li>
+        </ul>
+        <div class="experience-duration">⏱️ 2-3 hours | 8-30 people</div>
+        <button class="btn-book" onclick="openModal('photoShoot')">Get a Quote</button>
+      </div>
+    </div>
+
+    <!-- DOCUMENTARY STORYTELLING -->
+    <div class="experience-card">
+      <div class="experience-image">🎥</div>
+      <div class="experience-content">
+        <h3>Documentary & Interview Film</h3>
+        <p>Capture stories, testimonials, and memories. Perfect for celebrating milestones, retirements, or corporate events.</p>
+        <ul class="experience-features">
+          <li>One-on-one interview filming</li>
+          <li>Professionally edited documentary</li>
+          <li>Heartfelt, cinematic storytelling</li>
+          <li>Archived for years to come</li>
+        </ul>
+        <div class="experience-duration">⏱️ 4-6 hours | Customizable</div>
+        <button class="btn-book" onclick="openModal('documentary')">Get a Quote</button>
+      </div>
+    </div>
+
+    <!-- WORKSHOP: INTRO TO FILMMAKING -->
+    <div class="experience-card">
+      <div class="experience-image">🎓</div>
+      <div class="experience-content">
+        <h3>Intro to Filmmaking Workshop</h3>
+        <p>Learn basics of cinematography, storytelling, and editing in a fun, hands-on session. Great for curious creatives.</p>
+        <ul class="experience-features">
+          <li>Camera fundamentals & techniques</li>
+          <li>Storytelling principles</li>
+          <li>Hands-on practice filming</li>
+          <li>Group or individual sessions</li>
+        </ul>
+        <div class="experience-duration">⏱️ 2.5-3 hours | 4-15 people</div>
+        <button class="btn-book" onclick="openModal('workshop')">Get a Quote</button>
+      </div>
+    </div>
+
+    <!-- CREATIVE TEAM RETREAT -->
+    <div class="experience-card">
+      <div class="experience-image">🌟</div>
+      <div class="experience-content">
+        <h3>Creative Team Retreat</h3>
+        <p>Multi-day retreat with creative workshops, filmmaking challenges, and team-building activities. Customizable for your group.</p>
+        <ul class="experience-features">
+          <li>Daily creative workshops</li>
+          <li>Collaborative projects</li>
+          <li>Team bonding activities</li>
+          <li>Professional video documentation</li>
+        </ul>
+        <div class="experience-duration">⏱️ Half-day to 2 days | 8-40 people</div>
+        <button class="btn-book" onclick="openModal('retreat')">Get a Quote</button>
+      </div>
+    </div>
+
+    <!-- BACHELORETTE/BACHELOR FILM PARTY -->
+    <div class="experience-card">
+      <div class="experience-image">💍</div>
+      <div class="experience-content">
+        <h3>Bachelorette/Bachelor Film Party</h3>
+        <p>Create a custom celebration film—roasts, testimonials, fun scenes. The ultimate keepsake from the big night.</p>
+        <ul class="experience-features">
+          <li>Guest video messages compiled</li>
+          <li>Candid footage from celebrations</li>
+          <li>Custom intro & creative editing</li>
+          <li>Professional final film</li>
+        </ul>
+        <div class="experience-duration">⏱️ Full event coverage + editing</div>
+        <button class="btn-book" onclick="openModal('bachelor')">Get a Quote</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="content-section" style="text-align: center; padding: 4rem 8%;">
+  <h2 class="section-title">Let's Create Something Memorable</h2>
+  <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1.1rem;">Whether it's a team event, celebration, or special milestone—let's bring your vision to life.</p>
+  <button class="btn" onclick="openModal('contact')">Plan Your Event</button>
+</section>
+
+</main>
+
+<!-- CONTACT MODAL -->
+<div class="modal" id="contactModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h2>Plan Your Event</h2>
+    <form onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label>Your Name *</label>
+        <input type="text" required />
+      </div>
+      <div class="form-group">
+        <label>Email *</label>
+        <input type="email" required />
+      </div>
+      <div class="form-group">
+        <label>Event Type *</label>
+        <input type="text" placeholder="Corporate, Bachelorette, Team Building, etc." required />
+      </div>
+      <div class="form-group">
+        <label>How many people? *</label>
+        <input type="number" min="1" required />
+      </div>
+      <div class="form-group">
+        <label>Preferred Date(s) *</label>
+        <input type="date" required />
+      </div>
+      <div class="form-group">
+        <label>Tell me about your event</label>
+        <textarea rows="4" placeholder="What's your vision? Any special requests?"></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send Request</button>
+    </form>
+  </div>
+</div>
+
+<!-- EXPERIENCE MODALS -->
+<div class="modal" id="teamFilmModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h2>🎬 Filmmaking Team Challenge</h2>
+    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Competitive, creative, and hilarious. Perfect for team building!</p>
+    <form onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label>Your Name *</label>
+        <input type="text" required />
+      </div>
+      <div class="form-group">
+        <label>Email *</label>
+        <input type="email" required />
+      </div>
+      <div class="form-group">
+        <label>Company/Organization</label>
+        <input type="text" />
+      </div>
+      <div class="form-group">
+        <label>How many people? *</label>
+        <input type="number" min="10" required />
+      </div>
+      <div class="form-group">
+        <label>Preferred Date *</label>
+        <input type="date" required />
+      </div>
+      <button type="submit" class="form-submit">Request Event</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="photoShootModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h2>📸 Professional Group Photoshoot</h2>
+    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Styled, professional photos everyone will love.</p>
+    <form onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label>Your Name *</label>
+        <input type="text" required />
+      </div>
+      <div class="form-group">
+        <label>Email *</label>
+        <input type="email" required />
+      </div>
+      <div class="form-group">
+        <label>Event Type</label>
+        <input type="text" placeholder="Bachelorette, Team Event, etc." />
+      </div>
+      <div class="form-group">
+        <label>How many people? *</label>
+        <input type="number" min="1" required />
+      </div>
+      <div class="form-group">
+        <label>Preferred Date *</label>
+        <input type="date" required />
+      </div>
+      <button type="submit" class="form-submit">Request Photoshoot</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="documentaryModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h2>🎥 Documentary & Interview Film</h2>
+    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Capture heartfelt stories and memories in a professional film.</p>
+    <form onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label>Your Name *</label>
+        <input type="text" required />
+      </div>
+      <div class="form-group">
+        <label>Email *</label>
+        <input type="email" required />
+      </div>
+      <div class="form-group">
+        <label>Event Details</label>
+        <textarea rows="3" placeholder="What are we documenting?"></textarea>
+      </div>
+      <button type="submit" class="form-submit">Request Documentary</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="workshopModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h2>🎓 Intro to Filmmaking Workshop</h2>
+    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Learn the basics of creative filmmaking in a hands-on session.</p>
+    <form onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label>Your Name *</label>
+        <input type="text" required />
+      </div>
+      <div class="form-group">
+        <label>Email *</label>
+        <input type="email" required />
+      </div>
+      <div class="form-group">
+        <label>How many people? *</label>
+        <input type="number" min="4" required />
+      </div>
+      <div class="form-group">
+        <label>Preferred Date *</label>
+        <input type="date" required />
+      </div>
+      <button type="submit" class="form-submit">Book Workshop</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="retreatModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h2>🌟 Creative Team Retreat</h2>
+    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Multi-day creative adventure for your team.</p>
+    <form onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label>Your Name *</label>
+        <input type="text" required />
+      </div>
+      <div class="form-group">
+        <label>Email *</label>
+        <input type="email" required />
+      </div>
+      <div class="form-group">
+        <label>Company *</label>
+        <input type="text" required />
+      </div>
+      <div class="form-group">
+        <label>Team Size *</label>
+        <input type="number" min="8" required />
+      </div>
+      <div class="form-group">
+        <label>Duration Interested In</label>
+        <select>
+          <option value="">Select duration</option>
+          <option value="half">Half-day</option>
+          <option value="full">Full-day</option>
+          <option value="two">2 days</option>
+          <option value="custom">Custom</option>
+        </select>
+      </div>
+      <button type="submit" class="form-submit">Request Retreat</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="bachelorModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h2>💍 Bachelorette/Bachelor Film Party</h2>
+    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">The ultimate keepsake from your celebration!</p>
+    <form onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label>Your Name *</label>
+        <input type="text" required />
+      </div>
+      <div class="form-group">
+        <label>Email *</label>
+        <input type="email" required />
+      </div>
+      <div class="form-group">
+        <label>Bride/Groom Name</label>
+        <input type="text" />
+      </div>
+      <div class="form-group">
+        <label>Event Date *</label>
+        <input type="date" required />
+      </div>
+      <div class="form-group">
+        <label>Number of Guests</label>
+        <input type="number" />
+      </div>
+      <button type="submit" class="form-submit">Plan Celebration Film</button>
+    </form>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p>© 2024 Joanna Fishman. Creating joy and connection.</p>

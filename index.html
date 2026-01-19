@@ -432,20 +432,46 @@
       margin-top: 8rem;
     }
 
-    /* SECTIONS - THE KEY FIX FOR ABOUT & CONTACT */
+/* attempt to fix below "sections-the key fix" */
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(10px); }
+    }
+
+    /* SECTIONS */
     .section {
       position: relative;
-      z-index: 10;          /* KEY: High z-index to layer above background */
-      width: 100%;          /* KEY: Full width */
+      z-index: 10;
+      width: 100%;
       padding: 8rem 5%;
       background: var(--bg);
-      margin: 0;
-      clear: both;          /* Prevents overlapping */
     }
 
     .section-inner {
-      max-width: 1400px;    /* Content stays constrained */
-      margin: 0 auto;       /* Centers content */
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    /* SECTIONS - THE KEY FIX FOR ABOUT & CONTACT 
+    .section {
+      position: relative;
+      z-index: 10;          /* KEY: High z-index to layer above background 
+      width: 100%;          /* KEY: Full width 
+      padding: 8rem 5%;
+      background: var(--bg);
+      margin: 0;
+      clear: both;          /* Prevents overlapping 
+    }
+
+    .section-inner {
+      max-width: 1400px;    /* Content stays constrained 
+      margin: 0 auto;       /* Centers content 
       width: 100%;
     }
 
@@ -458,6 +484,7 @@
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(10px); }
     }
+      */
 
     /* HERO SECTION */
     .hero {

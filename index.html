@@ -1024,7 +1024,21 @@
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </nav>
+
+   <!-- MOBILE MENU TOGGLE BUTTON -->
+  <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" title="Menu">
+    <i class="fas fa-bars"></i>
+  </button>
 </header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button onclick="toggleMobileMenu(); document.querySelector('#home').scrollIntoView({behavior: 'smooth'});" style="color: var(--text-primary);"><i class="fas fa-home"></i> Home</button>
+  <button onclick="toggleMobileMenu(); document.querySelector('#work').scrollIntoView({behavior: 'smooth'});" style="color: var(--text-primary);"><i class="fas fa-briefcase"></i> Work</button>
+  <button onclick="toggleMobileMenu(); document.querySelector('#about').scrollIntoView({behavior: 'smooth'});" style="color: var(--text-primary);"><i class="fas fa-user"></i> About</button>
+  <button onclick="toggleMobileMenu(); document.querySelector('#contact').scrollIntoView({behavior: 'smooth'});" style="color: var(--text-primary);"><i class="fas fa-envelope"></i> Contact</button>
+</div>
+
 
 <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">
   <i class="fas fa-moon" id="theme-icon"></i>

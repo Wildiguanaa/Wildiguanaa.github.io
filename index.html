@@ -1284,6 +1284,35 @@
   }, 2000);
 
 
+  // Mobile menu toggle
+function toggleMobileMenu() {
+  const menu = document.getElementById('mobileMenu');
+  menu.classList.toggle('open');
+}
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+  const menu = document.getElementById('mobileMenu');
+  const toggle = document.querySelector('.mobile-menu-toggle');
+  if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+    menu.classList.remove('open');
+  }
+});
+
+// Auto-play video on mobile
+window.addEventListener('DOMContentLoaded', () => {
+  const video = document.getElementById('heroVideo');
+  if (video) {
+    // Try to play video
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        console.log('Video autoplay prevented:', error);
+      });
+    }
+  }
+});
+
   // Theme toggle
   function toggleTheme() {
     const body = document.body;

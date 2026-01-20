@@ -349,6 +349,20 @@
       padding: 6rem 5% 3rem;
     }
     
+  .portfolio-reel-section {
+      margin-bottom: 3.5rem;
+    }
+
+    .portfolio-reel {
+      max-width: 500px;
+    }
+
+    .reel-action-icon {
+      width: 60px;
+      height: 60px;
+      font-size: 24px;
+    }
+
     h1 {
       font-size: 2rem;
     }
@@ -493,6 +507,15 @@
   <h1>Film & Documentary</h1>
   <p>Narrative & documentary work exploring stories that matter; from activism to human connection.</p>
 
+  <!-- Portfolio Reel Section -->
+  <div class="portfolio-reel-section">
+    <div class="portfolio-reel" onclick="openInstagram('https://www.instagram.com/reel/YOUR_REEL_URL/')">
+      <video src="images/portfolio-reel.mp4" muted></video>
+      <div class="reel-action-icon"><i class="fas fa-play"></i></div>
+      <div class="reel-title">Portfolio Reel</div>
+    </div>
+  </div>
+
   <div class="gallery">
     <!-- Example image item
     <div class="item" onclick="openModal(this)">
@@ -619,6 +642,7 @@
       <div class="action-icon"><i class="fas fa-play"></i></div>
       <div class="item-title">Battle of the Bands</div>
     </div>
+
 
     <!-- Sample Photo 
     <div class="item" onclick="openModal(this)">

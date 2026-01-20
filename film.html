@@ -391,6 +391,84 @@
       font-size: 1rem;
     }
   }
+
+
+  /* Portfolio Reel Section */
+  .portfolio-reel-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5rem;
+  }
+
+  .portfolio-reel {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    overflow: hidden;
+    border-radius: 6px;
+    cursor: pointer;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .portfolio-reel:hover {
+    border-color: var(--accent);
+    box-shadow: 0 12px 32px rgba(80, 30, 40, 0.4);
+  }
+
+  .portfolio-reel video {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 9 / 16;
+  }
+
+  .reel-action-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+    background: rgba(80, 30, 40, 0.95);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: #fbf8e8;
+    pointer-events: none;
+    opacity: 0;
+    transition: 0.3s ease;
+  }
+
+  .portfolio-reel:hover .reel-action-icon {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  .reel-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    color: #fbf8e8;
+    padding: 2rem 1.5rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .portfolio-reel:hover .reel-title {
+    opacity: 1;
+  }
+
+
 </style>
 </head>
 <body class="dark-mode">

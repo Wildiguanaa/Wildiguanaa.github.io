@@ -661,6 +661,18 @@
 
 <script>
   // Theme toggle
+
+  function playReelVideo(el) {
+      const video = el.querySelector("video");
+      if (video.paused) {
+        video.play();
+        video.muted = false;
+      } else {
+        video.pause();
+        video.muted = true;
+      }
+    }
+
   function toggleTheme() {
     const body = document.body;
     const icon = document.getElementById('theme-icon');

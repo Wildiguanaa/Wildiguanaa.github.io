@@ -557,6 +557,13 @@
       <div class="item-title">Heart Sculpture</div>
     </div>
 
+    <!-- LUMA Art of Our Faces -->
+    <div class="item" onclick="openWebModal('https://lumafestival.com/feature/art-of-our-faces/')">
+      <img src="images/luma.jpg" alt="Art of Our Faces">
+      <div class="action-icon"><i class="fas fa-globe"></i></div>
+      <div class="item-title">LUMA: Art of Our Faces</div>
+    </div>
+
 
   </div>
 </main>
@@ -635,6 +642,14 @@
       const pdfPath = el.getAttribute('data-pdf');
       
       content.innerHTML = `<embed src="${pdfPath}" type="application/pdf" />`;
+      modal.style.display = "flex";
+    }
+
+  function openWebModal(url) {
+      const modal = document.getElementById("modal");
+      const content = document.getElementById("modal-content");
+      
+      content.innerHTML = `<iframe src="${url}" style="width: 90vw; height: 85vh; border: none; border-radius: 6px;"></iframe>`;
       modal.style.display = "flex";
     }
 

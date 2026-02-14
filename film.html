@@ -1125,6 +1125,10 @@
 
 <script>
   // ===== REEL VIDEO CONTROLS =====
+
+  function toggleSection(header) {
+    header.classList.toggle('collapsed');
+  }
   
   function toggleReelPlay() {
     const video = document.getElementById('reelVideo');

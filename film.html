@@ -777,6 +777,60 @@
     padding-top: 1.5rem;
   }
 
+  
+
+
+  /* YouTube Video Item */
+  .youtube-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    cursor: pointer;
+    background: var(--bg-card);
+    margin-bottom: 1.5rem;
+    break-inside: avoid;
+    display: inline-block;
+    width: 100%;
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+    aspect-ratio: 16 / 9;
+  }
+
+  .youtube-item:hover {
+    border-color: var(--accent);
+  }
+
+  .youtube-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 4px;
+  }
+
+  .youtube-item:hover .youtube-iframe {
+    filter: grayscale(0%);
+  }
+
+  .youtube-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .youtube-item:hover .youtube-overlay {
+    opacity: 0;
+  }
+
+
+
+
+
 
 
 
@@ -871,6 +925,14 @@
       <div class="item-title">Sample Video</div>
     </div> 
 
+     YouTube Video Example
+    <div class="youtube-item">
+      <iframe class="youtube-iframe" 
+        src="https://www.youtube.com/embed/VIDEO_ID" 
+        allowfullscreen="" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share">
+      </iframe>
+    </div>  -->
 
 <div class="gallery-section">
   <div class="section-header" onclick="toggleSection(this)">
@@ -910,6 +972,15 @@
       <img src="images/ukraine.jpg" alt="Ukraine Video">
       <div class="action-icon"><i class="fas fa-play"></i></div>
       <div class="item-title">Binghamton community rallies for Ukraine</div>
+    </div>
+
+    <!-- YouTube Battle of the Bands 2024 -->
+    <div class="youtube-item">
+      <iframe class="youtube-iframe" 
+        src="https://www.youtube.com/embed/YXtGu7uhNtc" 
+        allowfullscreen="" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share">
+      </iframe>
     </div>
 
     <!-- Stellar Human -->

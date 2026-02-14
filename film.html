@@ -512,6 +512,7 @@
     }
 */
 
+
     .divider-after-reel {
     width: 100%;
     height: 1px;
@@ -519,6 +520,205 @@
     margin: 5rem auto;
     max-width: 800px;
   }
+
+  /* Reel Controls */
+  .reel-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px 12px;
+    border-radius: 6px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+    font-size: 0.85rem;
+  }
+
+  .portfolio-reel:hover .reel-controls {
+    opacity: 1;
+  }
+
+  .reel-controls button {
+    background: var(--accent);
+    border: none;
+    color: #fbf8e8;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+  }
+
+  .reel-controls button:hover {
+    background: var(--accent-light);
+  }
+
+  .reel-controls .volume-control {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #fbf8e8;
+  }
+
+  .reel-controls .volume-control input[type="range"] {
+    width: 60px;
+    height: 3px;
+    border-radius: 2px;
+    background: rgba(232, 230, 240, 0.3);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .reel-controls .volume-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+  }
+
+  .reel-controls .volume-control input[type="range"]::-moz-range-thumb {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    border: none;
+  }
+
+  /* Fullscreen Reel */
+  .fullscreen-reel-container {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    padding: 20px;
+  }
+
+  .fullscreen-reel-container.active {
+    display: flex;
+  }
+
+  .fullscreen-reel-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .fullscreen-reel-content video {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 6px;
+  }
+
+  .fullscreen-close {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    font-size: 2.5rem;
+    color: #fbf8e8;
+    cursor: pointer;
+    font-family: sans-serif;
+    transition: color 0.3s;
+    z-index: 3001;
+  }
+
+  .fullscreen-close:hover {
+    color: var(--accent);
+  }
+
+  .fullscreen-controls {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 15px 20px;
+    border-radius: 6px;
+    z-index: 3001;
+  }
+
+  .fullscreen-controls button {
+    background: var(--accent);
+    border: none;
+    color: #fbf8e8;
+    padding: 10px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .fullscreen-controls button:hover {
+    background: var(--accent-light);
+  }
+
+  .fullscreen-volume-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fbf8e8;
+  }
+
+  .fullscreen-volume-control input[type="range"] {
+    width: 100px;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(232, 230, 240, 0.3);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .fullscreen-volume-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+  }
+
+  .fullscreen-volume-control input[type="range"]::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    border: none;
+  }
+
+
+
+
+
+
+
 
 
 </style>
@@ -545,15 +745,54 @@
   <h1>Film & Documentary</h1>
   <p>Narrative & documentary work exploring stories that matter; from activism to human connection.</p>
 
+
   <!-- Portfolio Reel Section -->
   <div class="portfolio-reel-section">
-    <div class="portfolio-reel" onclick="playReelVideo(this)">
-      <video src="videos/filmreel.mp4" muted></video>
-      <div class="reel-action-icon"><i class="fas fa-play"></i></div>
+    <div class="portfolio-reel" id="portfolioReel">
+      <video id="reelVideo" src="videos/filmreel.mp4" muted></video>
+      <div class="reel-action-icon"><i class="fas fa-expand"></i></div>
       <div class="reel-title">Portfolio Reel</div>
+      <div class="reel-controls">
+        <button onclick="toggleReelPlay()" title="Play/Pause">
+          <i class="fas fa-play"></i> <span>Play</span>
+        </button>
+        <div class="volume-control">
+          <i class="fas fa-volume-low"></i>
+          <input type="range" id="reelVolume" min="0" max="100" value="100" onchange="setReelVolume()">
+        </div>
+        <button onclick="openFullscreenReel()" title="Fullscreen">
+          <i class="fas fa-expand"></i>
+        </button>
+      </div>
+    </div>
   </div>
-</div>
-<div class="divider-after-reel"></div>
+  <div class="divider-after-reel"></div>
+
+  <!-- Fullscreen Reel Container -->
+  <div class="fullscreen-reel-container" id="fullscreenReelContainer">
+    <span class="fullscreen-close" onclick="closeFullscreenReel()">&times;</span>
+    <div class="fullscreen-reel-content">
+      <video id="fullscreenVideo" src="videos/filmreel.mp4"></video>
+    </div>
+    <div class="fullscreen-controls">
+      <button onclick="toggleFullscreenPlay()" title="Play/Pause">
+        <i class="fas fa-play" id="fullscreenPlayIcon"></i> <span id="fullscreenPlayText">Play</span>
+      </button>
+      <div class="fullscreen-volume-control">
+        <i class="fas fa-volume-down"></i>
+        <input type="range" id="fullscreenVolume" min="0" max="100" value="100" onchange="setFullscreenVolume()">
+        <i class="fas fa-volume-up"></i>
+      </div>
+      <button onclick="closeFullscreenReel()" title="Close fullscreen">
+        <i class="fas fa-compress"></i> <span>Exit</span>
+      </button>
+    </div>
+  </div>
+
+
+
+
+
 
 <div class="gallery">
     <!-- Example image item
@@ -698,6 +937,8 @@
   <div id="modal-content"></div>
 </div>
 
+<!--
+
 <script>
   // Theme toggle
 
@@ -792,6 +1033,174 @@
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
       closeModal();
+    }
+  });
+</script> -->
+
+<script>
+  // ===== REEL VIDEO CONTROLS =====
+  
+  function toggleReelPlay() {
+    const video = document.getElementById('reelVideo');
+    if (video.paused) {
+      video.play();
+      video.muted = false;
+    } else {
+      video.pause();
+      video.muted = true;
+    }
+  }
+
+  function setReelVolume() {
+    const video = document.getElementById('reelVideo');
+    const volume = document.getElementById('reelVolume').value;
+    video.volume = volume / 100;
+  }
+
+  function openFullscreenReel() {
+    const container = document.getElementById('fullscreenReelContainer');
+    const sourceVideo = document.getElementById('reelVideo');
+    const fullscreenVideo = document.getElementById('fullscreenVideo');
+    
+    // Copy current playback state
+    fullscreenVideo.currentTime = sourceVideo.currentTime;
+    fullscreenVideo.volume = sourceVideo.volume;
+    fullscreenVideo.muted = sourceVideo.muted;
+    
+    container.classList.add('active');
+    
+    // Try to enter fullscreen
+    if (container.requestFullscreen) {
+      container.requestFullscreen().catch(err => {
+        console.log('Fullscreen request failed:', err);
+      });
+    }
+  }
+
+  function closeFullscreenReel() {
+    const container = document.getElementById('fullscreenReelContainer');
+    const fullscreenVideo = document.getElementById('fullscreenVideo');
+    const sourceVideo = document.getElementById('reelVideo');
+    
+    container.classList.remove('active');
+    fullscreenVideo.pause();
+    fullscreenVideo.currentTime = 0;
+    
+    // Exit fullscreen if in fullscreen mode
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    }
+  }
+
+  function toggleFullscreenPlay() {
+    const video = document.getElementById('fullscreenVideo');
+    const icon = document.getElementById('fullscreenPlayIcon');
+    const text = document.getElementById('fullscreenPlayText');
+    
+    if (video.paused) {
+      video.play();
+      video.muted = false;
+      icon.classList.remove('fa-play');
+      icon.classList.add('fa-pause');
+      text.textContent = 'Pause';
+    } else {
+      video.pause();
+      icon.classList.remove('fa-pause');
+      icon.classList.add('fa-play');
+      text.textContent = 'Play';
+    }
+  }
+
+  function setFullscreenVolume() {
+    const video = document.getElementById('fullscreenVideo');
+    const volume = document.getElementById('fullscreenVolume').value;
+    video.volume = volume / 100;
+    video.muted = false;
+  }
+
+  // ===== THEME TOGGLE =====
+
+  function toggleTheme() {
+    const body = document.body;
+    const icon = document.getElementById('theme-icon');
+    
+    if (body.classList.contains('dark-mode')) {
+      body.classList.remove('dark-mode');
+      body.classList.add('light-mode');
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+      localStorage.setItem('theme', 'light');
+    } else {
+      body.classList.remove('light-mode');
+      body.classList.add('dark-mode');
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+      localStorage.setItem('theme', 'dark');
+    }
+  }
+
+  // Load saved theme
+  window.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem('theme') || 'dark';
+    const body = document.body;
+    const icon = document.getElementById('theme-icon');
+    
+    body.classList.remove('dark-mode', 'light-mode');
+    body.classList.add(saved === 'light' ? 'light-mode' : 'dark-mode');
+    
+    if (saved === 'light') {
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    }
+  });
+
+  // Gallery functions
+  function openModal(el) {
+    const modal = document.getElementById("modal");
+    const content = document.getElementById("modal-content");
+    let media = el.querySelector("img")?.cloneNode() ||
+                 el.querySelector("video")?.cloneNode();
+    
+    if (media.tagName === "VIDEO") {
+      media.controls = true;
+      media.autoplay = true;
+      media.muted = false;
+    }
+    
+    content.innerHTML = "";
+    content.appendChild(media);
+    modal.style.display = "flex";
+  }
+
+  function openInstagram(url) {
+    window.open(url, '_blank');
+  }
+
+  function closeModal() {
+    const modal = document.getElementById("modal");
+    const video = modal.querySelector("video");
+    
+    if (video) {
+      video.pause();
+      video.currentTime = 0;
+    }
+    
+    modal.style.display = "none";
+    document.getElementById("modal-content").innerHTML = "";
+  }
+
+  function checkModalClick(e) {
+    const modal = document.getElementById("modal");
+    
+    if (e.target === modal) {
+      closeModal();
+    }
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeModal();
+      closeFullscreenReel();
     }
   });
 </script>

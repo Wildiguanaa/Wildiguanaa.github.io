@@ -717,6 +717,69 @@
 
 
 
+  /* Collapsible Sections */
+  .gallery-section {
+    margin-bottom: 4rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s ease;
+    user-select: none;
+  }
+
+  .section-header:hover {
+    color: var(--accent-light);
+  }
+
+  .section-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    color: var(--text-muted);
+    transition: transform 0.3s ease;
+  }
+
+  .section-header.collapsed .section-toggle {
+    transform: rotate(-90deg);
+  }
+
+  .section-title {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  .section-content {
+    display: grid;
+    max-height: 10000px;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
+    opacity: 1;
+  }
+
+  .section-header.collapsed + .section-content {
+    max-height: 0;
+    opacity: 0;
+  }
+
+  .gallery {
+    column-count: 3;
+    column-gap: 1.5rem;
+    padding-top: 1.5rem;
+  }
+
+
+
+
 
 
 

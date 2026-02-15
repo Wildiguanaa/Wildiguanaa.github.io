@@ -168,7 +168,7 @@
 
   /* COLLAPSIBLE SECTIONS */
   .gallery-section {
-    margin-bottom: 4rem;
+    margin-bottom: 1.5rem;
   }
 
   .section-header {
@@ -176,7 +176,7 @@
     align-items: center;
     gap: 12px;
     cursor: pointer;
-    padding: 1.5rem 0;
+    padding: 0.8rem 0;
     border-bottom: 1px solid var(--border);
     transition: all 0.3s ease;
     user-select: none;
@@ -202,17 +202,17 @@
 
   .section-title {
     font-family: var(--font-serif);
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     font-weight: 400;
     margin: 0;
   }
 
   .section-description {
     color: var(--text-muted);
-    margin: 1rem 0 2rem;
+    margin: 0.5rem 0 1rem;
     max-width: 650px;
     line-height: 1.6;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     max-height: 500px;
     overflow: hidden;
     transition: max-height 0.3s ease, opacity 0.3s ease;
@@ -227,7 +227,7 @@
 
   /* SUBSECTIONS */
   .subsection {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     padding-left: 2rem;
     border-left: 2px solid var(--border);
     max-height: 10000px;
@@ -236,14 +236,10 @@
     opacity: 1;
   }
 
-
-
-
-
-
   .section-header.closed ~ .section-description,
   .section-header.closed ~ .ets-container,
-  .section-header.closed ~ .slideshow-container {
+  .section-header.closed ~ .slideshow-container,
+  .section-header.closed ~ .subsection {
     max-height: 0;
     opacity: 0;
     margin: 0;
@@ -255,7 +251,8 @@
 
   .section-description,
   .ets-container,
-  .slideshow-container {
+  .slideshow-container,
+  .subsection {
     max-height: 10000px;
     overflow: hidden;
     transition: max-height 0.3s ease, opacity 0.3s ease;
@@ -264,16 +261,16 @@
 
   .subsection-title {
     font-family: var(--font-serif);
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: 400;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
   }
 
   .subsection-description {
     color: var(--text-muted);
-    margin-bottom: 1.5rem;
-    font-size: 0.9rem;
-    line-height: 1.6;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
   }
 
   /* SLIDESHOW */
@@ -295,11 +292,12 @@
   .slideshow-slides {
     position: relative;
     width: 100%;
-    max-width: 100%;
-    height: 400px;
     background: #000;
     border-radius: 4px;
     overflow: hidden;
+    aspect-ratio: auto;
+    min-height: 250px;
+    max-height: 600px;
   }
 
   .slideshow-slides img {
@@ -344,16 +342,12 @@
     text-align: center;
   }
 
-
-
-
-
-/* ETS SIDE BY SIDE */
+  /* ETS SIDE BY SIDE */
   .ets-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
 
   .ets-item {
@@ -365,12 +359,16 @@
     background: transparent;
     border: none;
     padding: 0;
-    margin: 0 0 1rem 0;
+    margin: 0 0 0.8rem 0;
   }
 
   .small-slides {
     height: 250px !important;
+    max-height: 250px !important;
     position: relative;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
   }
 
   .small-slides img {
@@ -386,66 +384,28 @@
     opacity: 1;
   }
 
-  /* HOVER DESCRIPTION */
-  .small-slides {
-    position: relative;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    overflow: hidden;
-  }
-
-  .small-slides::after {
-    content: attr(data-title);
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-    color: #fbf8e8;
-    padding: 2rem 1rem 1rem;
-    font-size: 0.9rem;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-  }
-
-  .slideshow-container.small:hover .small-slides::after {
-    opacity: 1;
-  }
-
   /* RESPONSIVE */
   @media (max-width: 768px) {
-    .ets-container {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-
-    .small-slides {
-      height: 200px !important;
-    }
-  }
-
-
-
-
-
-
-
-
-
-
-  /* Responsive */
-  @media (max-width: 768px) {
     main {
-      padding: 6rem 5% 3rem;
+      padding: 6rem 5% 2rem;
     }
     
     h1 {
       font-size: 2rem;
     }
 
-    .slideshow-slides {
-      height: 250px;
+    p {
+      margin-bottom: 2rem;
+    }
+
+    .ets-container {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .small-slides {
+      height: 200px !important;
+      max-height: 200px !important;
     }
 
     .site-nav {
@@ -488,23 +448,21 @@
   <h1>Interactive & Mixed Media</h1>
   <p>Emerging technology, digital experiences and visual explorations.</p>
 
-<!-- EMERGING TECHNOLOGY STUDIO SECTION -->
+  <!-- ETS -->
   <div class="gallery-section">
     <div class="section-header" onclick="toggleSection(this)">
       <span class="section-toggle"><i class="fas fa-chevron-down"></i></span>
-      <h2 class="section-title">Emerging Technology Studio (ETS)</h2>
+      <h2 class="section-title">ETS</h2>
     </div>
-    <p class="section-description">Interactive and experimental digital projects created in the ETS program.</p>
+    <p class="section-description">Emerging Technology Studio projects.</p>
     
-    <!-- SIDE BY SIDE CONTAINER -->
+    <!-- SIDE BY SIDE -->
     <div class="ets-container">
-      <!-- ETS INTERNSHIP SUBSECTION -->
       <div class="ets-item">
         <div class="slideshow-container small" id="slideshow-ets-internship">
           <div class="slideshow-wrapper">
             <div class="slideshow-slides small-slides">
-              <!-- Add your images here: <img src="images/..." alt="Project Title"> -->
-               <img src="images/VanGoghInspiredFaceMask.PNG" alt="Van Gogh Inspired Face Mask">
+              <!-- Add your images here -->
             </div>
             <div class="slideshow-controls">
               <button onclick="prevSlide('slideshow-ets-internship')" class="slide-btn">❮</button>
@@ -514,15 +472,14 @@
           </div>
         </div>
         <h3 class="subsection-title">Internship</h3>
-        <p class="subsection-description">Work completed during internship at ETS.</p>
+        <p class="subsection-description">Work from ETS internship.</p>
       </div>
 
-      <!-- ETS DESIGNER'S EDGE SUBSECTION -->
       <div class="ets-item">
         <div class="slideshow-container small" id="slideshow-ets-designers-edge">
           <div class="slideshow-wrapper">
             <div class="slideshow-slides small-slides">
-              <!-- Add your images here: <img src="images/..." alt="Project Title"> -->
+              <!-- Add your images here -->
             </div>
             <div class="slideshow-controls">
               <button onclick="prevSlide('slideshow-ets-designers-edge')" class="slide-btn">❮</button>
@@ -532,22 +489,22 @@
           </div>
         </div>
         <h3 class="subsection-title">Designer's Edge</h3>
-        <p class="subsection-description">Projects from Designer's Edge coursework.</p>
+        <p class="subsection-description">Coursework from Designer's Edge.</p>
       </div>
     </div>
   </div>
 
-  <!-- LUMA LIGHT PROJECTION ARTS FESTIVAL SECTION -->
+  <!-- LUMA -->
   <div class="gallery-section">
     <div class="section-header" onclick="toggleSection(this)">
       <span class="section-toggle"><i class="fas fa-chevron-down"></i></span>
-      <h2 class="section-title">LUMA Light Projection Arts Festival</h2>
+      <h2 class="section-title">LUMA Festival</h2>
     </div>
-    <p class="section-description">Light projection and immersive art installations for the LUMA festival.</p>
+    <p class="section-description">Light projection installations.</p>
     <div class="slideshow-container" id="slideshow-luma">
       <div class="slideshow-wrapper">
         <div class="slideshow-slides">
-          <!-- Add your images here: <img src="images/..." alt="..."> -->
+          <!-- Add your images here -->
         </div>
         <div class="slideshow-controls">
           <button onclick="prevSlide('slideshow-luma')" class="slide-btn">❮</button>
@@ -558,17 +515,17 @@
     </div>
   </div>
 
-  <!-- STUDENT EXPERIMENTAL FILM FESTIVAL SECTION -->
+  <!-- SEFF -->
   <div class="gallery-section">
     <div class="section-header" onclick="toggleSection(this)">
       <span class="section-toggle"><i class="fas fa-chevron-down"></i></span>
-      <h2 class="section-title">Student Experimental Film Festival (SEFF)</h2>
+      <h2 class="section-title">SEFF</h2>
     </div>
-    <p class="section-description">Experimental film and video art presented at the Student Experimental Film Festival.</p>
+    <p class="section-description">Experimental film work.</p>
     <div class="slideshow-container" id="slideshow-seff">
       <div class="slideshow-wrapper">
         <div class="slideshow-slides">
-          <!-- Add your images here: <img src="images/..." alt="..."> -->
+          <!-- Add your images here -->
         </div>
         <div class="slideshow-controls">
           <button onclick="prevSlide('slideshow-seff')" class="slide-btn">❮</button>
@@ -579,17 +536,17 @@
     </div>
   </div>
 
-  <!-- SENIOR THESIS SECTION -->
+  <!-- Senior Thesis -->
   <div class="gallery-section">
     <div class="section-header" onclick="toggleSection(this)">
       <span class="section-toggle"><i class="fas fa-chevron-down"></i></span>
       <h2 class="section-title">Senior Thesis</h2>
     </div>
-    <p class="section-description">Final thesis project exploring emerging technology and creative expression.</p>
+    <p class="section-description">Thesis project.</p>
     <div class="slideshow-container" id="slideshow-thesis">
       <div class="slideshow-wrapper">
         <div class="slideshow-slides">
-          <!-- Add your images here: <img src="images/..." alt="..."> -->
+          <!-- Add your images here -->
         </div>
         <div class="slideshow-controls">
           <button onclick="prevSlide('slideshow-thesis')" class="slide-btn">❮</button>
@@ -609,7 +566,6 @@
 </div>
 
 <script>
-  // Theme toggle
   function toggleTheme() {
     const body = document.body;
     const icon = document.getElementById('theme-icon');
@@ -629,7 +585,6 @@
     }
   }
 
-  // Load saved theme
   window.addEventListener('DOMContentLoaded', () => {
     const saved = localStorage.getItem('theme') || 'dark';
     const body = document.body;
@@ -643,7 +598,6 @@
       icon.classList.add('fa-sun');
     }
 
-    // Initialize slideshows
     initSlideshow('slideshow-ets-internship');
     initSlideshow('slideshow-ets-designers-edge');
     initSlideshow('slideshow-luma');
@@ -651,12 +605,10 @@
     initSlideshow('slideshow-thesis');
   });
 
-  // Toggle section collapse/expand
   function toggleSection(header) {
     header.classList.toggle('closed');
   }
 
-  // Slideshow functionality
   let slideshows = {};
 
   function initSlideshow(containerId) {
@@ -746,7 +698,6 @@
     container.querySelector('.total-slides').textContent = slideshow.slides.length;
   }
 
-  // Modal functions
   function closeModal() {
     const modal = document.getElementById('modal');
     modal.style.display = 'none';

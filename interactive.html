@@ -561,29 +561,120 @@
   <h1>Interactive & Immersive Work</h1>
   <p></p>
 
-  <div class="gallery">
-    <!-- Example image item
-    <div class="item" onclick="openModal(this)">
-      <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800" alt="Film Project">
-      <div class="action-icon"><i class="fas fa-expand"></i></div>
-      <div class="item-title">Sample Film Project</div>
-    </div> -->
 
-    <!-- Example video item 
-    <div class="item" onclick="openModal(this)">
-      <video src="https://www.w3schools.com/html/mov_bbb.mp4" muted></video>
-      <div class="action-icon"><i class="fas fa-play"></i></div>
-      <div class="item-title">Sample Video</div>
-    </div> -->
 
-    <!-- Audience1  
-    <div class="item" onclick="openModal(this)">
-      <img src="images/audience.png">
-      <div class="action-icon"><i class="fas fa-expand"></i></div>
-      <div class="item-title">Audience</div>
-    </div> -->
+<!-- EMERGING TECHNOLOGY STUDIO SECTION -->
+  <div class="gallery-section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="section-toggle"><i class="fas fa-chevron-down"></i></span>
+      <h2 class="section-title">Emerging Technology Studio (ETS)</h2>
+    </div>
+    <p class="section-description">Interactive and experimental digital projects created in the ETS program.</p>
+    
+    <!-- ETS INTERNSHIP SUBSECTION -->
+    <div class="subsection">
+      <h3 class="subsection-title">Internship</h3>
+      <p class="subsection-description">Work completed during internship at ETS.</p>
+      <div class="slideshow-container" id="slideshow-ets-internship">
+        <div class="slideshow-wrapper">
+          <div class="slideshow-slides">
+            <!-- Add your images here -->
+          </div>
+          <div class="slideshow-controls">
+            <button onclick="prevSlide('slideshow-ets-internship')" class="slide-btn">❮</button>
+            <span class="slide-counter"><span class="current-slide">0</span> / <span class="total-slides">0</span></span>
+            <button onclick="nextSlide('slideshow-ets-internship')" class="slide-btn">❯</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <!-- ETS DESIGNER'S EDGE SUBSECTION -->
+    <div class="subsection">
+      <h3 class="subsection-title">Designer's Edge</h3>
+      <p class="subsection-description">Projects from Designer's Edge coursework.</p>
+      <div class="slideshow-container" id="slideshow-ets-designers-edge">
+        <div class="slideshow-wrapper">
+          <div class="slideshow-slides">
+            <!-- Add your images here -->
+          </div>
+          <div class="slideshow-controls">
+            <button onclick="prevSlide('slideshow-ets-designers-edge')" class="slide-btn">❮</button>
+            <span class="slide-counter"><span class="current-slide">0</span> / <span class="total-slides">0</span></span>
+            <button onclick="nextSlide('slideshow-ets-designers-edge')" class="slide-btn">❯</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <!-- LUMA LIGHT PROJECTION ARTS FESTIVAL SECTION -->
+  <div class="gallery-section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="section-toggle"><i class="fas fa-chevron-down"></i></span>
+      <h2 class="section-title">LUMA Light Projection Arts Festival</h2>
+    </div>
+    <p class="section-description">Light projection and immersive art installations for the LUMA festival.</p>
+    <div class="slideshow-container" id="slideshow-luma">
+      <div class="slideshow-wrapper">
+        <div class="slideshow-slides">
+          <!-- Add your images here -->
+        </div>
+        <div class="slideshow-controls">
+          <button onclick="prevSlide('slideshow-luma')" class="slide-btn">❮</button>
+          <span class="slide-counter"><span class="current-slide">0</span> / <span class="total-slides">0</span></span>
+          <button onclick="nextSlide('slideshow-luma')" class="slide-btn">❯</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STUDENT EXPERIMENTAL FILM FESTIVAL SECTION -->
+  <div class="gallery-section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="section-toggle"><i class="fas fa-chevron-down"></i></span>
+      <h2 class="section-title">Student Experimental Film Festival (SEFF)</h2>
+    </div>
+    <p class="section-description">Experimental film and video art presented at the Student Experimental Film Festival.</p>
+    <div class="slideshow-container" id="slideshow-seff">
+      <div class="slideshow-wrapper">
+        <div class="slideshow-slides">
+          <!-- Add your images here -->
+        </div>
+        <div class="slideshow-controls">
+          <button onclick="prevSlide('slideshow-seff')" class="slide-btn">❮</button>
+          <span class="slide-counter"><span class="current-slide">0</span> / <span class="total-slides">0</span></span>
+          <button onclick="nextSlide('slideshow-seff')" class="slide-btn">❯</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SENIOR THESIS SECTION -->
+  <div class="gallery-section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span class="section-toggle"><i class="fas fa-chevron-down"></i></span>
+      <h2 class="section-title">Senior Thesis</h2>
+    </div>
+    <p class="section-description">Final thesis project exploring emerging technology and creative expression.</p>
+    <div class="slideshow-container" id="slideshow-thesis">
+      <div class="slideshow-wrapper">
+        <div class="slideshow-slides">
+          <!-- Add your images here -->
+        </div>
+        <div class="slideshow-controls">
+          <button onclick="prevSlide('slideshow-thesis')" class="slide-btn">❮</button>
+          <span class="slide-counter"><span class="current-slide">0</span> / <span class="total-slides">0</span></span>
+          <button onclick="nextSlide('slideshow-thesis')" class="slide-btn">❯</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
 </main>
 
 <!-- Modal -->
@@ -591,6 +682,11 @@
   <span class="modal-close" onclick="closeModal()">&times;</span>
   <div id="modal-content"></div>
 </div>
+
+
+
+
+
 
 <script>
   // Theme toggle
@@ -626,57 +722,117 @@
       icon.classList.remove('fa-moon');
       icon.classList.add('fa-sun');
     }
+
+    // Initialize slideshows
+    initSlideshow('slideshow-ets-internship');
+    initSlideshow('slideshow-ets-designers-edge');
+    initSlideshow('slideshow-luma');
+    initSlideshow('slideshow-seff');
+    initSlideshow('slideshow-thesis');
   });
 
-  // Gallery functions
-  function openModal(el) {
-    const modal = document.getElementById("modal");
-    const content = document.getElementById("modal-content");
-    let media = el.querySelector("img")?.cloneNode() ||
-                 el.querySelector("video")?.cloneNode();
-    
-    if (media.tagName === "VIDEO") {
-      media.controls = true;
-      media.autoplay = true;
-      media.muted = false;
-    }
-    
-    content.innerHTML = "";
-    content.appendChild(media);
-    modal.style.display = "flex";
+  // Toggle section collapse/expand
+  function toggleSection(header) {
+    header.classList.toggle('open');
   }
 
-  function openInstagram(url) {
-    window.open(url, '_blank');
+  // Slideshow functionality
+  let slideshows = {};
+
+  function initSlideshow(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    const slides = container.querySelectorAll('.slideshow-slides img');
+    
+    if (slides.length === 0) {
+      container.querySelector('.slide-counter').innerHTML = '<span class="current-slide">0</span> / <span class="total-slides">0</span>';
+      return;
+    }
+
+    slideshows[containerId] = {
+      currentIndex: 0,
+      slides: slides,
+      interval: null
+    };
+
+    updateCounter(containerId);
+    if (slides.length > 0) {
+      slides[0].classList.add('active');
+    }
+    startAutoplay(containerId);
   }
 
-  function closeModal() {
-    const modal = document.getElementById("modal");
-    const video = modal.querySelector("video");
+  function showSlide(containerId, index) {
+    const slideshow = slideshows[containerId];
+    if (!slideshow) return;
+
+    const slides = slideshow.slides;
     
-    if (video) {
-      video.pause();
-      video.currentTime = 0;
+    if (index >= slides.length) {
+      slideshow.currentIndex = 0;
+    } else if (index < 0) {
+      slideshow.currentIndex = slides.length - 1;
+    } else {
+      slideshow.currentIndex = index;
     }
-    
-    modal.style.display = "none";
-    document.getElementById("modal-content").innerHTML = "";
+
+    slides.forEach(slide => slide.classList.remove('active'));
+    slides[slideshow.currentIndex].classList.add('active');
+    updateCounter(containerId);
+    stopAutoplay(containerId);
+    startAutoplay(containerId);
   }
 
-  function checkModalClick(e) {
-    const modal = document.getElementById("modal");
-    
-    if (e.target === modal) {
-      closeModal();
-    }
+  function nextSlide(containerId) {
+    const slideshow = slideshows[containerId];
+    if (!slideshow) return;
+    showSlide(containerId, slideshow.currentIndex + 1);
   }
 
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      closeModal();
+  function prevSlide(containerId) {
+    const slideshow = slideshows[containerId];
+    if (!slideshow) return;
+    showSlide(containerId, slideshow.currentIndex - 1);
+  }
+
+  function startAutoplay(containerId) {
+    const slideshow = slideshows[containerId];
+    if (!slideshow || slideshow.slides.length <= 1) return;
+
+    slideshow.interval = setInterval(() => {
+      nextSlide(containerId);
+    }, 5000);
+  }
+
+  function stopAutoplay(containerId) {
+    const slideshow = slideshows[containerId];
+    if (!slideshow || !slideshow.interval) return;
+    clearInterval(slideshow.interval);
+    slideshow.interval = null;
+  }
+
+  function updateCounter(containerId) {
+    const container = document.getElementById(containerId);
+    const slideshow = slideshows[containerId];
+    
+    if (!slideshow) {
+      container.querySelector('.current-slide').textContent = '0';
+      container.querySelector('.total-slides').textContent = '0';
+      return;
     }
-  });
+
+    container.querySelector('.current-slide').textContent = slideshow.currentIndex + 1;
+    container.querySelector('.total-slides').textContent = slideshow.slides.length;
+  }
 </script>
+
+
+
+
+
+
+
 
 </body>
 </html>

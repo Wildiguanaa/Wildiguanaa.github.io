@@ -610,7 +610,7 @@
       width: fit-content;
     }
 
-
+/*
 
     .image {
       width: auto;
@@ -625,6 +625,26 @@
       pointer-events: none;
       aspect-ratio: attr(data-aspect-ratio);
     }
+*/
+
+
+  .image {
+        width: 350px;
+        height: 350px;
+        object-fit: cover;
+        flex-shrink: 0;
+        border-radius: 6px;
+        filter: grayscale(0.3) brightness(0.9);
+        transition: all 0.3s ease;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+        object-position: center;
+        pointer-events: none;
+      }
+
+
+
+
+
 
     .image:hover {
       filter: grayscale(0.1) brightness(1.05);

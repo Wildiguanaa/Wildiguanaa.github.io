@@ -1139,7 +1139,7 @@
 
 
 
-
+<!--
 
 <script>
   // Theme toggle
@@ -1294,6 +1294,149 @@
 
 
 
+-->
+
+
+
+
+<script>
+  // Theme toggle
+  function toggleTheme() {
+    const body = document.body;
+    const icon = document.getElementById('theme-icon');
+    
+    if (body.classList.contains('dark-mode')) {
+      body.classList.remove('dark-mode');
+      body.classList.add('light-mode');
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+      localStorage.setItem('theme', 'light');
+    } else {
+      body.classList.remove('light-mode');
+      body.classList.add('dark-mode');
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+      localStorage.setItem('theme', 'dark');
+    }
+  }
+
+  // Load saved theme
+  window.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem('theme') || 'dark';
+    const body = document.body;
+    const icon = document.getElementById('theme-icon');
+    
+    body.classList.remove('dark-mode', 'light-mode');
+    body.classList.add(saved === 'light' ? 'light-mode' : 'dark-mode');
+    
+    if (saved === 'light') {
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    }
+
+    // Initialize slideshows
+    initSlideshow('slideshow-ets-internship');
+    initSlideshow('slideshow-ets-designers-edge');
+    initSlideshow('slideshow-luma');
+    initSlideshow('slideshow-seff');
+    initSlideshow('slideshow-thesis');
+  });
+
+  // Toggle section collapse/expand
+  function toggleSection(header) {
+    header.classList.toggle('open');
+  }
+
+  // Slideshow functionality
+  let slideshows = {};
+
+  function initSlideshow(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    const slides = container.querySelectorAll('.slideshow-slides img');
+    
+    if (slides.length === 0) {
+      container.querySelector('.slide-counter').innerHTML = '<span class="current-slide">0</span> / <span class="total-slides">0</span>';
+      return;
+    }
+
+    slideshows[containerId] = {
+      currentIndex: 0,
+      slides: slides,
+      interval: null
+    };
+
+    updateCounter(containerId);
+    if (slides.length > 0) {
+      slides[0].classList.add('active');
+    }
+    startAutoplay(containerId);
+  }
+
+  function showSlide(containerId, index) {
+    const slideshow = slideshows[containerId];
+    if (!slideshow) return;
+
+    const slides = slideshow.slides;
+    
+    if (index >= slides.length) {
+      slideshow.currentIndex = 0;
+    } else if (index < 0) {
+      slideshow.currentIndex = slides.length - 1;
+    } else {
+      slideshow.currentIndex = index;
+    }
+
+    slides.forEach(slide => slide.classList.remove('active'));
+    slides[slideshow.currentIndex].classList.add('active');
+    updateCounter(containerId);
+    stopAutoplay(containerId);
+    startAutoplay(containerId);
+  }
+
+  function nextSlide(containerId) {
+    const slideshow = slideshows[containerId];
+    if (!slideshow) return;
+    showSlide(containerId, slideshow.currentIndex + 1);
+  }
+
+  function prevSlide(containerId) {
+    const slideshow = slideshows[containerId];
+    if (!slideshow) return;
+    showSlide(containerId, slideshow.currentIndex - 1);
+  }
+
+  function startAutoplay(containerId) {
+    const slideshow = slideshows[containerId];
+    if (!slideshow || slideshow.slides.length <= 1) return;
+
+    slideshow.interval = setInterval(() => {
+      nextSlide(containerId);
+    }, 5000);
+  }
+
+  function stopAutoplay(containerId) {
+    const slideshow = slideshows[containerId];
+    if (!slideshow || !slideshow.interval) return;
+    clearInterval(slideshow.interval);
+    slideshow.interval = null;
+  }
+
+  function updateCounter(containerId) {
+    const container = document.getElementById(containerId);
+    const slideshow = slideshows[containerId];
+    
+    if (!slideshow) {
+      container.querySelector('.current-slide').textContent = '0';
+      container.querySelector('.total-slides').textContent = '0';
+      return;
+    }
+
+    container.querySelector('.current-slide').textContent = slideshow.currentIndex + 1;
+    container.querySelector('.total-slides').textContent = slideshow.slides.length;
+  }
+</script>
 
 
 

@@ -1593,6 +1593,24 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   
+
+// SLIDER ARROW FUNCTIONS
+  function slideLeft() {
+    const wrapper = document.getElementById('trackWrapper');
+    wrapper.scrollBy({ left: -400, behavior: 'smooth' });
+  }
+
+  function slideRight() {
+    const wrapper = document.getElementById('trackWrapper');
+    wrapper.scrollBy({ left: 400, behavior: 'smooth' });
+  }
+
+
+
+
+
+
+
 // DRAGGABLE IMAGE TRACK - LINEAR SCROLL
   const track = document.getElementById("image-track");
 

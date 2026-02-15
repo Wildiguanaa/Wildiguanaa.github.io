@@ -236,12 +236,30 @@
     opacity: 1;
   }
 
-  .section-header.closed ~ .subsection {
+
+
+
+
+
+  .section-header.closed ~ .section-description,
+  .section-header.closed ~ .ets-container,
+  .section-header.closed ~ .slideshow-container {
     max-height: 0;
     opacity: 0;
     margin: 0;
     padding: 0;
     border: none;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+  }
+
+  .section-description,
+  .ets-container,
+  .slideshow-container {
+    max-height: 10000px;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 1;
   }
 
   .subsection-title {

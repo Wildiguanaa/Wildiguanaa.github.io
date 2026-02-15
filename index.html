@@ -646,6 +646,7 @@
 
 
 /* SLIDER ARROWS */
+/*
     .slider-arrow {
       position: absolute;
       top: 50%;
@@ -678,6 +679,54 @@
       right: 0;
     }
 
+*/
+
+
+
+
+
+
+
+
+  .slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      color: #000;
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      transition: all 0.3s;
+      z-index: 10;
+    }
+
+    body.dark-mode .slider-arrow {
+      color: #fff;
+    }
+
+    body.light-mode .slider-arrow {
+      color: #000;
+    }
+
+    .slider-arrow:hover {
+      background: none;
+      transform: translateY(-50%) scale(1.2);
+    }
+
+    .slider-arrow.prev {
+      left: 0;
+    }
+
+    .slider-arrow.next {
+      right: 0;
+    }
 
 
 

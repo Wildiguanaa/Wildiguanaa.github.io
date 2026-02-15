@@ -597,6 +597,65 @@
       cursor: grabbing;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+/* SLIDER ARROWS */
+    .slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--accent);
+      color: #f5e8e0;
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: all 0.3s;
+      z-index: 10;
+    }
+
+    .slider-arrow:hover {
+      background: var(--accent-light);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .slider-arrow.prev {
+      left: 0;
+    }
+
+    .slider-arrow.next {
+      right: 0;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     #image-track {
       display: flex;
       gap: 1.5rem;

@@ -1572,12 +1572,40 @@
   document.getElementById('year').textContent = new Date().getFullYear();
 
   // Splash screen - fade out after 2 seconds
+
+  /*
   setTimeout(() => {
     const splash = document.getElementById('splashScreen');
     if (splash) {
       splash.classList.add('hidden');
     }
   }, 2000);
+*/
+
+
+
+  // Splash screen - only show on initial page load
+    if (performance.navigation.type === 0 || !sessionStorage.getItem('hasVisited')) {
+      // This is a fresh page load or first visit
+      sessionStorage.setItem('hasVisited', 'true');
+      setTimeout(() => {
+        const splash = document.getElementById('splashScreen');
+        if (splash) {
+          splash.classList.add('hidden');
+        }
+      }, 2000);
+    } else {
+      // User is navigating via tabs/reload - hide splash immediately
+      const splash = document.getElementById('splashScreen');
+      if (splash) {
+        splash.classList.add('hidden');
+      }
+    }
+
+
+
+
+
 
 
   // Mobile menu toggle

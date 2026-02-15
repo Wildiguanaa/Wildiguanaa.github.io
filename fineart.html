@@ -153,186 +153,6 @@
     line-height: 1.6;
   }
 
-  .gallery {
-    column-count: 3;
-    column-gap: 1.5rem;
-  }
-
-  .item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 4px;
-    cursor: pointer;
-    background: var(--bg-card);
-    margin-bottom: 1.5rem;
-    break-inside: avoid;
-    display: inline-block;
-    width: 100%;
-    border: 1px solid var(--border);
-    transition: all 0.3s ease;
-  }
-
-  .item:hover {
-    border-color: var(--accent);
-  }
-
-  .item img,
-  .item video {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-    filter: grayscale(100%);
-    transition: filter 0.4s ease;
-  }
-
-  .item:hover img,
-  .item:hover video {
-    filter: grayscale(0%);
-  }
-
-  /* Varied heights for organic look */
-  .item:nth-child(1) img,
-  .item:nth-child(1) video { height: 400px; }
-
-  .item:nth-child(2) img,
-  .item:nth-child(2) video { height: 500px; }
-
-  .item:nth-child(3) img,
-  .item:nth-child(3) video { height: 350px; }
-
-  .item:nth-child(4) img,
-  .item:nth-child(4) video { height: 450px; }
-
-  .item:nth-child(5) img,
-  .item:nth-child(5) video { height: 380px; }
-
-  .item:nth-child(6) img,
-  .item:nth-child(6) video { height: 520px; }
-
-  .item:nth-child(7) img,
-  .item:nth-child(7) video { height: 420px; }
-
-  .item:nth-child(8) img,
-  .item:nth-child(8) video { height: 480px; }
-
-  .item:nth-child(9) img,
-  .item:nth-child(9) video { height: 400px; }
-
-  .item:nth-child(10) img,
-  .item:nth-child(10) video { height: 520px; }
-
-  .item:nth-child(11) img,
-  .item:nth-child(11) video { height: 380px; }
-
-  .item:nth-child(12) img,
-  .item:nth-child(12) video { height: 450px; }
-
-  .item:nth-child(13) img,
-  .item:nth-child(13) video { height: 500px; }
-
-  .item:nth-child(14) img,
-  .item:nth-child(14) video { height: 420px; }
-
-  .item:nth-child(15) img,
-  .item:nth-child(15) video { height: 480px; }
-
-  .item:nth-child(16) img,
-  .item:nth-child(16) video { height: 390px; }
-
-  .item:nth-child(17) img,
-  .item:nth-child(17) video { height: 440px; }
-
-  .item:nth-child(18) img,
-  .item:nth-child(18) video { height: 510px; }
-
-  /* Play/Expand icon overlay - hidden by default */
-  .action-icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60px;
-    height: 60px;
-    background: rgba(80, 30, 40, 0.95);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    color: #fbf8e8;
-    pointer-events: none;
-    opacity: 0;
-    transition: 0.3s ease;
-  }
-
-  .item:hover .action-icon {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.1);
-  }
-
-  .item-title {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-    color: #fbf8e8;
-    padding: 2rem 1rem 1rem;
-    font-size: 0.95rem;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .item:hover .item-title {
-    opacity: 1;
-  }
-
-  /* Modal viewer */
-  .modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.95);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    z-index: 2000;
-  }
-
-  .modal img,
-  .modal video {
-    max-width: 90vw;
-    max-height: 85vh;
-    border-radius: 6px;
-  }
-
-
-  .modal embed,
-  .modal iframe {
-    width: 90vw;
-    height: 85vh;
-    border-radius: 6px;
-    border: none;
-  }
-
-  .modal-close {
-    position: fixed;
-    top: 20px;
-    right: 30px;
-    font-size: 2.5rem;
-    color: #fbf8e8;
-    cursor: pointer;
-    font-family: sans-serif;
-    transition: color 0.3s;
-    z-index: 2001;
-  }
-
-  .modal-close:hover {
-    color: var(--accent);
-  }
-
-  /* Back button */
   .back-btn {
     display: inline-block;
     margin-bottom: 2rem;
@@ -342,98 +162,11 @@
     transition: opacity 0.3s;
   }
 
-
-
-  
-
-
-
-
-
-
-
-
-  /* PDF Item */
-  .pdf-item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 4px;
-    cursor: pointer;
-    background: var(--bg-card);
-    margin-bottom: 1.5rem;
-    break-inside: avoid;
-    display: inline-block;
-    width: 100%;
-    border: 1px solid var(--border);
-    transition: all 0.3s ease;
-    aspect-ratio: 8.5 / 11;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .pdf-item:hover {
-    border-color: var(--accent);
-  }
-
-  .pdf-icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60px;
-    height: 60px;
-    background: rgba(80, 30, 40, 0.95);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    color: #fbf8e8;
-    opacity: 0;
-    transition: 0.3s ease;
-  }
-
-  .pdf-item:hover .pdf-icon {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.1);
-  }
-
-  .pdf-title {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-    color: #fbf8e8;
-    padding: 2rem 1rem 1rem;
-    font-size: 0.95rem;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    text-align: center;
-  }
-
-  .pdf-item:hover .pdf-title {
-    opacity: 1;
-  }
-
-
-
-
-
-
-
-
   .back-btn:hover {
     opacity: 0.7;
   }
 
-
-
-
-
-
-/* COLLAPSIBLE SECTIONS */
+  /* COLLAPSIBLE SECTIONS */
   .gallery-section {
     margin-bottom: 4rem;
   }
@@ -463,7 +196,7 @@
     transition: transform 0.3s ease;
   }
 
-  .section-header:not(.open) .section-toggle {
+  .section-header.closed .section-toggle {
     transform: rotate(-90deg);
   }
 
@@ -480,6 +213,16 @@
     max-width: 650px;
     line-height: 1.6;
     font-size: 0.95rem;
+    max-height: 500px;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 1;
+  }
+
+  .section-header.closed + .section-description {
+    max-height: 0;
+    opacity: 0;
+    margin: 0;
   }
 
   /* SUBSECTIONS */
@@ -487,6 +230,18 @@
     margin-bottom: 3rem;
     padding-left: 2rem;
     border-left: 2px solid var(--border);
+    max-height: 10000px;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 1;
+  }
+
+  .section-header.closed ~ .subsection {
+    max-height: 0;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
   }
 
   .subsection-title {
@@ -510,6 +265,7 @@
     border-radius: 6px;
     padding: 1.5rem;
     margin: 1.5rem 0;
+    max-width: 800px;
   }
 
   .slideshow-wrapper {
@@ -521,7 +277,8 @@
   .slideshow-slides {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9;
+    max-width: 100%;
+    height: 400px;
     background: #000;
     border-radius: 4px;
     overflow: hidden;
@@ -569,20 +326,7 @@
     text-align: center;
   }
 
-
-
-
-
-
-
-
   /* Responsive */
-  @media (max-width: 1024px) {
-    .gallery {
-      column-count: 2;
-    }
-  }
-
   @media (max-width: 768px) {
     main {
       padding: 6rem 5% 3rem;
@@ -591,28 +335,10 @@
     h1 {
       font-size: 2rem;
     }
-    
-    .gallery {
-      column-count: 1;
-      column-gap: 1rem;
+
+    .slideshow-slides {
+      height: 250px;
     }
-    
-    .item {
-      margin-bottom: 1rem;
-    }
-    
-    .action-icon {
-      width: 50px;
-      height: 50px;
-      font-size: 20px;
-    }
-    
-    /* Simpler heights for mobile */
-    .item:nth-child(odd) img,
-    .item:nth-child(odd) video { height: 350px; }
-    
-    .item:nth-child(even) img,
-    .item:nth-child(even) video { height: 400px; }
 
     .site-nav {
       gap: 1.5rem;
@@ -648,76 +374,6 @@
   <i class="fas fa-moon" id="theme-icon"></i>
 </button>
 
-<!-- <main>
-  <a href="index.html" class="back-btn">← Back to Portfolio</a>
-
-  <h1>Interactive & Mixed Media</h1>
-  <p>Emerging technology, digital experiences and visual explorations.</p>
-
-  <div class="gallery">
-    <!-- Example image item
-    <div class="item" onclick="openModal(this)">
-      <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800" alt="Film Project">
-      <div class="action-icon"><i class="fas fa-expand"></i></div>
-      <div class="item-title">Sample Film Project</div>
-    </div> -->
-
-    <!-- Example video item 
-    <div class="item" onclick="openModal(this)">
-      <video src="https://www.w3schools.com/html/mov_bbb.mp4" muted></video>
-      <div class="action-icon"><i class="fas fa-play"></i></div>
-      <div class="item-title">Sample Video</div>
-    </div> -->
-
-    <!-- Audience1  
-    <div class="item" onclick="openModal(this)">
-      <img src="images/audience.png">
-      <div class="action-icon"><i class="fas fa-expand"></i></div>
-      <div class="item-title">Audience</div>
-    </div> -->
-
-    <!-- MixedMediaOlderManLookingBackatPastSelf 
-    <div class="item" onclick="openModal(this)">
-      <img src="images/MixedMediaOlderManLookingBackatPastSelf.PNG">
-      <div class="action-icon"><i class="fas fa-expand"></i></div>
-      <div class="item-title">Inner Child</div>
-    </div>
-
-    <!-- MixedMediaOlderManLookingBackatPastSelf
-    <div class="item" onclick="openModal(this)">
-      <img src="images/LandscapePainting1.jpg">
-      <div class="action-icon"><i class="fas fa-expand"></i></div>
-      <div class="item-title">Landscape</div>
-    </div>
-
-
-    <!-- VanGoghInspiredFaceMask 
-    <div class="item" onclick="openModal(this)">
-      <img src="images/VanGoghInspiredFaceMask.PNG">
-      <div class="action-icon"><i class="fas fa-expand"></i></div>
-      <div class="item-title">My Fortitude</div>
-    </div>
-
-<!-- heart sculpture
-    <div class="item" onclick="openPDFModal(this)" data-pdf="pdfs/HeartSculpture.pdf">
-      <img src="images/heartt.png" alt="Heart Sculpture">
-      <div class="action-icon"><i class="fas fa-expand"></i></div>
-      <div class="item-title">Heart Sculpture</div>
-    </div>
-
-    <!-- LUMA Art of Our Faces 
-    <div class="item" onclick="openWebModal('https://lumafestival.com/feature/art-of-our-faces/')">
-      <img src="images/luma.jpg" alt="Art of Our Faces">
-      <div class="action-icon"><i class="fas fa-globe"></i></div>
-      <div class="item-title">LUMA: Art of Our Faces</div>
-    </div>
-
-
-  </div>
-</main> -->
-
-
-
 <main>
   <a href="index.html" class="back-btn">← Back to Portfolio</a>
 
@@ -726,7 +382,7 @@
 
   <!-- EMERGING TECHNOLOGY STUDIO SECTION -->
   <div class="gallery-section">
-    <div class="section-header open" onclick="toggleSection(this)">
+    <div class="section-header" onclick="toggleSection(this)">
       <span class="section-toggle"><i class="fas fa-chevron-down"></i></span>
       <h2 class="section-title">Emerging Technology Studio (ETS)</h2>
     </div>
@@ -758,184 +414,6 @@
         <div class="slideshow-wrapper">
           <div class="slideshow-slides">
             <!-- Add your images here: <img src="images/..." alt="..."> -->
-
-
-
-            
-        <!-- MixedMediaOlderManLookingBackatPastSelf  -->
-            <div class="item" onclick="openModal(this)">
-              <img src="images/MixedMediaOlderManLookingBackatPastSelf.PNG">
-              <div class="action-icon"><i class="fas fa-expand"></i></div>
-              <div class="item-title">Inner Child</div>
-            </div>
-
-            <!-- MixedMediaOlderManLookingBackatPastSelf  -->
-            <div class="item" onclick="openModal(this)">
-              <img src="images/LandscapePainting1.jpg">
-              <div class="action-icon"><i class="fas fa-expand"></i></div>
-              <div class="item-title">Landscape</div>
-            </div>
-
-
-            <!-- VanGoghInspiredFaceMask  -->
-            <div class="item" onclick="openModal(this)">
-              <img src="images/VanGoghInspiredFaceMask.PNG">
-              <div class="action-icon"><i class="fas fa-expand"></i></div>
-              <div class="item-title">My Fortitude</div>
-            </div>
-
-        <!-- heart sculpture -->
-            <div class="item" onclick="openPDFModal(this)" data-pdf="pdfs/HeartSculpture.pdf">
-              <img src="images/heartt.png" alt="Heart Sculpture">
-              <div class="action-icon"><i class="fas fa-expand"></i></div>
-              <div class="item-title">Heart Sculpture</div>
-            </div>
-
-            <!-- LUMA Art of Our Faces -->
-            <div class="item" onclick="openWebModal('https://lumafestival.com/feature/art-of-our-faces/')">
-              <img src="images/luma.jpg" alt="Art of Our Faces">
-              <div class="action-icon"><i class="fas fa-globe"></i></div>
-              <div class="item-title">LUMA: Art of Our Faces</div>
-            </div>
-
-
-            
-
-
-          </div>
-          <div class="slideshow-controls">
-            <button onclick="prevSlide('slideshow-ets-designers-edge')" class="slide-btn">❮</button>
-            <span class="slide-counter"><span class="current-slide">0</span> / <span class="total-slides">0</span></span>
-            <button onclick="nextSlide('slideshow-ets-designers-edge')" class="slide-btn">❯</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- LUMA LIGHT PROJECTION ARTS FESTIVAL SECTION -->
-  <div class="gallery-section">
-    <div class="section-header open" onclick="toggleSection(this)">
-      <span class="section-toggle"><i class="fas fa-chevron-down"></i></span>
-      <h2 class="section-title">LUMA Light Projection Arts Festival</h2>
-    </div>
-    <p class="section-description">Light projection and immersive art installations for the LUMA festival.</p>
-    <div class="slideshow-container" id="slideshow-luma">
-      <div class="slideshow-wrapper">
-        <div class="slideshow-slides">
-          <!-- Add your images here: <img src="images/..." alt="..."> -->
-        </div>
-        <div class="slideshow-controls">
-          <button onclick="prevSlide('slideshow-luma')" class="slide-btn">❮</button>
-          <span class="slide-counter"><span class="current-slide">0</span> / <span class="total-slides">0</span></span>
-          <button onclick="nextSlide('slideshow-luma')" class="slide-btn">❯</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- STUDENT EXPERIMENTAL FILM FESTIVAL SECTION -->
-  <div class="gallery-section">
-    <div class="section-header open" onclick="toggleSection(this)">
-      <span class="section-toggle"><i class="fas fa-chevron-down"></i></span>
-      <h2 class="section-title">Student Experimental Film Festival (SEFF)</h2>
-    </div>
-    <p class="section-description">Experimental film and video art presented at the Student Experimental Film Festival.</p>
-    <div class="slideshow-container" id="slideshow-seff">
-      <div class="slideshow-wrapper">
-        <div class="slideshow-slides">
-          <!-- Add your images here: <img src="images/..." alt="..."> -->
-        </div>
-        <div class="slideshow-controls">
-          <button onclick="prevSlide('slideshow-seff')" class="slide-btn">❮</button>
-          <span class="slide-counter"><span class="current-slide">0</span> / <span class="total-slides">0</span></span>
-          <button onclick="nextSlide('slideshow-seff')" class="slide-btn">❯</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SENIOR THESIS SECTION -->
-  <div class="gallery-section">
-    <div class="section-header open" onclick="toggleSection(this)">
-      <span class="section-toggle"><i class="fas fa-chevron-down"></i></span>
-      <h2 class="section-title">Senior Thesis</h2>
-    </div>
-    <p class="section-description">Final thesis project exploring emerging technology and creative expression.</p>
-    <div class="slideshow-container" id="slideshow-thesis">
-      <div class="slideshow-wrapper">
-        <div class="slideshow-slides">
-          <!-- Add your images here: <img src="images/..." alt="..."> -->
-        </div>
-        <div class="slideshow-controls">
-          <button onclick="prevSlide('slideshow-thesis')" class="slide-btn">❮</button>
-          <span class="slide-counter"><span class="current-slide">0</span> / <span class="total-slides">0</span></span>
-          <button onclick="nextSlide('slideshow-thesis')" class="slide-btn">❯</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</main>
-
-
-
-
-
-
-  </div>
-</main>
-
-
-
-
-
-
-
-
-
-<!-- EMERGING TECHNOLOGY STUDIO SECTION -->
-  <div class="gallery-section">
-    <div class="section-header" onclick="toggleSection(this)">
-      <span class="section-toggle"><i class="fas fa-chevron-down"></i></span>
-      <h2 class="section-title">Emerging Technology Studio (ETS)</h2>
-    </div>
-    <p class="section-description">Interactive and experimental digital projects created in the ETS program.</p>
-    
-    <!-- LUMA Art of Our Faces -->
-    <div class="item" onclick="openWebModal('https://lumafestival.com/feature/art-of-our-faces/')">
-      <img src="images/luma.jpg" alt="Art of Our Faces">
-      <div class="action-icon"><i class="fas fa-globe"></i></div>
-      <div class="item-title">LUMA: Art of Our Faces</div>
-    </div>
-
-
-    <!-- ETS INTERNSHIP SUBSECTION -->
-    <div class="subsection">
-      <h3 class="subsection-title">Internship</h3>
-      <p class="subsection-description">Work completed during internship at ETS.</p>
-      <div class="slideshow-container" id="slideshow-ets-internship">
-        <div class="slideshow-wrapper">
-          <div class="slideshow-slides">
-            <!-- Add your images here -->
-          </div>
-          <div class="slideshow-controls">
-            <button onclick="prevSlide('slideshow-ets-internship')" class="slide-btn">❮</button>
-            <span class="slide-counter"><span class="current-slide">0</span> / <span class="total-slides">0</span></span>
-            <button onclick="nextSlide('slideshow-ets-internship')" class="slide-btn">❯</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ETS DESIGNER'S EDGE SUBSECTION -->
-    <div class="subsection">
-      <h3 class="subsection-title">Designer's Edge</h3>
-      <p class="subsection-description">Projects from Designer's Edge coursework.</p>
-      <div class="slideshow-container" id="slideshow-ets-designers-edge">
-        <div class="slideshow-wrapper">
-          <div class="slideshow-slides">
-            <!-- Add your images here -->
           </div>
           <div class="slideshow-controls">
             <button onclick="prevSlide('slideshow-ets-designers-edge')" class="slide-btn">❮</button>
@@ -957,7 +435,7 @@
     <div class="slideshow-container" id="slideshow-luma">
       <div class="slideshow-wrapper">
         <div class="slideshow-slides">
-          <!-- Add your images here -->
+          <!-- Add your images here: <img src="images/..." alt="..."> -->
         </div>
         <div class="slideshow-controls">
           <button onclick="prevSlide('slideshow-luma')" class="slide-btn">❮</button>
@@ -978,7 +456,7 @@
     <div class="slideshow-container" id="slideshow-seff">
       <div class="slideshow-wrapper">
         <div class="slideshow-slides">
-          <!-- Add your images here -->
+          <!-- Add your images here: <img src="images/..." alt="..."> -->
         </div>
         <div class="slideshow-controls">
           <button onclick="prevSlide('slideshow-seff')" class="slide-btn">❮</button>
@@ -999,7 +477,7 @@
     <div class="slideshow-container" id="slideshow-thesis">
       <div class="slideshow-wrapper">
         <div class="slideshow-slides">
-          <!-- Add your images here -->
+          <!-- Add your images here: <img src="images/..." alt="..."> -->
         </div>
         <div class="slideshow-controls">
           <button onclick="prevSlide('slideshow-thesis')" class="slide-btn">❮</button>
@@ -1011,293 +489,12 @@
   </div>
 
 </main>
-
-
-
-
-
-
-
-
-
 
 <!-- Modal -->
 <div class="modal" id="modal" onclick="checkModalClick(event)">
   <span class="modal-close" onclick="closeModal()">&times;</span>
   <div id="modal-content"></div>
 </div>
-
-<!--
-<script>
-  // Theme toggle
-  function toggleTheme() {
-    const body = document.body;
-    const icon = document.getElementById('theme-icon');
-    
-    if (body.classList.contains('dark-mode')) {
-      body.classList.remove('dark-mode');
-      body.classList.add('light-mode');
-      icon.classList.remove('fa-moon');
-      icon.classList.add('fa-sun');
-      localStorage.setItem('theme', 'light');
-    } else {
-      body.classList.remove('light-mode');
-      body.classList.add('dark-mode');
-      icon.classList.remove('fa-sun');
-      icon.classList.add('fa-moon');
-      localStorage.setItem('theme', 'dark');
-    }
-  }
-
-  // Load saved theme
-  window.addEventListener('DOMContentLoaded', () => {
-    const saved = localStorage.getItem('theme') || 'dark';
-    const body = document.body;
-    const icon = document.getElementById('theme-icon');
-    
-    body.classList.remove('dark-mode', 'light-mode');
-    body.classList.add(saved === 'light' ? 'light-mode' : 'dark-mode');
-    
-    if (saved === 'light') {
-      icon.classList.remove('fa-moon');
-      icon.classList.add('fa-sun');
-    }
-  });
-
-  // Gallery functions
-  function openModal(el) {
-    const modal = document.getElementById("modal");
-    const content = document.getElementById("modal-content");
-    let media = el.querySelector("img")?.cloneNode() ||
-                 el.querySelector("video")?.cloneNode();
-    
-    if (media.tagName === "VIDEO") {
-      media.controls = true;
-      media.autoplay = true;
-      media.muted = false;
-    }
-    
-    content.innerHTML = "";
-    content.appendChild(media);
-    modal.style.display = "flex";
-  }
-
-  function openInstagram(url) {
-    window.open(url, '_blank');
-  }
-
-  function openPDFModal(el) {
-      const modal = document.getElementById("modal");
-      const content = document.getElementById("modal-content");
-      const pdfPath = el.getAttribute('data-pdf');
-      
-      content.innerHTML = `<embed src="${pdfPath}" type="application/pdf" />`;
-      modal.style.display = "flex";
-    }
-
-  function openWebModal(url) {
-      const modal = document.getElementById("modal");
-      const content = document.getElementById("modal-content");
-      
-      content.innerHTML = `<iframe src="${url}" style="width: 90vw; height: 85vh; border: none; border-radius: 6px;"></iframe>`;
-      modal.style.display = "flex";
-    }
-
-  function closeModal() {
-    const modal = document.getElementById("modal");
-    const video = modal.querySelector("video");
-    
-    if (video) {
-      video.pause();
-      video.currentTime = 0;
-    }
-    
-    modal.style.display = "none";
-    document.getElementById("modal-content").innerHTML = "";
-  }
-
-  function checkModalClick(e) {
-    const modal = document.getElementById("modal");
-    
-    if (e.target === modal) {
-      closeModal();
-    }
-  }
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      closeModal();
-    }
-  });
-</script> -->
-
-
-
-
-
-
-
-
-
-<!--
-
-<script>
-  // Theme toggle
-  function toggleTheme() {
-    const body = document.body;
-    const icon = document.getElementById('theme-icon');
-    
-    if (body.classList.contains('dark-mode')) {
-      body.classList.remove('dark-mode');
-      body.classList.add('light-mode');
-      icon.classList.remove('fa-moon');
-      icon.classList.add('fa-sun');
-      localStorage.setItem('theme', 'light');
-    } else {
-      body.classList.remove('light-mode');
-      body.classList.add('dark-mode');
-      icon.classList.remove('fa-sun');
-      icon.classList.add('fa-moon');
-      localStorage.setItem('theme', 'dark');
-    }
-  }
-
-  // Load saved theme
-  window.addEventListener('DOMContentLoaded', () => {
-    const saved = localStorage.getItem('theme') || 'dark';
-    const body = document.body;
-    const icon = document.getElementById('theme-icon');
-    
-    body.classList.remove('dark-mode', 'light-mode');
-    body.classList.add(saved === 'light' ? 'light-mode' : 'dark-mode');
-    
-    if (saved === 'light') {
-      icon.classList.remove('fa-moon');
-      icon.classList.add('fa-sun');
-    }
-  });
-
-  // Toggle section collapse/expand
-  function toggleSection(header) {
-    header.classList.toggle('open');
-  }
-
-  // Slideshow functionality
-  let slideshows = {};
-
-  function initSlideshow(containerId) {
-    const container = document.getElementById(containerId);
-    const slides = container.querySelectorAll('.slideshow-slides img');
-    
-    if (slides.length === 0) {
-      container.querySelector('.slide-counter').innerHTML = '<span class="current-slide">0</span> / <span class="total-slides">0</span>';
-      return;
-    }
-
-    slideshows[containerId] = {
-      currentIndex: 0,
-      slides: slides,
-      interval: null
-    };
-
-    // Update counter
-    updateCounter(containerId);
-
-    // Show first slide
-    if (slides.length > 0) {
-      slides[0].classList.add('active');
-    }
-
-    // Start auto-play
-    startAutoplay(containerId);
-  }
-
-  function showSlide(containerId, index) {
-    const slideshow = slideshows[containerId];
-    if (!slideshow) return;
-
-    const slides = slideshow.slides;
-    
-    // Wrap around
-    if (index >= slides.length) {
-      slideshow.currentIndex = 0;
-    } else if (index < 0) {
-      slideshow.currentIndex = slides.length - 1;
-    } else {
-      slideshow.currentIndex = index;
-    }
-
-    // Hide all slides
-    slides.forEach(slide => slide.classList.remove('active'));
-
-    // Show current slide
-    slides[slideshow.currentIndex].classList.add('active');
-
-    updateCounter(containerId);
-
-    // Restart autoplay
-    stopAutoplay(containerId);
-    startAutoplay(containerId);
-  }
-
-  function nextSlide(containerId) {
-    const slideshow = slideshows[containerId];
-    if (!slideshow) return;
-    showSlide(containerId, slideshow.currentIndex + 1);
-  }
-
-  function prevSlide(containerId) {
-    const slideshow = slideshows[containerId];
-    if (!slideshow) return;
-    showSlide(containerId, slideshow.currentIndex - 1);
-  }
-
-  function startAutoplay(containerId) {
-    const slideshow = slideshows[containerId];
-    if (!slideshow || slideshow.slides.length <= 1) return;
-
-    slideshow.interval = setInterval(() => {
-      nextSlide(containerId);
-    }, 5000); // Change slide every 5 seconds
-  }
-
-  function stopAutoplay(containerId) {
-    const slideshow = slideshows[containerId];
-    if (!slideshow || !slideshow.interval) return;
-    clearInterval(slideshow.interval);
-    slideshow.interval = null;
-  }
-
-  function updateCounter(containerId) {
-    const container = document.getElementById(containerId);
-    const slideshow = slideshows[containerId];
-    
-    if (!slideshow) {
-      container.querySelector('.current-slide').textContent = '0';
-      container.querySelector('.total-slides').textContent = '0';
-      return;
-    }
-
-    container.querySelector('.current-slide').textContent = slideshow.currentIndex + 1;
-    container.querySelector('.total-slides').textContent = slideshow.slides.length;
-  }
-
-  // Initialize all slideshows on page load
-  window.addEventListener('DOMContentLoaded', () => {
-    initSlideshow('slideshow-ets-internship');
-    initSlideshow('slideshow-ets-designers-edge');
-    initSlideshow('slideshow-luma');
-    initSlideshow('slideshow-seff');
-    initSlideshow('slideshow-thesis');
-  });
-</script>
-
-
-
--->
-
-
-
 
 <script>
   // Theme toggle
@@ -1344,7 +541,7 @@
 
   // Toggle section collapse/expand
   function toggleSection(header) {
-    header.classList.toggle('open');
+    header.classList.toggle('closed');
   }
 
   // Slideshow functionality
@@ -1436,17 +633,27 @@
     container.querySelector('.current-slide').textContent = slideshow.currentIndex + 1;
     container.querySelector('.total-slides').textContent = slideshow.slides.length;
   }
+
+  // Modal functions
+  function closeModal() {
+    const modal = document.getElementById('modal');
+    modal.style.display = 'none';
+    document.getElementById('modal-content').innerHTML = '';
+  }
+
+  function checkModalClick(e) {
+    const modal = document.getElementById('modal');
+    if (e.target === modal) {
+      closeModal();
+    }
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeModal();
+    }
+  });
 </script>
-
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>

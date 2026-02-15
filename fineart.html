@@ -326,6 +326,96 @@
     text-align: center;
   }
 
+
+
+
+
+/* ETS SIDE BY SIDE */
+  .ets-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .ets-item {
+    flex: 1;
+  }
+
+  /* SMALL SLIDESHOW */
+  .slideshow-container.small {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+  }
+
+  .small-slides {
+    height: 250px !important;
+    position: relative;
+  }
+
+  .small-slides img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .small-slides img.active {
+    opacity: 1;
+  }
+
+  /* HOVER DESCRIPTION */
+  .small-slides {
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .small-slides::after {
+    content: attr(data-title);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    color: #fbf8e8;
+    padding: 2rem 1rem 1rem;
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .slideshow-container.small:hover .small-slides::after {
+    opacity: 1;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .ets-container {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .small-slides {
+      height: 200px !important;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
   /* Responsive */
   @media (max-width: 768px) {
     main {
@@ -380,7 +470,7 @@
   <h1>Interactive & Mixed Media</h1>
   <p>Emerging technology, digital experiences and visual explorations.</p>
 
-  <!-- EMERGING TECHNOLOGY STUDIO SECTION -->
+<!-- EMERGING TECHNOLOGY STUDIO SECTION -->
   <div class="gallery-section">
     <div class="section-header" onclick="toggleSection(this)">
       <span class="section-toggle"><i class="fas fa-chevron-down"></i></span>
@@ -388,39 +478,43 @@
     </div>
     <p class="section-description">Interactive and experimental digital projects created in the ETS program.</p>
     
-    <!-- ETS INTERNSHIP SUBSECTION -->
-    <div class="subsection">
-      <h3 class="subsection-title">Internship</h3>
-      <p class="subsection-description">Work completed during internship at ETS.</p>
-      <div class="slideshow-container" id="slideshow-ets-internship">
-        <div class="slideshow-wrapper">
-          <div class="slideshow-slides">
-            <!-- Add your images here: <img src="images/..." alt="..."> -->
-          </div>
-          <div class="slideshow-controls">
-            <button onclick="prevSlide('slideshow-ets-internship')" class="slide-btn">❮</button>
-            <span class="slide-counter"><span class="current-slide">0</span> / <span class="total-slides">0</span></span>
-            <button onclick="nextSlide('slideshow-ets-internship')" class="slide-btn">❯</button>
+    <!-- SIDE BY SIDE CONTAINER -->
+    <div class="ets-container">
+      <!-- ETS INTERNSHIP SUBSECTION -->
+      <div class="ets-item">
+        <div class="slideshow-container small" id="slideshow-ets-internship">
+          <div class="slideshow-wrapper">
+            <div class="slideshow-slides small-slides">
+              <!-- Add your images here: <img src="images/..." alt="Project Title"> -->
+               <img src="images/VanGoghInspiredFaceMask.PNG" alt="Van Gogh Inspired Face Mask">
+            </div>
+            <div class="slideshow-controls">
+              <button onclick="prevSlide('slideshow-ets-internship')" class="slide-btn">❮</button>
+              <span class="slide-counter"><span class="current-slide">0</span> / <span class="total-slides">0</span></span>
+              <button onclick="nextSlide('slideshow-ets-internship')" class="slide-btn">❯</button>
+            </div>
           </div>
         </div>
+        <h3 class="subsection-title">Internship</h3>
+        <p class="subsection-description">Work completed during internship at ETS.</p>
       </div>
-    </div>
 
-    <!-- ETS DESIGNER'S EDGE SUBSECTION -->
-    <div class="subsection">
-      <h3 class="subsection-title">Designer's Edge</h3>
-      <p class="subsection-description">Projects from Designer's Edge coursework.</p>
-      <div class="slideshow-container" id="slideshow-ets-designers-edge">
-        <div class="slideshow-wrapper">
-          <div class="slideshow-slides">
-            <!-- Add your images here: <img src="images/..." alt="..."> -->
-          </div>
-          <div class="slideshow-controls">
-            <button onclick="prevSlide('slideshow-ets-designers-edge')" class="slide-btn">❮</button>
-            <span class="slide-counter"><span class="current-slide">0</span> / <span class="total-slides">0</span></span>
-            <button onclick="nextSlide('slideshow-ets-designers-edge')" class="slide-btn">❯</button>
+      <!-- ETS DESIGNER'S EDGE SUBSECTION -->
+      <div class="ets-item">
+        <div class="slideshow-container small" id="slideshow-ets-designers-edge">
+          <div class="slideshow-wrapper">
+            <div class="slideshow-slides small-slides">
+              <!-- Add your images here: <img src="images/..." alt="Project Title"> -->
+            </div>
+            <div class="slideshow-controls">
+              <button onclick="prevSlide('slideshow-ets-designers-edge')" class="slide-btn">❮</button>
+              <span class="slide-counter"><span class="current-slide">0</span> / <span class="total-slides">0</span></span>
+              <button onclick="nextSlide('slideshow-ets-designers-edge')" class="slide-btn">❯</button>
+            </div>
           </div>
         </div>
+        <h3 class="subsection-title">Designer's Edge</h3>
+        <p class="subsection-description">Projects from Designer's Edge coursework.</p>
       </div>
     </div>
   </div>

@@ -824,6 +824,13 @@
     startAutoplay(containerId);
   }
 
+    // DEBUG: Log slideshow info
+    console.log(`Slideshow ${containerId} initialized with ${slides.length} images`);
+    slides.forEach((slide, index) => {
+      console.log(`Image ${index}: ${slide.src}`);
+    });
+
+
   function showSlide(containerId, index) {
     const slideshow = slideshows[containerId];
     if (!slideshow) return;

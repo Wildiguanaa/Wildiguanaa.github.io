@@ -477,6 +477,44 @@
     flex: 1;
   }
 
+
+
+
+  .instagram-embed-container {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+  }
+
+  .instagram-embed-container button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 50;
+    background: var(--accent);
+    color: #f5e8e0;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+  }
+
+  .instagram-embed-container button:hover {
+    background: var(--accent-light);
+  }
+
+
+
+
   /* SMALL SLIDESHOW */
   .slideshow-container.small {
     background: transparent;
@@ -548,6 +586,7 @@
     }
   }
 </style>
+  <script async defer src="https://www.instagram.com/embed.js"></script>
 </head>
 <body class="dark-mode">
 
@@ -639,6 +678,13 @@
             title="ETS Internship Instagram Post"
             sandbox="allow-same-origin allow-scripts allow-popups allow-forms">
           </iframe>
+
+        <div class="instagram-embed-container">
+          <button onclick="openInstagramLink()">↗ Open on Instagram</button>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DQU1IMkEo3y/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"><a href="https://www.instagram.com/p/DQU1IMkEo3y/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" style="background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"></a></div></blockquote>
+        </div>
+
+
         </div>
         <h3 class="subsection-title">Internship</h3>
         <p class="subsection-description">I delievered hands-on training and in-depth discussions on software and equipment including: 3D printing (FDM & SLA), 3D modeling (Blenda & CAD), Cricut, AR/VR, Shining 3D Scanner, DaVinci Resolve, Canva, Hueforge, and Adobe Suite, among others.</p>
@@ -1004,7 +1050,7 @@
   });
 
 
-  
+
 
 
 
@@ -1020,7 +1066,9 @@
 
 
 
-
+  function openInstagramLink() {
+    window.open('https://www.instagram.com/p/DQU1IMkEo3y/', '_blank');
+  }
 
 
 

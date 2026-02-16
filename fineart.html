@@ -512,9 +512,15 @@
     background: var(--accent-light);
   }
 
-
-
-
+/*
+  .instagram-wrapper {
+    width: 100%;
+    max-width: 400px;
+    overflow: hidden;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+*/
   /* SMALL SLIDESHOW */
   .slideshow-container.small {
     background: transparent;
@@ -544,6 +550,56 @@
   .small-slides img.active {
     opacity: 1;
   }
+
+
+
+  .luma-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .luma-embed {
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .luma-embed button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 50;
+    background: var(--accent);
+    color: #f5e8e0;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+
+  .luma-embed button:hover {
+    background: var(--accent-light);
+  }
+
+  @media (max-width: 768px) {
+    .luma-content {
+      grid-template-columns: 1fr;
+    }
+  }
+
+
+
+
+
+
+
+
+
 
   /* RESPONSIVE */
   @media (max-width: 768px) {
@@ -645,7 +701,7 @@
       <span class="section-toggle"><i class="fas fa-chevron-down"></i></span>
       <h2 class="section-title">Emerging Technology Studio (ETS)</h2>
     </div>
-    <p class="section-description">As a Technician & Media Specialist at Binghamton University's makerspace, the ETS, I founded and directed an internship program and designathon, called Designer's Edge, as a byproduct.</p>
+    <p class="section-description">As a Technician & Media Specialist at Binghamton University's makerspace, the ETS, I founded and directed an internship program and designathon, called Designer's Edge, as a byproduct.<br></p>
     
     <!-- SIDE BY SIDE -->
     <div class="ets-container">
@@ -672,18 +728,19 @@
      
         <div class="designer-edge-embed" style="position: relative;"> 
             <!--
-          <button onclick="expandInstagram()" style="position: absolute; top: 10px; right: 10px; z-index: 50; background: var(--accent); color: #f5e8e0; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 0.9rem; transition: background 0.3s;">⛶ Expand for better view!</button>
-          <iframe 
-            id="instagramFrame"
-            src="https://www.instagram.com/p/DQU1IMkEo3y/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" 
-            style="width: 100%; height: 500px; border: 1px solid var(--border); border-radius: 6px; margin-bottom: 0.5rem; display: block; overflow: hidden;"
-            title="ETS Internship Instagram Post"
-            sandbox="allow-same-origin allow-scripts allow-popups allow-forms">
-          </iframe>
-        -->
         <div class="instagram-embed-container">
           <button onclick="openInstagramLink()">↗ Open on Instagram</button>
           <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DQU1IMkEo3y/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"><a href="https://www.instagram.com/p/DQU1IMkEo3y/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" style="background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"></a></div></blockquote>
+        </div>
+-->
+
+
+
+        <div class="instagram-embed-container">
+          <button onclick="openInstagramLink()">↗ Open on Instagram</button>
+          <div class="instagram-wrapper">
+            <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DQU1IMkEo3y/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14" style="background:transparent; border:none; margin: 0; padding:0; width:100%;"><div style="padding:0;"><a href="https://www.instagram.com/p/DQU1IMkEo3y/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" style="background:transparent; line-height:0; padding:0 0; text-decoration:none; width:100%;" target="_blank"></a></div></blockquote>
+          </div>
         </div>
 
 
@@ -771,7 +828,7 @@
       </div>
 
 
-  <!-- LUMA -->
+  <!-- LUMA 
   <div class="gallery-section">
     <div class="section-header closed" onclick="toggleSection(this)">
       <span class="section-toggle"><i class="fas fa-chevron-down"></i></span>
@@ -781,7 +838,7 @@
     <div class="slideshow-container" id="slideshow-luma">
       <div class="slideshow-wrapper">
         <div class="slideshow-slides">
-          <!-- Add your images here -->
+
           <img src="images/luma.jpg" alt="LUMA Installation 1">
           <img src="images/lumaaa.png" alt="LUMA Installation 2">
 
@@ -794,6 +851,58 @@
       </div>
     </div>
   </div>
+
+
+-->
+
+
+<div class="gallery-section">
+  <div class="section-header closed" onclick="toggleSection(this)">
+    <span class="section-toggle"><i class="fas fa-chevron-down"></i></span>
+    <h2 class="section-title">LUMA Festival</h2>
+  </div>
+  <p class="section-description">Light projection installations.</p>
+  
+  <div class="luma-content">
+    <div class="luma-item">
+      <div class="luma-embed">
+        <button onclick="expandLumaWebpage()">⛶ Expand for better view!</button>
+        <iframe src="https://lumafestival.com/feature/art-of-our-faces/" style="width: 100%; height: 600px; border: none;" title="LUMA Festival"></iframe>
+      </div>
+      <h3 class="subsection-title">Featured at LUMA Festival</h3>
+      <p class="subsection-description"><a href="https://lumafestival.com/feature/art-of-our-faces/" target="_blank" style="color: var(--accent-light);">View Full Feature →</a></p>
+    </div>
+
+    <div class="luma-item">
+      <div class="slideshow-container" id="slideshow-luma">
+        <div class="slideshow-wrapper">
+          <div class="slideshow-slides">
+            <img src="images/luma.jpg" alt="LUMA Installation 1">
+            <img src="images/lumaaa.png" alt="LUMA Installation 2">
+          </div>
+          <div class="slideshow-controls">
+            <button onclick="prevSlide('slideshow-luma')" class="slide-btn">❮</button>
+            <span class="slide-counter"><span class="current-slide">0</span> / <span class="total-slides">0</span></span>
+            <button onclick="nextSlide('slideshow-luma')" class="slide-btn">❯</button>
+          </div>
+        </div>
+      </div>
+      <h3 class="subsection-title">Project Images</h3>
+      <p class="subsection-description">Additional photos from the installation.</p>
+    </div>
+  </div>
+
+  <div id="lumaWebpageModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.9); z-index: 1000; padding: 2rem;">
+    <button onclick="closeLumaWebpage()" style="position: absolute; top: 20px; right: 20px; background: var(--accent); color: #f5e8e0; border: none; padding: 0.7rem 1.5rem; border-radius: 4px; cursor: pointer;">✕ Close</button>
+    <iframe src="https://lumafestival.com/feature/art-of-our-faces/" style="width: 100%; height: 100%; border: none;"></iframe>
+  </div>
+</div>
+
+
+
+
+
+
 
   <!-- SEFF -->
   <div class="gallery-section">
@@ -1048,6 +1157,7 @@
     if (e.key === 'Escape') {
       closeInstagram();
       closeDesignersEdge();
+      closeLumaWebpage();
     }
   });
 
@@ -1070,6 +1180,19 @@
 
   function openInstagramLink() {
     window.open('https://www.instagram.com/p/DQU1IMkEo3y/', '_blank');
+  }
+
+
+
+
+  function expandLumaWebpage() {
+    document.getElementById('lumaWebpageModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLumaWebpage() {
+    document.getElementById('lumaWebpageModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
   }
 
 

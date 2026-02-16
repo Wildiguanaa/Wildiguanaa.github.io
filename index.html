@@ -163,6 +163,29 @@
       border-bottom-color: var(--border);
     }
 
+
+
+    .site-header.scrolled {
+      padding: 0.5rem 8%;
+      background: rgba(4, 7, 23, 0.98);
+    }
+
+    body.light-mode .site-header.scrolled {
+      background: rgba(220, 223, 232, 0.98);
+    }
+
+    .site-header.scrolled .logo {
+      font-size: 1rem;
+    }
+
+    .site-header.scrolled .logo img {
+      max-height: 40px;
+    }
+
+
+
+
+
     .logo {
       font-family: var(--font-serif);
       font-size: 1.3rem;
@@ -1934,6 +1957,31 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
+
+
+
+
+
+
+
+
+// Collapsing header on scroll
+window.addEventListener('scroll', () => {
+  const header = document.querySelector('.site-header');
+  if (window.scrollY > 100) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+
+
+
+
+
+
+
+
 
   // Theme toggle
   function toggleTheme() {

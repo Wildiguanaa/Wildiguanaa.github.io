@@ -998,9 +998,26 @@
   // Close modal when pressing Escape
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
+      closeInstagram();
       closeDesignersEdge();
     }
   });
+
+
+
+
+
+  function expandInstagram() {
+    document.getElementById('instagramModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeInstagram() {
+    document.getElementById('instagramModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+
+
 
 
 

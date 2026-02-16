@@ -1244,16 +1244,31 @@
 
 
 
-
+<!---
 
   <div class="luma-content">
     <div class="luma-item">
       <div class="slideshow-container" id="slideshow-luma">
         <div class="slideshow-wrapper">
           <div class="slideshow-slides">
+
+
+
+
+          <div class="slideshow-slides">
             <img src="images/luma.jpg" alt="LUMA Installation 1">
             <img src="images/lumaaa.png" alt="LUMA Installation 2">
+            <video alt="LUMA Animation 1" style="width: 100%; height: 100%; object-fit: contain;">
+              <source src="videos/Face_Block_Animation_4.mov" type="video/quicktime">
+            </video>
+            <video alt="LUMA Animation 2" style="width: 100%; height: 100%; object-fit: contain;">
+              <source src="videos/Joanna_FionaFace.mov" type="video/quicktime">
+            </video>
           </div>
+
+
+
+
           <div class="slideshow-controls">
             <button onclick="prevSlide('slideshow-luma')" class="slide-btn">❮</button>
             <span class="slide-counter"><span class="current-slide">0</span> / <span class="total-slides">0</span></span>
@@ -1268,7 +1283,7 @@
 
 
 
-<!---
+--
     
     <div class="luma-item">
       <div class="luma-embed">
@@ -1313,6 +1328,28 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!---
+
 <div class="luma-item">
       <div class="luma-embed">
         <button onclick="expandLumaWebpage()" style="position: absolute; top: 10px; right: 10px; z-index: 50; background: var(--accent); color: #f5e8e0; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 0.9rem; transition: background 0.3s;">⛶ Expand for better view!</button>
@@ -1340,6 +1377,92 @@
     </iframe>
   </div>
 </div>
+
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="luma-content">
+    <div class="luma-item">
+      <div class="slideshow-container" id="slideshow-luma">
+        <div class="slideshow-wrapper">
+          <div class="slideshow-slides">
+            <img src="images/luma.jpg" alt="LUMA Installation 1">
+            <img src="images/lumaaa.png" alt="LUMA Installation 2">
+            <video alt="LUMA Animation 1" style="width: 100%; height: 100%; object-fit: contain;" autoplay muted>
+              <source src="videos/Face_Block_Animation_4.mp4" type="video/mp4">
+            </video>
+            <video alt="LUMA Animation 2" style="width: 100%; height: 100%; object-fit: contain;" autoplay muted>
+              <source src="videos/Joanna_FionaFace.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="slideshow-controls">
+            <button onclick="prevSlide('slideshow-luma')" class="slide-btn">❮</button>
+            <span class="slide-counter"><span class="current-slide">0</span> / <span class="total-slides">0</span></span>
+            <button onclick="nextSlide('slideshow-luma')" class="slide-btn">❯</button>
+          </div>
+        </div>
+      </div>
+      <h3 class="subsection-title">"Art of Our Faces"</h3>
+      <p class="subsection-description">Using the TROIKATRONIX Isadora software, I collaborated to create complex interactive light projection mappings to display handmade animated real-time motion graphics fit to volunteers' faces. Our team crafted animations through techniques and software such as Rotoscoping, Dragonframe, ProCreate, and Adobe Suite. These animations include flesh and skull, flowers, emotion and lots of play.</p>
+    </div>
+
+    <div class="luma-item">
+      <div class="luma-embed">
+        <button onclick="expandLumaWebpage()" style="position: absolute; top: 10px; right: 10px; z-index: 50; background: var(--accent); color: #f5e8e0; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 0.9rem; transition: background 0.3s;">⛶ Expand for better view!</button>
+        <iframe 
+          id="lumaWebpageFrame"
+          src="https://lumafestival.com/feature/art-of-our-faces/" 
+          style="width: 100%; height: 400px; border: none; display: block; overflow: hidden;"
+          title="LUMA Festival - Art of Our Faces"
+          sandbox="allow-same-origin allow-scripts allow-popups allow-forms">
+        </iframe>
+      </div>
+      <h3 class="subsection-title">Featured at LUMA Festival</h3>
+      <p class="subsection-description"><a href="https://lumafestival.com/feature/art-of-our-faces/" target="_blank" style="color: var(--accent-light);">View Full Feature →</a></p>
+    </div>
+  </div>
+
+  <div id="lumaWebpageModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.9); z-index: 1000; padding: 2rem;">
+    <button onclick="closeLumaWebpage()" style="position: absolute; top: 20px; right: 20px; background: var(--accent); color: #f5e8e0; border: none; padding: 0.7rem 1.5rem; border-radius: 4px; cursor: pointer; font-size: 1rem;">✕ Close</button>
+    <iframe 
+      src="https://lumafestival.com/feature/art-of-our-faces/" 
+      style="width: 100%; height: 100%; border: none; border-radius: 6px;"
+      title="LUMA Festival Fullscreen"
+      sandbox="allow-same-origin allow-scripts allow-popups allow-forms">
+    </iframe>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1681,13 +1804,24 @@
   }
 
   let slideshows = {};
-
+/*
   function initSlideshow(containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
     const slides = container.querySelectorAll('.slideshow-slides img');
-    
+    */
+
+  function initSlideshow(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    const slides = container.querySelectorAll('.slideshow-slides img, .slideshow-slides video');
+
+
+
+
+
     if (slides.length === 0) {
       container.querySelector('.slide-counter').innerHTML = '<span class="current-slide">0</span> / <span class="total-slides">0</span>';
       return;

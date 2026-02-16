@@ -92,10 +92,44 @@
     border-bottom-color: var(--border);
   }
 
+
+  .site-header.scrolled {
+    padding: 0.5rem 8%;
+    background: rgba(4, 7, 23, 0.98);
+    transition: all 0.3s ease;
+  }
+  .site-header.scrolled .logo img {
+    max-height: 40px;
+  }
+
   .logo {
     font-family: var(--font-serif);
     font-size: 1.3rem;
     font-weight: 700;
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-dark,
+  .logo-light {
+    max-height: 75px;
+    width: auto;
+  }
+
+  .logo-dark {
+    display: block;
+  }
+
+  .logo-light {
+    display: none;
+  }
+
+  body.light-mode .logo-dark {
+    display: none;
+  }
+
+  body.light-mode .logo-light {
+    display: block;
   }
 
   .site-nav {
@@ -843,7 +877,10 @@
 <body class="dark-mode">
 
 <header class="site-header">
-  <div class="logo">Joanna Fishman</div>
+  <div class="logo">
+    <img src="images/signature-light.png" alt="Joanna Fishman" class="logo-dark" />
+    <img src="images/signature-dark.png" alt="Joanna Fishman" class="logo-light" />
+  </div>
   <nav class="site-nav">
     <a href="index.html">Home</a>
     <a href="index.html#work">Work</a>

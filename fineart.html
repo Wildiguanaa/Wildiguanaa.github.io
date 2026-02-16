@@ -354,7 +354,8 @@
   .section-header.closed ~ .ets-container,
   .section-header.closed ~ .slideshow-container,
   .section-header.closed ~ .luma-content,
-  .section-header.closed ~ .subsection {
+  .section-header.closed ~ .subsection 
+  .section-header.closed ~ div[style*="grid-template-columns"] {
     max-height: 0;
     opacity: 0;
     margin: 0;
@@ -584,6 +585,7 @@
     padding: 0 !important;
     margin: 0.6rem 0 !important;
   }
+
 
   #slideshow-seff .slideshow-slides {
     min-height: 250px;
@@ -815,6 +817,69 @@
 
 
 
+/* IMAGE EXPAND MODAL */
+  .slideshow-slides {
+    cursor: pointer;
+  }
+
+  .slideshow-slides img:hover {
+    opacity: 0.8 !important;
+    cursor: pointer;
+  }
+
+  #imageExpandModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 2000;
+    padding: 2rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #imageExpandModal.active {
+    display: flex;
+  }
+
+  #expandedImage {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+
+  .image-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--accent);
+    color: #f5e8e0;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    z-index: 2001;
+  }
+
+  .image-modal-close:hover {
+    background: var(--accent-light);
+  }
+
+
+
+
+
+
+
+
+
+
+
 
   /* Senior Thesis - 2 column layout */
   #slideshow-thesis {
@@ -822,6 +887,26 @@
   }
 
 
+
+
+  .thesis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-bottom: 0.5rem;
+      max-height: 10000px;
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+      opacity: 1;
+    }
+
+    .section-header.closed ~ .thesis-grid {
+      max-height: 0;
+      opacity: 0;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
 
 
 
@@ -1448,9 +1533,15 @@
 
 
 
-
-
 </main>
+
+<!-- Image Expand Modal -->
+<div id="imageExpandModal">
+  <button class="image-modal-close" onclick="closeImageModal()">✕</button>
+  <img id="expandedImage" alt="Expanded view">
+</div>
+
+
 
 <!-- Modal -->
 <div class="modal" id="modal" onclick="checkModalClick(event)">
@@ -1686,7 +1777,53 @@
   }
 
 
+// Image Expand Modal Functions
+  function expandImage(imgElement) {
+    const modal = document.getElementById('imageExpandModal');
+    const expandedImg = document.getElementById('expandedImage');
+    expandedImg.src = imgElement.src;
+    expandedImg.alt = imgElement.alt;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
 
+  function closeImageModal() {
+    const modal = document.getElementById('imageExpandModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+
+  // Close modal when clicking outside the image
+  document.addEventListener('click', function(event) {
+    const modal = document.getElementById('imageExpandModal');
+    if (event.target === modal) {
+      closeImageModal();
+    }
+  });
+
+  // Close modal with Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeImageModal();
+    }
+  });
+
+  // Add click listeners to all slideshow images
+  function addImageClickListeners() {
+    const allImages = document.querySelectorAll('.slideshow-slides img, .top-slideshow-slides img');
+    allImages.forEach(img => {
+      img.style.cursor = 'pointer';
+      img.addEventListener('click', function(e) {
+        e.stopPropagation();
+        expandImage(this);
+      });
+    });
+  }
+
+  // Initialize image click listeners when page loads
+  window.addEventListener('DOMContentLoaded', function() {
+    addImageClickListeners();
+  });
 
 
 </script>

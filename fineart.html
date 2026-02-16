@@ -417,6 +417,7 @@
     aspect-ratio: auto;
     min-height: 200px;
     max-height: 500px;
+    cursor: pointer;
   }
 
   .slideshow-slides img {
@@ -426,6 +427,11 @@
     object-fit: contain;
     opacity: 0;
     transition: opacity 0.5s ease;
+    cursor: pointer;
+  }
+
+  .slideshow-slides img:hover {
+    cursor: pointer;  /* ADD THESE 3 LINES */
   }
 
   .slideshow-slides img.active {
@@ -1810,6 +1816,8 @@
     initSlideshow('slideshow-seff');
     initSlideshow('slideshow-thesis');
     initSlideshow('slideshow-top');
+
+    addImageClickListeners();
   });
 
   function toggleSection(header) {
@@ -1945,14 +1953,22 @@
       closeModal();
     }
   }
-
+/*
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
       closeModal();
     }
   });
-
-
+*/
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeModal();
+      closeImageModal();
+      closeInstagram();
+      closeDesignersEdge();
+      closeLumaWebpage();
+    }
+  });
 
 
 
@@ -2025,11 +2041,19 @@
     modal.classList.remove('active');
     document.body.style.overflow = 'auto';
   }
-
+/*
   // Close modal when clicking outside the image
   document.addEventListener('click', function(event) {
     const modal = document.getElementById('imageExpandModal');
     if (event.target === modal) {
+      closeImageModal();
+    }
+  });
+*/
+
+  // Close modal when clicking outside the image
+  document.getElementById('imageExpandModal').addEventListener('click', function(event) {
+    if (event.target === this) {
       closeImageModal();
     }
   });
@@ -2040,7 +2064,7 @@
       closeImageModal();
     }
   });
-
+/*
   // Add click listeners to all slideshow images
   function addImageClickListeners() {
     const allImages = document.querySelectorAll('.slideshow-slides img, .top-slideshow-slides img');
@@ -2052,6 +2076,25 @@
       });
     });
   }
+*/
+
+// Add click listeners to all slideshow images
+  function addImageClickListeners() {
+    // Get all images from slideshows (both regular slideshows and top gallery grid)
+    const allImages = document.querySelectorAll('.slideshow-slides img, .top-slideshow-slides img, div[style*="grid-template-columns"] img');
+    
+    allImages.forEach(img => {
+      img.style.cursor = 'pointer';
+      img.addEventListener('click', function(e) {
+        e.stopPropagation();
+        expandImage(this);
+      });
+    });
+  }
+
+
+
+
 
   // Initialize image click listeners when page loads
   window.addEventListener('DOMContentLoaded', function() {

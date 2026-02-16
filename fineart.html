@@ -198,10 +198,39 @@
     opacity: 0;
     transition: opacity 0.5s ease;
   }
-
+/*
   .top-slideshow-slides img.active {
     opacity: 1;
   }
+
+*/
+
+
+
+
+  .top-slideshow-slides img.active {
+    opacity: 1 !important;
+    z-index: 10;
+  }
+
+  .top-slideshow-slides img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 0;
+  }
+
+
+
+
+
+
+
+
+
 
   /* IMAGE CAPTION ON HOVER */
   .top-slideshow-slides {

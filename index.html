@@ -777,6 +777,55 @@
 
 
 
+/*
+
+    #image-track {
+      display: flex;
+      gap: 1.5rem;
+      position: relative;
+      left: auto;
+      top: auto;
+      transform: none;
+      user-select: none;
+      padding: 0 2rem;
+      align-items: center;
+      width: fit-content;
+    }
+
+*/
+
+
+
+
+
+
+
+/*
+    #image-track {
+      display: flex;
+      gap: 1.5rem;
+      position: relative;
+      left: auto;
+      top: auto;
+      transform: none;
+      user-select: none;
+      padding: 0 2rem;
+      align-items: center;
+      width: fit-content;
+      animation: scroll 200s linear infinite;
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(calc(-350px * 13));
+      }
+    }
+
+*/
+
 
 
     #image-track {
@@ -791,6 +840,21 @@
       align-items: center;
       width: fit-content;
     }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(calc(-350px * 13 - 19.5rem));
+      }
+    }
+
+
+
+
+
+
 
 /*
 
@@ -1923,7 +1987,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   
-
+/*
 // SLIDER ARROW FUNCTIONS
   function slideLeft() {
     const wrapper = document.getElementById('trackWrapper');
@@ -1934,6 +1998,65 @@ window.addEventListener('DOMContentLoaded', () => {
     const wrapper = document.getElementById('trackWrapper');
     wrapper.scrollBy({ left: 400, behavior: 'smooth' });
   }
+
+
+*/
+
+
+
+
+
+/*
+
+
+function slideLeft() {
+    const wrapper = document.getElementById('trackWrapper');
+    // Allow scrolling backwards by stopping animation temporarily
+    const track = document.getElementById('image-track');
+    track.style.animationPlayState = 'paused';
+    wrapper.scrollBy({ left: -400, behavior: 'smooth' });
+    setTimeout(() => {
+      track.style.animationPlayState = 'running';
+    }, 600);
+  }
+
+  function slideRight() {
+    const wrapper = document.getElementById('trackWrapper');
+    const track = document.getElementById('image-track');
+    track.style.animationPlayState = 'paused';
+    wrapper.scrollBy({ left: 400, behavior: 'smooth' });
+    setTimeout(() => {
+      track.style.animationPlayState = 'running';
+    }, 600);
+  }
+*/
+
+
+
+
+  function slideLeft() {
+    const wrapper = document.getElementById('trackWrapper');
+    const track = document.getElementById('image-track');
+    track.style.animationPlayState = 'paused';
+    wrapper.scrollBy({ left: -350, behavior: 'smooth' });
+    setTimeout(() => {
+      track.style.animationPlayState = 'running';
+    }, 600);
+  }
+
+  function slideRight() {
+    const wrapper = document.getElementById('trackWrapper');
+    const track = document.getElementById('image-track');
+    track.style.animationPlayState = 'paused';
+    wrapper.scrollBy({ left: 350, behavior: 'smooth' });
+    setTimeout(() => {
+      track.style.animationPlayState = 'running';
+    }, 600);
+  }
+
+
+
+
 
 
 

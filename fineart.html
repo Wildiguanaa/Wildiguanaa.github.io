@@ -913,7 +913,18 @@
 
 
 
+  .slideshow-slides video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
 
+  .slideshow-slides video.active {
+    opacity: 1;
+  }
 
 
 
@@ -1402,12 +1413,15 @@
           <div class="slideshow-slides">
             <img src="images/luma.jpg" alt="LUMA Installation 1">
             <img src="images/lumaaa.png" alt="LUMA Installation 2">
-            <video alt="LUMA Animation 1" style="width: 100%; height: 100%; object-fit: contain;" autoplay muted>
+
+
+            <video alt="LUMA Animation 1" style="width: 100%; height: 100%; object-fit: contain;" autoplay muted loop controls>
               <source src="videos/Face_Block_Animation_4.mp4" type="video/mp4">
             </video>
-            <video alt="LUMA Animation 2" style="width: 100%; height: 100%; object-fit: contain;" autoplay muted>
+            <video alt="LUMA Animation 2" style="width: 100%; height: 100%; object-fit: contain;" autoplay muted loop controls>
               <source src="videos/Joanna_FionaFace.mp4" type="video/mp4">
             </video>
+
           </div>
           <div class="slideshow-controls">
             <button onclick="prevSlide('slideshow-luma')" class="slide-btn">❮</button>

@@ -888,28 +888,6 @@
 
 
 
-
-  .thesis-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.2rem;
-      margin-bottom: 0.5rem;
-      max-height: 10000px;
-      overflow: hidden;
-      transition: max-height 0.3s ease, opacity 0.3s ease;
-      opacity: 1;
-    }
-
-    .section-header.closed ~ .thesis-grid {
-      max-height: 0;
-      opacity: 0;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-    }
-
-
-
   @media (max-width: 768px) {
     .luma-content {
       grid-template-columns: 1fr;
